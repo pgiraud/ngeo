@@ -114,7 +114,7 @@ app.LayertreeController.prototype.getLayer = function(node) {
  * @export
  */
 app.LayertreeController.prototype.onButtonClick = function(node, layer) {
-  if (!goog.isDef(node.metadataPromise_)) {
+  if (!angular.isDefined(node.metadataPromise_)) {
     node.metadataPromise_ = this.http_.get('data/metadata.html').then(
         angular.bind(this, function(resp) {
           var html = this.sce_.trustAsHtml(resp.data);
