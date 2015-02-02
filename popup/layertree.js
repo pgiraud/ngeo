@@ -114,12 +114,12 @@ app.LayertreeController.prototype.getLayer = function(node) {
  * @export
  */
 app.LayertreeController.prototype.onButtonClick = function(node, layer) {
-  if (goog.isNull(node.metadataPromise_)) {
+  if (!goog.isDef(node.metadataPromise_)) {
     node.metadataPromise_ = this.http_.get('data/metadata.html').then(
-        function(resp) {
+        angular.bind(this, function(resp) {
           var html = this.sce_.trustAsHtml(resp.data);
           return html;
-        });
+        }));
   }
   var infoPopup = this.infoPopup_;
   node.metadataPromise_.then(function(html) {
