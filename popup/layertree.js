@@ -91,7 +91,7 @@ app.LayertreeController = function($http, $sce, appGetLayer, ngeoCreatePopup) {
    * @private
    * @type {ngeo.Popup}
    */
-  this.infoPopup_ = ngeoCreatePopup({});
+  this.infoPopup_ = ngeoCreatePopup();
 };
 
 
@@ -115,7 +115,7 @@ app.LayertreeController.prototype.getLayer = function(node) {
  */
 app.LayertreeController.prototype.onButtonClick = function(node, layer) {
   this.http_.get('data/metadata.html').then(angular.bind(this, function(resp) {
-    var html = this.sce_.trustAsHtml(resp.data);
+    var html = this.sce_.trustAsHtml(resp['data']);
     this.infoPopup_.setContent(html);
   }));
   this.infoPopup_.show();
