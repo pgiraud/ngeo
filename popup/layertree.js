@@ -114,12 +114,19 @@ app.LayertreeController.prototype.getLayer = function(node) {
  * @export
  */
 app.LayertreeController.prototype.onButtonClick = function(node, layer) {
-  this.http_.get('data/metadata.html').then(angular.bind(this, function(resp) {
-    var html = this.sce_.trustAsHtml(resp['data']);
-    this.infoPopup_.setContent(html);
-  }));
-  this.infoPopup_.show();
-  this.infoPopup_.setTitle(node['name']);
+  if (goog.isNull(node.metadataPromise_)) {
+    node.metadataPromise_ = this.http_.get('data/metadata.html').then(
+        function(resp) {
+          var html = this.sce_.trustAsHtml(resp.data);
+          return html;
+        });
+  }
+  var infoPopup = this.infoPopup_;
+  node.metadataPromise_.then(function(html) {
+    infoPopup.setTitle(node['name']);
+    infoPopup.setContent(html);
+    infoPopup.show();
+  });
 };
 
 
