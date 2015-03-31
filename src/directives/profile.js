@@ -22,9 +22,11 @@ goog.require('ngeo.profile');
 
 
 /**
+ * @param {angular.$parse} $parse Angular parse service.
  * @return {angular.Directive} Directive Definition Object.
+ * @ngInject
  */
-ngeo.profileDirective = function() {
+ngeo.profileDirective = function($parse) {
   return {
     restrict: 'A',
     link:
@@ -45,11 +47,14 @@ ngeo.profileDirective = function() {
             options = newVal;
             if (goog.isDef(options)) {
               profile = ngeo.profile(options);
+              var getter = $parse(attrs['ngeoProfile']);
+              var setter = getter.assign;
+              setter(scope, profile);
               refreshData();
             }
           });
 
-          scope.$watch(attrs['ngeoProfile'], function(newVal, oldVal) {
+          scope.$watch(attrs['ngeoProfileData'], function(newVal, oldVal) {
             elevationData = newVal;
             refreshData();
           });
@@ -65,6 +70,12 @@ ngeo.profileDirective = function() {
               profile.showPois(poiData);
             }
           }
+
+          scope.$watch(attrs['ngeoProfileHighlight'], function(newVal, oldVal) {
+            if (goog.isDef(profile) && goog.isDef(elevationData)) {
+              profile.highlight(newVal);
+            }
+          });
         }
   };
 };
