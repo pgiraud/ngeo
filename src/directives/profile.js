@@ -45,7 +45,18 @@ ngeo.profileDirective = function($parse) {
 
           scope.$watchCollection(optionsAttr, function(newVal) {
             options = newVal;
+
             if (goog.isDef(options)) {
+
+              if (goog.isDef(options.hoverCallback)) {
+                var hoverCallback = function(point) {
+                  var origHoverCallback = options.hoverCallback;
+                  origHoverCallback(point);
+                  scope.$apply();
+                };
+                options.hoverCallback = hoverCallback;
+              }
+
               profile = ngeo.profile(options);
               var getter = $parse(attrs['ngeoProfile']);
               var setter = getter.assign;

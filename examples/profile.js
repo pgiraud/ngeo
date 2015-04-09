@@ -188,13 +188,11 @@ app.MainController = function($http, $scope) {
     // An item in the list of points given to the profile.
     that['point'] = point;
     that.snappedPoint_.setGeometry(new ol.geom.Point([point.x, point.y]));
-    $scope.$apply();
   };
 
   var outCallback = function() {
     that['point'] = null;
     that.snappedPoint_.setGeometry(null);
-    $scope.$apply();
   };
 
 
