@@ -46,7 +46,11 @@
   </head>
   <body ng-controller="MainController as ctrl">
     <div id="container">
-      <div id="sidebar" ng-class="ctrl.open ? 'open' : ''" ngeo-resizemap="ctrl.map"></div>
+      <div id="sidebar" ng-class="ctrl.open ? 'open' : ''" ngeo-resizemap="ctrl.map">
+        <div ng-repeat="item in ctrl.items">
+          {{ item }}
+        </div>
+      </div>
       <app-map app-map="ctrl.map"></app-map>
     </div>
     <label>

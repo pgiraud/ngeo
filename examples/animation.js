@@ -79,6 +79,7 @@ app.MainController = function($timeout) {
   // animation hooks.
   var self = this;
   $timeout(function() {
+    self.items = ['blah'];
     self.open = true;
   }, 0);
 };
