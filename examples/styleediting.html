@@ -1,0 +1,45 @@
+<!DOCTYPE>
+<html ng-app='app'>
+  <head>
+    <title>Style editing example</title>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" href="../node_modules/openlayers/css/ol.css" type="text/css">
+    <style>
+      #map {
+        width: 600px;
+        height: 400px;
+      }
+
+      button.selected {
+        color: red;
+      }
+
+      .palette {
+        border-collapse: collapse;
+      }
+      .palette td {
+        height: 14px;
+        width: 14px;
+        cursor: pointer;
+      }
+      .palette td.selected {
+        background: transparent;
+        -webkit-box-shadow: 0 1px 4px #000,inset 0 0 3px #fff;
+        box-shadow: 0 1px 4px #000,inset 0 0 3px #fff;
+        position: relative;
+      }
+    </style>
+  </head>
+  <body ng-controller="MainController as ctrl">
+    <div id="map" ngeo-map="ctrl.map"></div>
+    <button ng-repeat="(type, feature) in ctrl.features" ng-class="{'selected': ctrl.feature == feature}" ng-click="ctrl.switch(type)">{{type}}</button>
+    <app-style-editing app-style-editing-feature="ctrl.feature">
+    </app-style-editing>
+    <script src="../node_modules/angular/angular.js"></script>
+    <script src="/@?main=styleediting.js"></script>
+    <script src="../utils/watchwatchers.js"></script>
+  </body>
+</html>
