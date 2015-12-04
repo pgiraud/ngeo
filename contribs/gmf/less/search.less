@@ -34,6 +34,33 @@
   }
 }
 
+main {
+  .search-overlay {
+    /* shadow layer visible when navigation is active */
+    position: fixed;
+    z-index: @above-content-index;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: darken(white, 10%);
+    visibility: hidden;
+    opacity: 0;
+
+    .search-is-focused & {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  .search {
+    .search-is-focused & {
+      /* needs to be on top of search-overlay */
+      z-index: @above-content-index + 1;
+    }
+  }
+}
+
 //For tablet only
 @media (min-width: @screen-sm-min) {
   .tt-menu {

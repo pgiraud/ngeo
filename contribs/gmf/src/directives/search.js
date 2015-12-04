@@ -37,7 +37,8 @@ gmf.searchDirective = function() {
     scope: {
       'getMapFn': '&gmfSearchMap',
       'getDatasourcesFn': '&gmfSearchDatasources',
-      'clearbutton': '=gmfSearchClearbutton'
+      'clearbutton': '=gmfSearchClearbutton',
+      'isFocused': '=gmfSearchIsfocused'
     },
     controller: 'GmfSearchController',
     controllerAs: 'ctrl',
@@ -66,6 +67,12 @@ gmf.searchDirective = function() {
               ctrl.clear();
             });
           }
+
+          element.find('input').on('focus', function() {
+            scope.$apply(function() {
+              scope.isFocused = true;
+            });
+          });
         }
   };
 };

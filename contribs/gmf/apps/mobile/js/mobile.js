@@ -61,6 +61,12 @@ app.MobileController = function(ngeoFeatureOverlayMgr, serverVars) {
   this.rightNavVisible = false;
 
   /**
+   * @type {boolean}
+   * @export
+   */
+  this.searchIsFocused = false;
+
+  /**
    * @type {ol.Map}
    * @export
    */
