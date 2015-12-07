@@ -38,7 +38,7 @@ gmf.searchDirective = function() {
       'getMapFn': '&gmfSearchMap',
       'getDatasourcesFn': '&gmfSearchDatasources',
       'clearbutton': '=gmfSearchClearbutton',
-      'isFocused': '=gmfSearchIsfocused'
+      'isfocused': '=gmfSearchIsfocused'
     },
     controller: 'GmfSearchController',
     controllerAs: 'ctrl',
@@ -52,6 +52,7 @@ gmf.searchDirective = function() {
         '<div class="clear-button ng-hide" ' +
         'ng-hide="!ctrl.clearButton || ctrl.input_value == \'\'" ' +
         'ng-click="ctrl.clear()"></div>' +
+        '<div class="btn btn-link" ng-show="ctrl.isFocused">Cancel</div>' +
         '</div>',
     link:
         /**
@@ -60,8 +61,8 @@ gmf.searchDirective = function() {
          * @param {angular.Attributes} attrs Atttributes.
          */
         function(scope, element, attrs) {
+          var ctrl = scope['ctrl'];
           if (!scope['clearbutton']) {
-            var ctrl = scope['ctrl'];
             // Empty the search field on focus and blur.
             element.find('input').on('focus blur', function() {
               ctrl.clear();
@@ -70,7 +71,7 @@ gmf.searchDirective = function() {
 
           element.find('input').on('focus', function() {
             scope.$apply(function() {
-              scope.isFocused = true;
+              ctrl.isFocused = true;
             });
           });
         }
@@ -147,6 +148,13 @@ gmf.SearchController = function($scope, $compile,
    * @private
    */
   this.datasources_ = datasources;
+
+  /**
+   * Whether or not the search is focused.
+   * @type {boolean}
+   * @export
+   */
+  this.isFocused = this.scope_['isfocused'];
 
   /**
    * @type {TypeaheadOptions}
