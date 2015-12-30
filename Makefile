@@ -12,6 +12,7 @@ GMF_EXAMPLES_HTML_FILES := $(shell find contribs/gmf/examples -maxdepth 1 -type 
 GMF_EXAMPLES_JS_FILES := $(shell find contribs/gmf/examples -maxdepth 1 -type f -name '*.js')
 GMF_APPS_MOBILE_JS_FILES := $(shell find contribs/gmf/apps/mobile/js -type f -name '*.js')
 GMF_APPS_MOBILE_LESS_FILES := $(shell find contribs/gmf/less -type f -name '*.less')
+GMF_APPS_DESKTOP_LESS_FILES := $(shell find contribs/gmf/less -type f -name '*.less')
 GMF_APPS_LIBS_JS_FILES += \
 	node_modules/jquery/dist/jquery.min.js \
 	node_modules/angular/angular.min.js \
@@ -497,12 +498,17 @@ contribs/gmf/build/mobile.js: contribs/gmf/build/mobile.closure.js $(GMF_APPS_LI
 	awk 'FNR==1{print ""}1' $(GMF_APPS_LIBS_JS_FILES) $< > $@
 
 .PHONY: compile-css
-compile-css: contribs/gmf/build/mobile.css
+compile-css: contribs/gmf/build/mobile.css contribs/gmf/build/desktop.css
 
 contribs/gmf/build/mobile.css: $(GMF_APPS_MOBILE_LESS_FILES) \
 		.build/node_modules.timestamp
 	mkdir -p $(dir $@)
 	./node_modules/.bin/lessc contribs/gmf/apps/mobile/less/mobile.less $@ --autoprefix
+
+contribs/gmf/build/desktop.css: $(GMF_APPS_DESKTOP_LESS_FILES) \
+		.build/node_modules.timestamp
+	mkdir -p $(dir $@)
+	./node_modules/.bin/lessc contribs/gmf/apps/desktop/less/desktop.less $@ --autoprefix
 
 
 # i18n
