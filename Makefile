@@ -386,6 +386,7 @@ node_modules/angular/angular.min.js: .build/node_modules.timestamp
 .build/node_modules.timestamp: package.json
 	npm install
 	mkdir -p $(dir $@)
+	cp node_modules/font-awesome/fonts/* contribs/gmf/fonts
 	touch $@
 
 .build/closure-compiler/compiler.jar: .build/closure-compiler/compiler-latest.zip
