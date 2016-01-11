@@ -60,48 +60,7 @@ gmf-map {
     border-width: 0 1px;
     border-radius: 0;
   }
-  .clear-button {
-    position: absolute;
-    top: @app-margin;
-    left: 0;
-    right: 0;
-    margin: -6px auto 0 158px;
-    width: 1.5em;
-    &:after {
-      content: 'e';
-      color: grey;
-      font-family: gmf-icons;
-      font-size: 1.5em;
-      font-weight: bold;
-      line-height: 0.5em;
-    }
-    &:hover {
-      cursor: pointer;
-    }
-  }
 }
-
-/*.nav-trigger {*/
-  /*top: @app-margin;*/
-  /*margin-top: 2px;*/
-  /*background-color: transparent;*/
-  /*border: none;*/
-  /*z-index: @above-content-index;*/
-/*}*/
-
-/*.nav-left-trigger {*/
-  /*margin-left: -104px;*/
-  /*&:after {*/
-    /*content: 'a';*/
-  /*}*/
-/*}*/
-
-/*.nav-right-trigger {*/
-  /*margin-left: 76px;*/
-  /*&:after {*/
-    /*content: 'd';*/
-  /*}*/
-/*}*/
 
 button[ngeo-mobile-geolocation] {
   right: 13px;
@@ -130,23 +89,10 @@ button[ngeo-mobile-geolocation] {
     padding: 3px 10px;
     right: auto;
     height: @map-tools-size;
-    width: 200px;
     input {
-      width: 150px;
+      width: 100%;
       margin: 0;
       border: none;
-    }
-    &:before {
-      content: 'c';
-      float: left;
-      font-family: gmf-icons;
-      color: grey;
-      font-size: 1.5em;
-      line-height: 0.6em;
-      width: 0.5em;
-    }
-    .clear-button {
-      margin: -8px auto 0 170px;
     }
   }
 
