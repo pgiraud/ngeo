@@ -50,8 +50,24 @@ button[ngeo-mobile-geolocation] {
 
 //For mobile only
 @media (max-width: @screen-sm-max) {
+  main .nav .nav-trigger {
+    border-width: 0;
+  }
+  .search {
+    width: 100%;
+    input {
+      width: 100%;
+    }
+  }
+  .nav-right-trigger {
+    right: 0;
+  }
   .ol-zoom {
     top: 52px;
+  }
+
+  button[ngeo-mobile-geolocation] {
+    top: 136px;
   }
 }
 
