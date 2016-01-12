@@ -1,3 +1,6 @@
+/*
+ * In this file we put everything related to map.
+ */
 gmf-map {
   position: initial;
   > div {
@@ -13,17 +16,18 @@ gmf-map {
   background-color: transparent;
   right: 0;
   left: auto;
-  top: 52px;
-  margin: 10px;
+  margin: @app-margin;
+  padding: 0;
   button {
-    margin-bottom: 3px;
+    margin: 0 0 3px 0;
     height: @map-tools-size;
     width: @map-tools-size;
     background-color: @map-tools-bg-color;
     border: solid 1px @map-tools-color;
     color: @map-tools-color;
+    border-radius: 0 !important;
     &:hover {
-      background-color: @map-tools-bg-color;
+      background-color: @onhover-color;
     }
   }
   &:hover {
@@ -40,83 +44,4 @@ gmf-map {
   border-color: @map-tools-color;
   border-width: 2px;
   color: @map-tools-color;
-}
-
-.search {
-  top: @app-margin;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 6px 10px;
-  background-color: @map-tools-bg-color;
-  width: 162px + @map-tools-size + @map-tools-size;
-  border-radius: 25px;
-  border: solid 1px @map-tools-color;
-  z-index: @content-index;
-  input {
-    width: 150px;
-    padding: 0 5px;
-    border-width: 0 1px;
-    border-radius: 0;
-  }
-}
-
-button[ngeo-mobile-geolocation] {
-  right: 13px;
-  top: 135px;
-  & button:after {
-    content: 'b'
-  }
-}
-
-//For tablet only
-@media (min-width: @screen-sm-min) {
-  main button:hover{
-    background-color: @onhover-color;
-  }
-
-  .ol-zoom {
-    top: auto;
-    bottom: 36px;
-    button:hover {
-      background-color: @onhover-color;
-    }
-  }
-
-  .search {
-    left: 26px + @map-tools-size;
-    padding: 3px 10px;
-    right: auto;
-    height: @map-tools-size;
-    input {
-      width: 100%;
-      margin: 0;
-      border: none;
-    }
-  }
-
-  .nav-trigger {
-    top: @app-margin;
-    margin: 0;
-    background-color: @map-tools-bg-color;
-    border: solid 1px @map-tools-color;
-  }
-
-  .nav-left-trigger {
-    left: @app-margin;
-  }
-
-  .nav-right-trigger {
-    left: auto;
-    right: @app-margin;
-  }
-
-  button[ngeo-mobile-geolocation] {
-    bottom: 12px;
-    top: auto;
-    & button:after {
-      content: 'b'
-    }
-  }
 }

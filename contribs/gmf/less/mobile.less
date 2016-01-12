@@ -1,5 +1,83 @@
+/*
+ * In this file we put everything specific to mobile application.
+ * Both mobile and tablet layout should be taken into account here.
+ */
 @import 'font.less';
 @import 'base.less';
 @import 'map.less';
 @import 'mobile-nav.less';
 @import 'icons.less';
+
+main .nav {
+  position: absolute;
+  top: @app-margin;
+  left: @app-margin;
+  right: @app-margin;
+  z-index: @content-index;
+
+  .nav-trigger {
+    position: absolute;
+    height: @map-tools-size;
+    width: @map-tools-size;
+    background-color: @map-tools-bg-color;
+    border: solid 1px @map-tools-color;
+  }
+}
+
+.search {
+  position: absolute;
+  background-color: @map-tools-bg-color;
+  border-radius: 25px;
+  border: solid 1px @map-tools-color;
+  padding: 3px 10px;
+  height: @map-tools-size;
+  input {
+    width: 150px;
+    border: 0;
+  }
+}
+
+button[ngeo-mobile-geolocation] {
+  z-index: @content-index;
+  right: @app-margin;
+
+  position: absolute;
+  height: @map-tools-size;
+  width: @map-tools-size;
+  background-color: @map-tools-bg-color;
+  border: solid 1px @map-tools-color;
+}
+
+//For mobile only
+@media (max-width: @screen-sm-max) {
+  .ol-zoom {
+    top: 52px;
+  }
+}
+
+//For tablet only
+@media (min-width: @screen-sm-min) {
+
+  .nav-left-trigger {
+    left: 0;
+  }
+  .nav-right-trigger {
+    right: 0;
+  }
+  main button:hover{
+    background-color: @onhover-color;
+  }
+
+  .ol-zoom {
+    top: auto;
+    bottom: 76px;
+  }
+
+  .search {
+    left: @map-tools-size + 10px;
+  }
+
+  button[ngeo-mobile-geolocation] {
+    bottom: 56px;
+  }
+}
