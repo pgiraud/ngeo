@@ -10,6 +10,75 @@ var ngeox;
 
 
 /**
+ * The configuration of a source for the Query service
+ * @typedef {{
+ *     infoFormat: (string|undefined),
+ *     label': (string|undefined),
+ *     layer: (ol.layer.Base|undefined),
+ *     name: (string),
+ *     params': (Object|undefined),
+ *     serverType: (string|undefined),
+ *     url: (string|undefined)
+ * }}
+ */
+ngeox.QuerySource;
+
+
+/**
+ * The info format to request and read the returned features. Optional.
+ * Default value is `geojson`. Possible values are: `geojson`, `gml`.
+ * @type {string|undefined}
+ */
+ngeox.QuerySource.prototype.infoFormat;
+
+
+/**
+ * The human-readable name of the source. If not set, the `name` property
+ * is used instead.
+ * @type {string|undefined}
+ */
+ngeox.QuerySource.prototype.label;
+
+
+/**
+ * A reference to the ol3 layer object. If not defined, will be automatically
+ * fetched using the source `name` and the according layer property that has
+ * the same value.
+ * @type {ol.layer.Base|undefined}
+ */
+ngeox.QuerySource.prototype.layer;
+
+
+/**
+ * The name of the source. Has to be unique. Serves to identify the source.
+ * @type {string}
+ */
+ngeox.QuerySource.prototype.name;
+
+
+/**
+ * Additionnal params to use when querying this source.
+ * @type {Object|undefined}
+ */
+ngeox.QuerySource.prototype.params;
+
+
+/**
+ * Server type of the source. Can be `mapserver` or `geoserver`.
+ * @type {string|undefined}
+ */
+ngeox.QuerySource.prototype.serverType;
+
+
+/**
+ * Url to use for the request. Required if the layer object doesn't support
+ * WMS GetFeatureInfo requests.
+ * @type {string|undefined}
+ */
+ngeox.QuerySource.prototype.url;
+
+
+/**
  * Namespace.
  * @type {Object}
  */
