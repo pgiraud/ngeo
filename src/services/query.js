@@ -114,6 +114,20 @@ ngeo.Query.prototype.addSource = function(source) {
   goog.asserts.assert(!this.cache_[sourceId],
       'no other source with the same id should be present');
 
+  // attempt to obtain an ol3 wms source object from the layer and set it
+  // in the query source object, if not defined
+  if (!source.wmsSource &&
+      source.layer &&
+      (source.layer instanceof ol.layer.Image ||
+      source.layer instanceof ol.layer.Tile)) {
+    var wmsSource = source.layer.getSource();
+    if (wmsSource &&
+        (wmsSource instanceof ol.source.ImageWMS ||
+        wmsSource instanceof ol.source.TileWMS)) {
+      source.wmsSource = wmsSource;
+    }
+  }
+
   this.sources_.push(source);
 
   var sourceLabel = source.label !== undefined ? source.label : sourceId;

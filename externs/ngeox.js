@@ -46,7 +46,8 @@ ngeox.QueryOptions.prototype.sourceIdProperty;
  *     layer: (ol.layer.Base|undefined),
  *     params': (Object|undefined),
  *     serverType: (string|undefined),
- *     url: (string|undefined)
+ *     url: (string|undefined),
+ *     wmsSource: (ol.source.ImageWMS|ol.source.TileWMS|undefined)
  * }}
  */
 ngeox.QuerySource;
@@ -104,6 +105,16 @@ ngeox.QuerySource.prototype.serverType;
  * @type {string|undefined}
  */
 ngeox.QuerySource.prototype.url;
+
+
+/**
+ * The ol3 WMS source object used to build the query string. If not defined,
+ * the layer source object will be used (if it's WMS), otherwise one will
+ * be created by the query service using the `url` and `params` properties of
+ * this source.
+ * @type {ol.source.ImageWMS|ol.source.TileWMS|undefined}
+ */
+ngeox.QuerySource.prototype.wmsSource;
 
 
 /**
