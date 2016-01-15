@@ -1,5 +1,7 @@
 goog.provide('query');
 
+goog.require('ngeo');
+goog.require('ngeo.Query');
 goog.require('ngeo.mapDirective');
 goog.require('ol.Map');
 goog.require('ol.View');
@@ -24,31 +26,42 @@ var app = {};
 app.module = angular.module('app', ['ngeo']);
 
 
+app.module.constant('ngeoQueryOptions', {
+  'limit': 20
+});
+
+
 
 /**
+ * @param {ngeo.Query} ngeoQuery Query service
  * @constructor
+ * @ngInject
  */
-app.MainController = function() {
+app.MainController = function(ngeoQuery) {
 
   var projection = ol.proj.get('EPSG:21781');
   projection.setExtent([485869.5728, 76443.1884, 837076.5648, 299941.7864]);
 
   var informationLayer = new ol.layer.Image({
-    'name': 'information',
-    'label': 'Information',
     'source': new ol.source.ImageWMS({
       'url': 'https://geomapfish-demo.camptocamp.net/1.6/wsgi/mapserv_proxy',
       params: {'LAYERS': 'information'}
     })
   });
+  ngeoQuery.addSource({
+    'id': 'information',
+    'layer': informationLayer
+  });
 
   var busStopLayer = new ol.layer.Image({
-    'name': 'bus_stop',
-    'label': 'Bus Stops',
     'source': new ol.source.ImageWMS({
       'url': 'https://geomapfish-demo.camptocamp.net/1.6/wsgi/mapserv_proxy',
       params: {'LAYERS': 'bus_stop'}
     })
+  });
+  ngeoQuery.addSource({
+    'id': 'bus_stop',
+    'layer': busStopLayer
   });
 
   /**

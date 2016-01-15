@@ -10,18 +10,53 @@ var ngeox;
 
 
 /**
+ * The options for the query service.
+ * @typedef {{
+ *     limit: (number|undefined),
+ *     sourceIdProperty: (string|undefined)
+ * }}
+ */
+ngeox.QueryOptions;
+
+
+/**
+ * The maximum number of records per request the query service should ask.
+ * Defaults to `50`. Note that sources sharing the same url are combined
+ * together in a single request. This limit will still apply to those.
+ * @type {number|undefined}
+ */
+ngeox.QueryOptions.prototype.limit;
+
+
+/**
+ * Defines the name of the layer property that holds the id for the source.
+ * Only used if a source is configured without a reference to its layer.
+ * Defaults to `querySourceId`.
+ * @type {string|undefined}
+ */
+ngeox.QueryOptions.prototype.sourceIdProperty;
+
+
+/**
  * The configuration of a source for the Query service
  * @typedef {{
+ *     id: (string),
  *     infoFormat: (string|undefined),
- *     label': (string|undefined),
+ *     label: (string|undefined),
  *     layer: (ol.layer.Base|undefined),
- *     name: (string),
  *     params': (Object|undefined),
  *     serverType: (string|undefined),
  *     url: (string|undefined)
  * }}
  */
 ngeox.QuerySource;
+
+
+/**
+ * The unique identifier of the source.
+ * @type {string}
+ */
+ngeox.QuerySource.prototype.id;
 
 
 /**
@@ -47,13 +82,6 @@ ngeox.QuerySource.prototype.label;
  * @type {ol.layer.Base|undefined}
  */
 ngeox.QuerySource.prototype.layer;
-
-
-/**
- * The name of the source. Has to be unique. Serves to identify the source.
- * @type {string}
- */
-ngeox.QuerySource.prototype.name;
 
 
 /**

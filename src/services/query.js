@@ -1,5 +1,16 @@
 goog.provide('ngeo.Query');
 
+goog.require('ngeo');
+
+
+/**
+ * @typedef {{
+ *     resultSource: (ngeo.QueryResultSource),
+ *     source: (ngeox.QuerySource)
+ * }}
+ */
+ngeo.QueryCacheItem;
+
 
 /**
  * @typedef {{
@@ -13,8 +24,8 @@ ngeo.QueryResult;
 /**
  * @typedef {{
  *     features: (Array.<ol.Feature>),
+ *     id: (string),
  *     label: (string),
- *     name: (string),
  *     pending: (boolean)
  * }}
  */
@@ -40,8 +51,24 @@ ngeoModule.value('ngeoQueryResult', {
  * @constructor
  * @param {angular.$http} $http Angular $http service.
  * @param {ngeo.QueryResult} ngeoQueryResult
+ * @param {ngeox.QueryOptions|undefined} ngeoQueryOptions
  */
-ngeo.Query = function($http, ngeoQueryResult) {
+ngeo.Query = function($http, ngeoQueryResult, ngeoQueryOptions) {
+
+  var options = ngeoQueryOptions !== undefined ? ngeoQueryOptions : {};
+
+  /**
+   * @type {number}
+   * @private
+   */
+  this.limit_ = options.limit !== undefined ? options.limit : 50;
+
+  /**
+   * @type {string}
+   * @private
+   */
+  this.sourceIdProperty_ = options.sourceIdProperty !== undefined ?
+      options.sourceIdProperty : ngeo.Query.DEFAULT_SOURCE_ID_PROPERTY_;
 
   /**
    * @type {angular.$http}
@@ -60,7 +87,20 @@ ngeo.Query = function($http, ngeoQueryResult) {
    * @private
    */
   this.sources_ = [];
+
+  /**
+   * @type {Object.<string, ngeo.QueryCacheItem>}
+   * @private
+   */
+  this.cache_ = {};
 };
+
+
+/**
+ * @const
+ * @private
+ */
+ngeo.Query.DEFAULT_SOURCE_ID_PROPERTY_ = 'querySourceId';
 
 
 /**
@@ -68,16 +108,30 @@ ngeo.Query = function($http, ngeoQueryResult) {
  * @export
  */
 ngeo.Query.prototype.addSource = function(source) {
+  var sourceId = source.id;
+
+  goog.asserts.assert(sourceId, 'source.id should be thruthy');
+  goog.asserts.assert(!this.cache_[sourceId],
+      'no other source with the same id should be present');
+
   this.sources_.push(source);
+
+  var sourceLabel = source.label !== undefined ? source.label : sourceId;
 
   var resultSource = /** @type {ngeo.QueryResultSource} */ ({
     'features': [],
-    'label': source.label,
-    'name': source.name,
+    'id': sourceId,
+    'label': sourceLabel,
     'pending': false
   });
 
   this.result_.sources.push(resultSource);
+
+  var cacheItem = {
+    'source': source,
+    'resultSource': resultSource
+  };
+  this.cache_[sourceId] = cacheItem;
 };
 
 
@@ -86,6 +140,8 @@ ngeo.Query.prototype.addSource = function(source) {
  * @export
  */
 ngeo.Query.prototype.issue = function(object) {
+  this.clearResult_();
+
   if (object.length === 2) {
     this.issueWMSGetFeatureInfoRequests_(object);
   }
@@ -97,11 +153,16 @@ ngeo.Query.prototype.issue = function(object) {
  * @private
  */
 ngeo.Query.prototype.issueWMSGetFeatureInfoRequests_ = function(coordinate) {
+  console.log(this.limit_);
+  console.log(this.sourceIdProperty_);
 };
 
 
 /**
  * @private
  */
-ngeo.Query.prototype.clear_ = function() {
+ngeo.Query.prototype.clearResult_ = function() {
 };
+
+
+ngeoModule.service('ngeoQuery', ngeo.Query);
