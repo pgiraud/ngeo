@@ -2,20 +2,36 @@
 <html ng-app='app'>
   <head>
     <title>Query example</title>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <meta name="viewport"
-          content="initial-scale=1.0, user-scalable=no, width=device-width">
-    <meta name="mobile-web-app-capable" content="yes">
-    <link rel="stylesheet" href="../node_modules/openlayers/css/ol.css" type="text/css">
+          content="initial-scale=1.0, user-scalable=no, width=device-width" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <link rel="stylesheet" href="../node_modules/openlayers/css/ol.css" type="text/css" />
+    <link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.min.css" type="text/css" />
     <style>
       #map {
         width: 600px;
         height: 400px;
       }
+     button[ngeo-mobile-query]:after {
+        content: 'Toggle query'
+      }
     </style>
   </head>
   <body ng-controller="MainController as ctrl">
     <div id="map" ngeo-map="ctrl.map"></div>
+    <!--button
+        class="btn btn-default"
+        ngeo-mobile-query=""
+        ngeo-mobile-query-map="::ctrl.map">
+    </button-->
+
+    <a ngeo-btn
+      class="btn btn-default"
+      ngeo-mobile-query=""
+      ngeo-mobile-query-map="::ctrl.map"
+      ng-model="ctrl.mobileQuery.active">Query</a>
+
     <p id="desc">Todo</p>
     <!--script src="http://cdnjs.cloudflare.com/ajax/libs/proj4js/2.2.1/proj4.js" type="text/javascript"></script-->
     <script src="../node_modules/angular/angular.js"></script>

@@ -3,6 +3,7 @@ goog.provide('query');
 goog.require('ngeo');
 goog.require('ngeo.Query');
 goog.require('ngeo.mapDirective');
+goog.require('ngeo.mobileQueryDirective');
 goog.require('ol.Map');
 goog.require('ol.View');
 goog.require('ol.layer.Image');
@@ -83,9 +84,6 @@ app.MainController = function(ngeoQuery) {
       zoom: 3
     })
   });
-
-  // bind the map to the query service
-  ngeoQuery.setMap(this.map);
 };
 
 
