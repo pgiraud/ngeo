@@ -2,6 +2,7 @@ goog.provide('query');
 
 goog.require('ngeo');
 goog.require('ngeo.Query');
+goog.require('ngeo.btnDirective');
 goog.require('ngeo.mapDirective');
 goog.require('ngeo.mobileQueryDirective');
 goog.require('ol.Map');
@@ -39,6 +40,8 @@ app.module.constant('ngeoQueryOptions', {
  * @ngInject
  */
 app.MainController = function(ngeoQuery) {
+
+  this.queryActive = false;
 
   var projection = ol.proj.get('EPSG:21781');
   projection.setExtent([485869.5728, 76443.1884, 837076.5648, 299941.7864]);
@@ -84,6 +87,21 @@ app.MainController = function(ngeoQuery) {
       zoom: 3
     })
   });
+
+  ngeoQuery.setMap(this.map);
+};
+
+/**
+ * @param {boolean|undefined} val Value.
+ * @return {boolean|undefined} Value.
+ * @export
+ */
+app.MainController.prototype.getSetQueryActive = function(val) {
+  if (goog.isDef(val)) {
+    this.queryActive = val;
+  } else {
+    return this.queryActive;
+  }
 };
 
 
