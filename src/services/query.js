@@ -93,6 +93,12 @@ ngeo.Query = function($http, ngeoQueryResult, ngeoQueryOptions) {
    * @private
    */
   this.cache_ = {};
+
+  /**
+   * @type {ol.Map}
+   * @private
+   */
+  this.map_;
 };
 
 
@@ -154,11 +160,23 @@ ngeo.Query.prototype.addSource = function(source) {
  * @export
  */
 ngeo.Query.prototype.issue = function(object) {
+
+  goog.asserts.assert(this.map_, 'query service\'s map should be thruthy');
+
   this.clearResult_();
 
   if (object.length === 2) {
     this.issueWMSGetFeatureInfoRequests_(object);
   }
+};
+
+
+/**
+ * @param {ol.Map} map
+ * @export
+ */
+ngeo.Query.prototype.setMap = function(map) {
+  this.map_ = map;
 };
 
 

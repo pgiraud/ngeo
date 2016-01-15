@@ -83,6 +83,9 @@ app.MainController = function(ngeoQuery) {
       zoom: 3
     })
   });
+
+  // bind the map to the query service
+  ngeoQuery.setMap(this.map);
 };
 
 
