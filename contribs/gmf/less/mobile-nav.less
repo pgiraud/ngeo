@@ -135,7 +135,7 @@ nav.nav-right {
 
     &::before, &::after {
       /* arrow goes on the right side - children navigation */
-      right: 20px;
+      right: 0;
       transform-origin: 9px 50%;
     }
   }
@@ -168,7 +168,6 @@ nav.nav-right {
     display: block;
     height: @menu-item-height;
     line-height: @menu-item-height;
-    padding: 0 20px;
     color: @nav-links;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -183,6 +182,7 @@ nav.nav-right {
     transition: transform @duration, opacity @duration;
     will-change: transform, opacity;
     opacity: 0;
+    padding: 10px;
 
     &.active {
       transform: translateX(0%);
