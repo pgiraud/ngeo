@@ -129739,11 +129739,6 @@ goog.storage.mechanism.HTML5LocalStorage = function() {
 goog.inherits(goog.storage.mechanism.HTML5LocalStorage,
               goog.storage.mechanism.HTML5WebStorage);
 
-/**
- * @fileoverview This files provides a service for managing the application
- * state. The application state is written to both the URL and the local
- * storage.
- */
 goog.provide('ngeo.StateManager');
 
 goog.require('goog.asserts');
@@ -130124,7 +130119,7 @@ ngeoModule.service('ngeoToolActivateMgr', ngeo.ToolActivateMgr);
 
 
 /**
- * @fileoverview ngeo template cache.
+ * ngeo template cache.
  *
  * GENERATED FILE. DO NOT EDIT.
  */
