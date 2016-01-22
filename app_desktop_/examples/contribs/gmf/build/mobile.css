@@ -8789,8 +8789,8 @@ a {
 .ol-zoom button {
   margin: 0;
   margin-bottom: 3px;
-  height: 29px;
-  width: 29px;
+  height: 3em;
+  width: 3em;
   background-color: white;
   border: solid 1px black;
   color: black;
@@ -9105,34 +9105,39 @@ nav.nav-right .slide.slide-out {
  * Buttons to open right and left navigation menus
  */
 .nav-trigger {
-  top: 13px;
-  margin-top: 2px;
-  background-color: transparent;
-  border: none;
+  top: 1em;
+  background: white;
   z-index: 3;
+  height: calc( 3em  - 3px);
+  margin-top: 2px;
+  border: none;
 }
 .nav-left-trigger {
-  margin-left: -104px;
+  left: calc( 1em  + 2px);
+  box-shadow: 3px 0 5px -2px #bbb;
 }
 .nav-right-trigger {
-  margin-left: 76px;
+  right: calc( 1em  + 2px);
+  box-shadow: -2px 0 5px -2px #bbb;
 }
 @media (min-width: 768px) {
   main button:hover {
     background-color: #cccccc;
   }
   .nav-trigger {
-    top: 13px;
+    top: 1em;
     margin: 0;
     background-color: white;
     border: solid 1px black;
+    box-shadow: none;
+    height: 3em;
   }
   .nav-left-trigger {
-    left: 13px;
+    left: 1em;
   }
   .nav-right-trigger {
     left: auto;
-    right: 13px;
+    right: 1em;
   }
 }
 /**
@@ -9152,8 +9157,8 @@ main > * {
   position: absolute;
 }
 main button {
-  height: 29px;
-  width: 29px;
+  height: 3em;
+  width: 3em;
 }
 gmf-map {
   position: initial;
@@ -9174,16 +9179,17 @@ span.twitter-typeahead:after {
   color: grey;
   position: absolute;
   top: 0;
-  left: 0;
+  left: .25em;
+  line-height: 2.8em;
 }
 span.twitter-typeahead input {
-  padding-left: 18px;
+  padding-left: 1.5em;
 }
 .tt-menu {
   position: fixed!important;
   left: 0;
   right: 0;
-  top: 48px!important;
+  top: 5em !important;
   bottom: 0;
   overflow-x: hidden;
   overflow-y: auto;
@@ -9197,7 +9203,7 @@ span.twitter-typeahead input {
 .tt-menu .search-datum {
   border-bottom: solid 1px black;
   margin: 0;
-  padding: 10px 13px;
+  padding: 10px 1em;
   text-align: left;
 }
 .tt-menu .search-datum:hover {
@@ -9215,59 +9221,64 @@ span.twitter-typeahead input {
   font-size: 0.8em;
 }
 .search {
-  top: 13px;
+  top: 1em;
+  height: 3em;
   left: 0;
   right: 0;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 6px 10px;
+  margin-left: 1em;
+  margin-right: 1em;
+  padding: 0 10px;
   background-color: white;
-  width: 220px;
-  border-radius: 25px;
   border: solid 1px black;
   z-index: 2;
 }
 .search input {
-  width: 150px;
+  width: 200px;
   padding: 0 5px;
-  border-width: 0 1px;
+  border-width: 0;
   border-radius: 0;
+  height: 2.8em;
 }
 .search .clear-button {
   position: absolute;
-  top: 13px;
-  left: 0;
-  right: 0;
-  margin: -6px auto 0 158px;
+  top: 0;
+  left: 50%;
+  margin-left: calc( 100px  -  3em );
+  height: 3em;
+  width: 3em;
+  line-height: 3em;
 }
 .search .clear-button:after {
   content: '\f00d';
   color: grey;
   font-family: FontAwesome;
-  line-height: 0.5em;
+  font-size: 1.5em;
 }
 .search .clear-button:hover {
   cursor: pointer;
 }
 @media (min-width: 768px) {
   .tt-menu {
-    top: 43px!important;
-    width: 33vw;
+    top: 4em !important;
+    width: 18em;
+    left: 5em !important;
+    bottom: auto;
   }
   .search {
-    left: 55px;
-    padding: 3px 10px;
+    left: 4em;
     right: auto;
-    height: 29px;
-    width: 200px;
+    height: 3em;
+    width: 18em;
+    padding: 0;
   }
   .search input {
-    width: 150px;
     margin: 0;
     border: none;
+    width: calc( 18em  - 2px);
   }
   .search .clear-button {
-    margin: -8px auto 0 170px;
+    right: 0;
+    left: auto;
   }
 }
 @media (max-width: 767px) {
@@ -9278,19 +9289,32 @@ span.twitter-typeahead input {
     padding: 0 5px !important;
   }
 }
-.ol-zoom {
-  right: 13px;
-  left: auto;
+.ol-touch .ol-control button {
+  font-size: 1em;
 }
-@media (max-width: 767px) {
-  .ol-zoom {
-    top: 60px;
-  }
+.ol-zoom {
+  top: 5em;
+}
+.ol-zoom .ol-zoom-in,
+.ol-zoom .ol-zoom-out {
+  border-radius: 0;
+}
+button[ngeo-mobile-geolocation] {
+  right: 1em;
+  top: 11.5em;
+}
+.ol-zoom {
+  right: 1em;
+  left: auto;
 }
 @media (min-width: 768px) {
   .ol-zoom {
     top: auto;
-    bottom: 50px;
+    bottom: 4.5em;
+  }
+  button[ngeo-mobile-geolocation] {
+    top: auto;
+    bottom: 1em;
   }
 }
 @media (min-width: 768px) {
