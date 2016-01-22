@@ -8912,11 +8912,13 @@ main .overlay {
   visibility: visible;
   opacity: 1;
 }
-.nav-left-is-visible nav.nav-right {
-  display: none;
-}
+.nav-left-is-visible nav.nav-right,
 .nav-right-is-visible nav.nav-left {
   display: none;
+}
+.nav-left-is-visible nav.nav-left,
+.nav-right-is-visible nav.nav-right {
+  visibility: visible;
 }
 nav.nav-left,
 nav.nav-right {
@@ -8929,6 +8931,7 @@ nav.nav-right {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   z-index: 1;
+  visibility: hidden;
 }
 nav.nav-left header,
 nav.nav-right header {
