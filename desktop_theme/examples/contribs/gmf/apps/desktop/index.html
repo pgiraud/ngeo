@@ -24,10 +24,11 @@
             <a href class="btn btn-default btn-block"
                data-toggle="dropdown">
               <span class="fa fa-grid"></span>
-              <span translate>Theme:</span> <b ng-bind="mainCtrl.theme['name']"></b>
+              <span translate>Theme:</span>
+              <b ng-bind="mainCtrl.theme['name']" translate>Loading...</b>
               <span class="caret"></span>
             </a>
-            <gmf-themeselector id="themes" class="dropdown-menu"
+            <gmf-themeselector class="dropdown-menu"
                 gmf-themeselector-currenttheme="mainCtrl.theme"
                 gmf-themeselector-filter="::mainCtrl.filter">
             </gmf-themeselector>
