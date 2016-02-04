@@ -21374,7 +21374,6 @@ ol.geom.flat.contains.linearRingContainsExtent = function(flatCoordinates, offse
   var outside = ol.extent.forEachCorner(extent,
       /**
        * @param {ol.Coordinate} coordinate Coordinate.
-       * @return {boolean} Contains (x, y).
        */
       function(coordinate) {
         return !ol.geom.flat.contains.linearRingContainsXY(flatCoordinates,
@@ -63119,7 +63118,8 @@ ol.source.ImageCanvas = function(options) {
     logo: options.logo,
     projection: options.projection,
     resolutions: options.resolutions,
-    state: options.state
+    state: options.state !== undefined ?
+        /** @type {ol.source.State} */ (options.state) : undefined
   });
 
   /**
@@ -72223,7 +72223,7 @@ ol.source.Vector.prototype.forEachFeatureIntersectingExtent = function(extent, c
   return this.forEachFeatureInExtent(extent,
       /**
        * @param {ol.Feature} feature Feature.
-       * @return {S|undefined} The return value from the last call to the callback.
+       * @return {S|undefined}
        * @template S
        */
       function(feature) {
@@ -74064,12 +74064,11 @@ goog.require('ol.source.TileEvent');
 
 /**
  * @typedef {{attributions: (Array.<ol.Attribution>|undefined),
- *            cacheSize: (number|undefined),
  *            extent: (ol.Extent|undefined),
  *            logo: (string|olx.LogoOptions|undefined),
  *            opaque: (boolean|undefined),
  *            projection: ol.proj.ProjectionLike,
- *            state: (ol.source.State|undefined),
+ *            state: (ol.source.State|string|undefined),
  *            tileGrid: (ol.tilegrid.TileGrid|undefined),
  *            tileLoadFunction: ol.TileLoadFunctionType,
  *            tilePixelRatio: (number|undefined),
@@ -74099,7 +74098,8 @@ ol.source.UrlTile = function(options) {
     logo: options.logo,
     opaque: options.opaque,
     projection: options.projection,
-    state: options.state,
+    state: options.state ?
+        /** @type {ol.source.State} */ (options.state) : undefined,
     tileGrid: options.tileGrid,
     tilePixelRatio: options.tilePixelRatio,
     wrapX: options.wrapX
@@ -74115,9 +74115,8 @@ ol.source.UrlTile = function(options) {
    * @protected
    * @type {ol.TileUrlFunctionType}
    */
-  this.tileUrlFunction = this.fixedTileUrlFunction ?
-      this.fixedTileUrlFunction.bind(this) :
-      ol.TileUrlFunction.nullTileUrlFunction;
+  this.tileUrlFunction =
+      this.fixedTileUrlFunction || ol.TileUrlFunction.nullTileUrlFunction;
 
   /**
    * @protected
@@ -74237,8 +74236,7 @@ ol.source.UrlTile.prototype.setTileUrlFunction = function(tileUrlFunction) {
 ol.source.UrlTile.prototype.setUrl = function(url) {
   this.urls = [url];
   var urls = ol.TileUrlFunction.expandUrl(url);
-  this.setTileUrlFunction(this.fixedTileUrlFunction ?
-      this.fixedTileUrlFunction.bind(this) :
+  this.setTileUrlFunction(this.fixedTileUrlFunction ||
       ol.TileUrlFunction.createFromTemplates(urls, this.tileGrid));
 };
 
@@ -74250,8 +74248,7 @@ ol.source.UrlTile.prototype.setUrl = function(url) {
  */
 ol.source.UrlTile.prototype.setUrls = function(urls) {
   this.urls = urls;
-  this.setTileUrlFunction(this.fixedTileUrlFunction ?
-      this.fixedTileUrlFunction.bind(this) :
+  this.setTileUrlFunction(this.fixedTileUrlFunction ||
       ol.TileUrlFunction.createFromTemplates(urls, this.tileGrid));
 };
 
@@ -74302,7 +74299,8 @@ ol.source.VectorTile = function(options) {
     logo: options.logo,
     opaque: options.opaque,
     projection: options.projection,
-    state: options.state,
+    state: options.state ?
+        /** @type {ol.source.State} */ (options.state) : undefined,
     tileGrid: options.tileGrid,
     tileLoadFunction: options.tileLoadFunction ?
         options.tileLoadFunction : ol.source.VectorTile.defaultTileLoadFunction,
@@ -105860,7 +105858,6 @@ goog.require('goog.array');
 goog.require('goog.asserts');
 goog.require('goog.dom.NodeType');
 goog.require('goog.object');
-goog.require('ol.array');
 goog.require('ol.format.GML2');
 goog.require('ol.format.XMLFeature');
 goog.require('ol.xml');
@@ -105873,12 +105870,9 @@ goog.require('ol.xml');
  *
  * @constructor
  * @extends {ol.format.XMLFeature}
- * @param {olx.format.WMSGetFeatureInfoOptions=} opt_options Options.
  * @api
  */
-ol.format.WMSGetFeatureInfo = function(opt_options) {
-
-  var options = opt_options ? opt_options : {};
+ol.format.WMSGetFeatureInfo = function() {
 
   /**
    * @private
@@ -105892,13 +105886,6 @@ ol.format.WMSGetFeatureInfo = function(opt_options) {
    * @type {ol.format.GML2}
    */
   this.gmlFormat_ = new ol.format.GML2();
-
-
-  /**
-   * @private
-   * @type {Array.<string>}
-   */
-  this.layers_ = options.layers ? options.layers : null;
 
   goog.base(this);
 };
@@ -105953,13 +105940,7 @@ ol.format.WMSGetFeatureInfo.prototype.readFeatures_ = function(node, objectStack
           'localName of layer node should match layerIdentifier');
 
       var toRemove = ol.format.WMSGetFeatureInfo.layerIdentifier_;
-      var layerName = layer.localName.replace(toRemove, '');
-
-      if (this.layers_ && !ol.array.includes(this.layers_, layerName)) {
-        continue;
-      }
-
-      var featureType = layerName +
+      var featureType = layer.localName.replace(toRemove, '') +
           ol.format.WMSGetFeatureInfo.featureIdentifier_;
 
       context['featureType'] = featureType;
@@ -112715,7 +112696,6 @@ ol.interaction.Select.handleEvent = function(mapBrowserEvent) {
         /**
          * @param {ol.Feature|ol.render.Feature} feature Feature.
          * @param {ol.layer.Layer} layer Layer.
-         * @return {boolean|undefined} Continue to iterate over the features.
          */
         function(feature, layer) {
           if (this.filter_(feature, layer)) {
@@ -115219,7 +115199,8 @@ ol.source.TileImage = function(options) {
     logo: options.logo,
     opaque: options.opaque,
     projection: options.projection,
-    state: options.state,
+    state: options.state !== undefined ?
+        /** @type {ol.source.State} */ (options.state) : undefined,
     tileGrid: options.tileGrid,
     tileLoadFunction: options.tileLoadFunction ?
         options.tileLoadFunction : ol.source.TileImage.defaultTileLoadFunction,
@@ -120638,15 +120619,9 @@ ol.style.RegularShape = function(options) {
   var snapToPixel = options.snapToPixel !== undefined ?
       options.snapToPixel : true;
 
-  /**
-   * @type {boolean}
-   */
-  var rotateWithView = options.rotateWithView !== undefined ?
-      options.rotateWithView : false;
-
   goog.base(this, {
     opacity: 1,
-    rotateWithView: rotateWithView,
+    rotateWithView: false,
     rotation: options.rotation !== undefined ? options.rotation : 0,
     scale: 1,
     snapToPixel: snapToPixel
@@ -121166,11 +121141,6 @@ ngeo.profile = function(options) {
       options.poiLabelAngle : -60;
 
   /**
-   * @type {function(number): number|undefined}
-   */
-  var ratioXYRule = options.ratioXYRule;
-
-  /**
    * @type {ngeox.profile.ProfileFormatter}
    */
   var formatter = {
@@ -121203,12 +121173,6 @@ ngeo.profile = function(options) {
    */
   var lightXAxis = goog.isDef(options.lightXAxis) ? options.lightXAxis : false;
 
-  /**
-   * @type {number|undefined}
-   */
-  var yLowerBound = options.yLowerBound;
-
-
   // Objects shared with the showPois function
   /**
    * @type {Object}
@@ -121225,6 +121189,10 @@ ngeo.profile = function(options) {
    */
   var y;
 
+  /**
+   * Scale modifier to allow customizing the x and y scales.
+   */
+  var scaleModifier = options.scaleModifier;
 
   var g;
 
@@ -121363,26 +121331,15 @@ ngeo.profile = function(options) {
       x.domain(xDomain);
 
       var yDomain = d3.extent(data, function(d) { return extractor.z(d); });
-      var padding = (yDomain[1] - yDomain[0]) * 0.1;
-      y.domain([yDomain[0] - padding, yDomain[1] + padding]);
+      y.domain(yDomain);
 
       // set the ratio according to the horizontal distance
-      if (goog.isDef(ratioXYRule)) {
-        // ratioYOverX = expectedYResolution / xResolution
-        var ratioYOverX = ratioXYRule(xDomain[1]);
-        if (ratioYOverX > 0) {
-          var yMean = (yDomain[1] - yDomain[0]) / 2 + yDomain[0];
-          var xResolution = (xDomain[1] - xDomain[0]) / width;
-          var yHalfDomain = ratioYOverX * xResolution * height / 2;
-          y.domain([yMean - yHalfDomain, yMean + yHalfDomain]);
-        }
-      }
-
-      // Lower bound for y-axis
-      if (goog.isDef(yLowerBound) && y.domain()[0] < yLowerBound) {
-        var shift = yLowerBound - y.domain()[0];
-        // For yLowerBound=0 and y0=-50, y is shifted 50m up
-        y.domain([yLowerBound, y.domain()[1] + shift]);
+      if (goog.isDef(scaleModifier)) {
+        scaleModifier(x, y, width, height);
+      } else {
+        // By default, add a small padding so that it looks nicer
+        var padding = (yDomain[1] - yDomain[0]) * 0.1;
+        y.domain([yDomain[0] - padding, yDomain[1] + padding]);
       }
 
       // Update the area path.

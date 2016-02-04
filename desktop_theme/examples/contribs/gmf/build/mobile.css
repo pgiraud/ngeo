@@ -8861,6 +8861,56 @@ gmf-layertree ul .treenode .legend a::before {
 gmf-layertree ul .treenode .legend img {
   padding-left: 15px;
 }
+[ngeo-popup].popover {
+  position: fixed;
+  top: 0;
+  left: auto;
+  right: auto;
+  max-width: 96%;
+  width: 96%;
+  height: 96%;
+  max-height: 96%;
+  margin: 2%;
+  border-radius: 0;
+}
+[ngeo-popup] .popover-title {
+  background-color: white;
+  border-bottom-color: #555;
+  color: #555;
+}
+[ngeo-popup] .popover-title .close {
+  color: #555;
+  line-height: 0.8;
+  opacity: 1;
+}
+[ngeo-popup] .popover-content {
+  /*
+     * popup's height - popover-title's height
+     * should be computed using bootstrap variables
+     */
+  max-height: 90%;
+  -webkit-overflow-scrolling: touch;
+}
+@media (min-width: 768px) {
+  [ngeo-popup].popover {
+    top: 20px;
+    max-width: 350px;
+    width: 350px;
+    margin-left: -175px;
+    left: 50%;
+    right: 50%;
+    max-height: 400px;
+    position: fixed;
+  }
+  [ngeo-popup] .popover-content {
+    overflow: auto;
+    /*
+       * popup's height - popover-title's height
+       * should be computed using bootstrap variables
+       */
+    max-height: calc(362px);
+  }
+}
 /**
  * Styles for mobile navigation menus (side menus).
  */
@@ -9323,17 +9373,11 @@ button[ngeo-mobile-geolocation] {
 @media (min-width: 768px) {
   .ol-zoom {
     top: auto;
-    bottom: 4.5em;
+    bottom: 8.5em;
   }
   button[ngeo-mobile-geolocation] {
     top: auto;
-    bottom: 1em;
-  }
-}
-@media (min-width: 768px) {
-  button[ngeo-mobile-geolocation] {
-    bottom: 12px;
-    top: auto;
+    bottom: 5.5em;
   }
   button[ngeo-mobile-geolocation] button:after {
     content: 'b';
