@@ -12,12 +12,6 @@
       </div>
     </header>
     <main>
-      <!-- using the mobile background layer selector (hidden) temporarily
-           here to get a background-layer -->
-      <gmf-mobile-background-layer-selector
-        gmf-mobile-background-layer-selector-map="::mainCtrl.map"
-        style="display: none;">
-      </gmf-mobile-background-layer-selector>
       <div class="data-panel">
         <div class="header">
           <div class="dropdown">
@@ -90,7 +84,17 @@
             gmf-search-clearbutton="true">
           </gmf-search>
         </div>
-        <gmf-map class="gmf-map" gmf-map-map="mainCtrl.map"></gmf-map>
+        <div class="btn-group dropup" style="position:absolute; z-index:2; bottom: 1em; left: 1em;">
+          <button class="btn btn-default"  data-toggle="dropdown" style="padding: 3px;box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);border-radius:3px !important;">
+            <img src="https://cloud.githubusercontent.com/assets/319774/13696817/1cc9a7ee-e769-11e5-85c8-a1ea5ff21a5d.png" alt="">
+          </button>
+          <gmf-mobile-backgroundlayerselector
+            gmf-mobile-background-layer-selector-map="::mainCtrl.map"
+            class="dropdown-menu">
+          </gmf-mobile-backgroundlayerselector>
+        </div>
+        <gmf-map class="gmf-map" gmf-map-map="mainCtrl.map">
+        </gmf-map>
       </div>
     </main>
     <script src="../../../../node_modules/jquery/dist/jquery.js"></script>
