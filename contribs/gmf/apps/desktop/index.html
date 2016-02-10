@@ -56,7 +56,7 @@
           </button>
           <button ngeo-btn class="btn btn-default" ng-model="measureActive"
             data-toggle="tooltip" data-placement="left" data-original-title="{{'Measure tools'|translate}}">
-            <span class="fa fa-circle">
+            <span class="fa fa-pencil">
           </button>
         </div>
         <div class="tools-content" ng-class="{active: mainCtrl.toolsActive}">
@@ -77,7 +77,62 @@
           <div ng-show="measureActive">
             <a class="btn close" ng-click="measureActive = false">&times;</a>
             <div class="tools-content-heading">
-              Measure
+              Draw & Measure
+            </div>
+            <div>
+              <button class="btn btn-default"
+                data-toggle="tooltip" data-placement="bottom" data-original-title="{{'Draw point'|translate}}">
+                <span class="gmf-icon gmf-icon-point"></span>
+              </button>
+              <button class="btn btn-default"
+                data-toggle="tooltip" data-placement="bottom" data-original-title="{{'Draw line'|translate}}">
+                <span class="gmf-icon gmf-icon-line"></span>
+              </button>
+              <button class="btn btn-default"
+                data-toggle="tooltip" data-placement="bottom" data-original-title="{{'Draw polygon'|translate}}">
+                <span class="gmf-icon gmf-icon-polygon"></span>
+              </button>
+              <button class="btn btn-default"
+                data-toggle="tooltip" data-placement="bottom" data-original-title="{{'Draw circle'|translate}}">
+                <span class="gmf-icon gmf-icon-circle"></span>
+              </button>
+              <button class="btn btn-default"
+                data-toggle="tooltip" data-placement="bottom" data-original-title="{{'Put text on map'|translate}}">
+                <span class="gmf-icon gmf-icon-text"></span>
+              </button>
+            </div>
+            <hr>
+            <div class="clearfix">
+              <a class="btn btn-sm btn-link pull-right" href="">
+                <span class="fa fa-trash"></span> Delete all
+              </a>
+              <a class="btn btn-sm btn-link pull-right" href="">
+                <span class="fa fa-share"></span> Export
+              </a>
+            </div>
+            <div>
+              <ul class="small">
+                <li>
+                  <span class="gmf-icon gmf-icon-point"></span>
+                  Point 1
+                </li>
+                <li>
+                  <span class="gmf-icon gmf-icon-point"></span>
+                  My Home
+                </li>
+                <li>
+                  <span class="gmf-icon gmf-icon-polygon"></span>
+                  Polygon 1
+                </li>
+                <li>
+                  <span class="gmf-icon gmf-icon-line"></span>
+                  A nice hiking trail
+                </li>
+                <li>
+                  <span class="gmf-icon gmf-icon-text"></span>
+                  Text 1
+                </li>
+              </ul>
             </div>
           </div>
         </div>

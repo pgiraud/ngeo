@@ -167,6 +167,11 @@ gmf-layertree ul .treenode {
       margin-bottom: @app-margin;
       border-bottom: 1px solid @color;
     }
+
+    hr {
+      margin-top: 0.5em;
+      margin-bottom: 0.5em;
+    }
   }
 
   .bar {
@@ -174,9 +179,9 @@ gmf-layertree ul .treenode {
     border-left: 1px solid @border-color;
     width: @toolbar-width;
 
-    float: right;
     height: 100%;
-    position: relative;
+    position: absolute;
+    right: 0;
 
     > .btn + .btn {
       margin-top: -1px;
