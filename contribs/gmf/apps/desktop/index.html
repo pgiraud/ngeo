@@ -90,7 +90,54 @@
             gmf-search-clearbutton="true">
           </gmf-search>
         </div>
+        <button class="btn btn-sm fa fa-info map-info ng-cloak" ng-if="!mainCtrl.info" ng-click="mainCtrl.info = true"></button>
         <gmf-map class="gmf-map" gmf-map-map="mainCtrl.map"></gmf-map>
+        <div class="footer ng-cloak" ng-class="{'active': mainCtrl.info}">
+          <div class="dropup">
+            <button type="button" class="btn btn-default btn-sm" data-toggle="dropdown" aria-expanded="false"> 1&nbsp;:&nbsp;100,000&nbsp;<span class="caret"></span> </button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="">1&nbsp;:&nbsp;2,500</a> </li>
+              <li><a href="">1&nbsp;:&nbsp;5,000</a> </li>
+              <li><a href="">1&nbsp;:&nbsp;10,000</a> </li>
+              <li><a href="">1&nbsp;:&nbsp;15,000</a> </li>
+              <li><a href="">1&nbsp;:&nbsp;20,000</a> </li>
+              <li><a href="">1&nbsp;:&nbsp;25,000</a> </li>
+              <li><a href="">1&nbsp;:&nbsp;50,000</a> </li>
+              <li><a href="">1&nbsp;:&nbsp;100,000</a> </li>
+            </ul>
+          </div>
+          <div id="scaleline"></div>
+          <div class="close pull-right" ng-click="mainCtrl.info = false">&times;</div>
+          <div class="btn-group pull-right dropup">
+            <div class="btn btn-sm" style="background-color: rgba(224, 224, 224, 0.8);">
+              <span class="fa fa-location-arrow"></span>
+            </div>
+            <div id="mouse-position" class="btn btn-sm" style="text-align: right; background-color: rgba(224, 224, 224, 0.8); min-width: 110px;"></div>
+            <div class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="background-color: rgba(224, 224, 224, 0.8);">
+              <span class="fa fa-ellipsis-v"></span>
+            </div>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href=""><span class="fa fa-fw"></span>Lon/Lat</a> </li>
+              <li><a href=""><span class="fa fa-fw"></span>Lon/Lat DMS</a> </li>
+              <li><a href=""><span class="fa fa-fw fa-check"></span>CH1903</a> </li>
+            </ul>
+          </div>
+          <div class="pull-right btn-group dropup">
+            <div class="btn btn-sm" style="background-color: rgba(224, 224, 224, 0.8);">
+              <span class="fa fa-arrows-v"></span>
+            </div>
+            <div id="elevation" class="btn btn-sm" style="text-align: right; background-color: rgba(224, 224, 224, 0.8); min-width: 50px;">
+              235m
+            </div>
+            <div class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="background-color: rgba(224, 224, 224, 0.8);">
+              <span class="fa fa-ellipsis-v"></span>
+            </div>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href=""><span class="fa fa-fw"></span>SRTM</a> </li>
+              <li><a href=""><span class="fa fa-fw fa-check"></span>Aster</a> </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </main>
     <script src="../../../../node_modules/jquery/dist/jquery.js"></script>

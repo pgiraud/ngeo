@@ -56,6 +56,86 @@ main {
     bottom: 0;
     left: 0;
   }
+
+
+  .footer {
+    @height: @line-height-computed + 2 * @padding-small-vertical;
+
+    position: absolute;
+    bottom:  -@height;
+    background-color: rgba(192, 192, 192, 0.9);
+    width: 100%;
+    /* cancel default navbar bottom margin */
+    margin-bottom: 0;
+    /* buttons or inputs in bar are supposed to be '-sm' */
+    min-height: @height;
+
+    transition: 0.2s ease-out all;
+    &.active {
+      bottom: 0;
+    }
+    > div {
+      display: inline-block;
+    }
+
+    .text  {
+      line-height: @height;
+      padding-right: 10px;
+      margin-top: 1px;
+    }
+    .btn {
+      margin-top: 1px;
+    }
+    .pull-right.btn-group {
+      margin-left: 10px;
+    }
+    .close {
+      margin-right: 5px;
+      margin-left: 15px;
+      line-height: @height;
+    }
+  }
+
+  #scaleline {
+    display: inline-block;
+    padding-right: 5px;
+  }
+  .ol-scale-line {
+    bottom: auto;
+    left: 5px;
+  }
+  .ol-scale-line, .ol-scale-line-inner {
+    position: relative;
+    background-color: transparent;
+  }
+}
+
+button.map-info {
+  position: absolute;
+  bottom: @app-margin;
+  right: @app-margin;
+  z-index: @content-index;
+
+
+  /* The starting CSS styles for the enter animation */
+  &.ng-enter {
+    transition: 0.2s ease-out all;
+    bottom: -50px;
+  }
+
+  /* The finishing CSS styles for the enter animation */
+  &.ng-enter.ng-enter-active {
+    bottom: @app-margin;
+  }
+
+  /* now the element will fade out before it is removed from the DOM */
+  &.ng-leave {
+    transition: 0.2s ease-in all;
+    bottom: @app-margin;
+  }
+  &.ng-leave.ng-leave-active {
+    bottom: -50px;
+  }
 }
 
 .search {

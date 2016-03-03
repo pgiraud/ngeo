@@ -10,6 +10,7 @@ goog.require('ngeo.btngroupDirective');
 goog.require('ngeo.resizemapDirective');
 goog.require('ol.Map');
 goog.require('ol.View');
+goog.require('ol.control.MousePosition');
 goog.require('ol.control.ScaleLine');
 goog.require('ol.control.Zoom');
 goog.require('ol.interaction');
@@ -46,8 +47,18 @@ gmf.AbstractDesktopController = function(config, $scope, $injector) {
     layers: [],
     view: new ol.View(viewConfig),
     controls: config.mapControls || [
-      new ol.control.ScaleLine(),
-      new ol.control.Zoom()
+      new ol.control.ScaleLine({
+        target: document.getElementById('scaleline')
+      }),
+      new ol.control.Zoom(),
+      new ol.control.MousePosition({
+        coordinateFormat: ol.coordinate.createStringXY(0),
+        // comment the following two lines to have the mouse position
+        // be placed within the map.
+        className: 'custom-mouse-position',
+        target: document.getElementById('mouse-position'),
+        undefinedHTML: '&nbsp;'
+      })
     ],
     interactions: config.mapInteractions || ol.interaction.defaults({
       pinchRotate: false,
