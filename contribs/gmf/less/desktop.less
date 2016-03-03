@@ -50,10 +50,11 @@ main {
 }
 
 @footer-height: @line-height-computed + 4 * @padding-small-vertical;
+@profile-height: 285px;
 
 .map-container {
   width: auto;
-  height: 100%;
+  height: calc(~"100% -" @profile-height);
   overflow: hidden;
   position: relative;
   display: block;

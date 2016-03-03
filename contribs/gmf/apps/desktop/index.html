@@ -55,6 +55,10 @@
             data-toggle="tooltip" data-placement="left" data-original-title="{{'Draw & Measure'|translate}}">
             <span class="fa fa-pencil"></span>
           </button>
+          <button ngeo-btn class="btn btn-default" ng-model="profileActive"
+            data-toggle="tooltip" data-placement="left" data-original-title="{{'Profile'|translate}}">
+            <span class="fa fa-area-chart"></span>
+          </button>
         </div>
         <div class="tools-content container-fluid" ng-class="{active: mainCtrl.toolsActive}">
           <div ng-show="mainCtrl.loginActive" class="row">
@@ -147,6 +151,21 @@
                  gmf-mouseposition-projections="::mainCtrl.mousePositionProjections"
                  class="text-center">
             </gmf-mouseposition>
+          </div>
+        </div>
+      </div>
+      <div class="text-center panel" style="padding: 10px; background-color: white; border-top: 1px solid grey; height: 285px; position: relative; overflow: hidden;">
+        <div class="close">&times;</div>
+        <img src="https://cloud.githubusercontent.com/assets/319774/13462816/92e9c0e4-e089-11e5-92f4-7957ee86c007.png" alt="screenshot from 2016-03-02 15 14 00" style="max-width:100%; margin-top: 10px;">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="dropup pull-right">
+              <a class="btn btn-link btn-xs dropup" data-toggle="dropdown">Export <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#"><span class="fa fa-table"></span> Download CSV</a></li>
+                <li><a href="#"><span class="fa fa-image"></span> Download Image</a></li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
