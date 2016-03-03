@@ -92,6 +92,39 @@
           </gmf-search>
         </div>
         <gmf-map class="gmf-map" gmf-map-map="mainCtrl.map"></gmf-map>
+        <div class="footer" ng-class="{'active': mainCtrl.info}">
+          <button class="btn btn-sm fa map-info ng-cloak" ng-click="mainCtrl.info = !mainCtrl.info"
+            ng-class="{'fa-angle-double-up': !mainCtrl.info, 'fa-angle-double-down': mainCtrl.info}"></button>
+          <div class="dropup">
+            <button type="button" class="btn btn-default btn-sm" data-toggle="dropdown" aria-expanded="false"> 1&nbsp;:&nbsp;100,000&nbsp;<span class="caret"></span> </button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="">1&nbsp;:&nbsp;2,500</a> </li>
+              <li><a href="">1&nbsp;:&nbsp;5,000</a> </li>
+              <li><a href="">1&nbsp;:&nbsp;10,000</a> </li>
+              <li><a href="">1&nbsp;:&nbsp;15,000</a> </li>
+              <li><a href="">1&nbsp;:&nbsp;20,000</a> </li>
+              <li><a href="">1&nbsp;:&nbsp;25,000</a> </li>
+              <li><a href="">1&nbsp;:&nbsp;50,000</a> </li>
+              <li><a href="">1&nbsp;:&nbsp;100,000</a> </li>
+            </ul>
+          </div>
+          <div id="scaleline"></div>
+          <div class="btn-group pull-right dropup" style="margin-top: 2px;">
+            <div id="mouse-position" class="btn btn-sm" style="text-align: right; background-color: rgba(224, 224, 224, 0.8); min-width: 120px;"></div>
+            <div class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="background-color: rgba(224, 224, 224, 0.8);">
+              <span class="fa fa-fw fa-ellipsis-v"></span>
+            </div>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href=""><span class="fa fa-fw"></span>Lon/Lat</a> </li>
+              <li><a href=""><span class="fa fa-fw"></span>Lon/Lat DMS</a> </li>
+              <li><a href=""><span class="fa fa-fw fa-check"></span>CH1903</a> </li>
+            </ul>
+          </div>
+          <div class="pull-right small text">
+            <span class="fa fa-arrows-v"></span>
+            235m
+          </div>
+        </div>
       </div>
     </main>
     <script src="../../../../node_modules/jquery/dist/jquery.js"></script>
