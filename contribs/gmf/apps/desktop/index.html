@@ -59,19 +59,40 @@
             <span class="fa fa-circle">
           </button>
         </div>
-        <div class="tools-content" ng-class="{active: mainCtrl.toolsActive}">
-          <div ng-show="loginActive">
-            <a class="btn close" ng-click="loginActive = false">&times;</a>
-            <div class="tools-content-heading">
-              Login
+        <div class="tools-content container-fluid" ng-class="{active: mainCtrl.toolsActive}">
+          <div ng-show="loginActive" class="row">
+            <div class="col-sm-12">
+              <div class="tools-content-heading">
+                Login
+                <a class="btn close" ng-click="loginActive = false">&times;</a>
+              </div>
+              <gmf-authentication></gmf-authentication>
             </div>
-            <gmf-authentication></gmf-authentication>
-            <br>
           </div>
-          <div ng-show="printActive">
-            <a class="btn close" ng-click="printActive = false">&times;</a>
-            <div class="tools-content-heading">
-              Print
+          <div ng-show="printActive" class="row">
+            <div class="col-sm-12">
+              <div class="tools-content-heading">
+                Print
+                <a class="btn close" ng-click="loginActive = false">&times;</a>
+              </div>
+              <input type="text" class="form-control">
+              <div class="form-group">
+                <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+              </div>
+              <div class="form-horizontal">
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-xs-3 control-label">Email</label>
+                  <div class="col-xs-9">
+                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-xs-3 control-label">Email</label>
+                  <div class="col-xs-9">
+                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div ng-show="measureActive">
