@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="{{desktopCtrl.lang}}" ng-app="app" ng-controller="DesktopController as mainCtrl">
+  <head>
+    <title translate>Desktop Application</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../build/desktop.css">
+  </head>
+  <body>
+    <header>
+      <div>
+        Put your logos or menus here
+      </div>
+    </header>
+    <main>
+      <!-- using the mobile background layer selector (hidden) temporarily
+           here to get a background-layer -->
+      <gmf-mobile-background-layer-selector
+        gmf-mobile-background-layer-selector-map="::mainCtrl.map"
+        style="display: none;">
+      </gmf-mobile-background-layer-selector>
+      <div class="data-panel">
+        <div class="header">
+          <div class="dropdown">
+            <a href class="btn btn-default btn-block"
+              data-toggle="dropdown">
+              <span class="fa fa-grid"></span>
+              <span translate>Theme:</span>
+              <b ng-bind="mainCtrl.theme['name']" translate>Loading...</b>
+              <span class="caret"></span>
+            </a>
+            <gmf-themeselector class="dropdown-menu"
+              gmf-themeselector-defaulttheme="OSM"
+              gmf-themeselector-currenttheme="mainCtrl.theme"
+              gmf-themeselector-filter="::mainCtrl.filter">
+            </gmf-themeselector>
+          </div>
+        </div>
+        <div class="content">
+          <gmf-layertree
+            gmf-layertree-source="mainCtrl.theme"
+            gmf-layertree-map="::mainCtrl.map"
+            gmf-layertree-openlinksinnewwindow="true">
+          </gmf-layertree>
+        </div>
+      </div>
+      <div class="tools" ngeo-resizemap="mainCtrl.map"
+        ngeo-resizemap-state="mainCtrl.toolsActive">
+        <div ngeo-btn-group class="bar btn-group-vertical" ngeo-btn-group-active="mainCtrl.toolsActive">
+          <button ngeo-btn class="btn btn-default" ng-model="loginActive"
+            data-toggle="tooltip" data-placement="left" data-original-title="{{'Login'|translate}}">
+            <span class="fa fa-user"></span>
+          </button>
+          <button ngeo-btn class="btn btn-default" ng-model="printActive"
+            data-toggle="tooltip" data-placement="left" data-original-title="{{'Print'|translate}}">
+            <span class="fa fa-print"></span>
+          </button>
+          <button ngeo-btn class="btn btn-default" ng-model="measureActive"
+            data-toggle="tooltip" data-placement="left" data-original-title="{{'Measure tools'|translate}}">
+            <span class="fa fa-circle">
+          </button>
+        </div>
+        <div class="tools-content container-fluid" ng-class="{active: mainCtrl.toolsActive}">
+          <div class="row">
+            <div class="col-sm-12">
+              <div ng-show="loginActive">
+                <div class="tools-content-heading">
+                  Login
+                  <a class="btn close" ng-click="loginActive = false">&times;</a>
+                </div>
+                <gmf-authentication></gmf-authentication>
+              </div>
+              <div ng-show="printActive">
+                <a class="btn close" ng-click="printActive = false">&times;</a>
+                <div class="tools-content-heading">
+                  Print
+                </div>
+                <div class="form-group">
+                  <input class="form-control" type="text" placeholder="{{'Title'|translate}}">
+                </div>
+                <div class="form-group">
+                  <textarea class="form-control" row="3" placeholder="{{'Comment'|translate}}"></textarea>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="">
+                    <span translate>Legend</span>
+                  </label>
+                </div>
+                <div class="form-horizontal">
+                  <div class="form-group form-group-sm">
+                    <label class="control-label col-md-3">Format</label>
+                    <div class="col-md-9">
+                      <button type="button" class="btn btn-default form-control" data-toggle="dropdown"> A4 portrait <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="">A4 portrait</a> </li>
+                        <li><a href="">A4 landscape</a> </li>
+                        <li><a href="">A3 portrait</a> </li>
+                        <li><a href="">A3 landscape</a> </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="form-group form-group-sm">
+                    <label class="control-label col-md-3">Scale</label>
+                    <div class="col-md-9">
+                      <button type="button" class="btn btn-default form-control" data-toggle="dropdown" aria-expanded="false"> 1&nbsp;:&nbsp;100,000&nbsp;<span class="caret"></span> </button>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="">1&nbsp;:&nbsp;2,500</a> </li>
+                        <li><a href="">1&nbsp;:&nbsp;5,000</a> </li>
+                        <li><a href="">1&nbsp;:&nbsp;10,000</a> </li>
+                        <li><a href="">1&nbsp;:&nbsp;15,000</a> </li>
+                        <li><a href="">1&nbsp;:&nbsp;20,000</a> </li>
+                        <li><a href="">1&nbsp;:&nbsp;25,000</a> </li>
+                        <li><a href="">1&nbsp;:&nbsp;50,000</a> </li>
+                        <li><a href="">1&nbsp;:&nbsp;100,000</a> </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="form-group form-group-sm">
+                    <label class="control-label col-md-3">Rotation</label>
+                    <div class="col-md-5">
+        <style>
+        input[type=range] {
+          -webkit-appearance: none;
+          width: 100%;
+          padding-right: 0 !important;
+          padding-left: 0 !important;
+        }
+        input[type=range]:focus {
+          outline: none;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+          width: 100%;
+          height: 5px;
+          cursor: pointer;
+          box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
+          background: rgba(148, 172, 154, 0.78);
+          border-radius: 1px;
+          border: 0.2px solid rgba(1, 1, 1, 0.2);
+        }
+        input[type=range]::-webkit-slider-thumb {
+          box-shadow: 0.9px 0.9px 1px rgba(0, 0, 49, 0.2), 0px 0px 0.9px rgba(0, 0, 75, 0.2);
+          border: 1px solid rgba(0, 0, 30, 0.2);
+          height: 20px;
+          width: 10px;
+          border-radius: 5px;
+          background: #ffffff;
+          cursor: pointer;
+          -webkit-appearance: none;
+          margin-top: -7.7px;
+        }
+        input[type=range]:focus::-webkit-slider-runnable-track {
+          background: rgba(205, 217, 208, 0.78);
+        }
+        input[type=range]::-moz-range-track {
+          width: 100%;
+          height: 5px;
+          cursor: pointer;
+          box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
+          background: rgba(148, 172, 154, 0.78);
+          border-radius: 1px;
+          border: 0.2px solid rgba(1, 1, 1, 0.2);
+        }
+        input[type=range]::-moz-range-thumb {
+          box-shadow: 0.9px 0.9px 1px rgba(0, 0, 49, 0.2), 0px 0px 0.9px rgba(0, 0, 75, 0.2);
+          border: 1px solid rgba(0, 0, 30, 0.2);
+          height: 20px;
+          width: 10px;
+          border-radius: 5px;
+          background: #ffffff;
+          cursor: pointer;
+        }
+        input[type=range]::-ms-track {
+          width: 100%;
+          height: 5px;
+          cursor: pointer;
+          background: transparent;
+          border-color: transparent;
+          color: transparent;
+        }
+        input[type=range]::-ms-fill-lower {
+          background: rgba(95, 123, 102, 0.78);
+          border: 0.2px solid rgba(1, 1, 1, 0.2);
+          border-radius: 2px;
+          box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
+        }
+        input[type=range]::-ms-fill-upper {
+          background: rgba(148, 172, 154, 0.78);
+          border: 0.2px solid rgba(1, 1, 1, 0.2);
+          border-radius: 2px;
+          box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
+        }
+        input[type=range]::-ms-thumb {
+          box-shadow: 0.9px 0.9px 1px rgba(0, 0, 49, 0.2), 0px 0px 0.9px rgba(0, 0, 75, 0.2);
+          border: 1px solid rgba(0, 0, 30, 0.2);
+          height: 20px;
+          width: 10px;
+          border-radius: 5px;
+          background: #ffffff;
+          cursor: pointer;
+          height: 5px;
+        }
+        input[type=range]:focus::-ms-fill-lower {
+          background: rgba(148, 172, 154, 0.78);
+        }
+        input[type=range]:focus::-ms-fill-upper {
+          background: rgba(205, 217, 208, 0.78);
+        }
+
+
+        </style>
+                      <input class="form-control" type="range" ng-model="ctrl.rotation" min="-180" max="180" style="border:0; background-color: transparent; box-shadow: none;" data-toggle="tooltip" title="You can also use Alt+Shift on the map">
+                    </div>
+                    <div class="col-md-4">
+                      <input class="form-control" type="text" ng-model="ctrl.rotation">
+                    </div>
+                  </div>
+                </div>
+                <div class="pull-right">
+                  <i class="fa fa-refresh fa-spin"></i>
+                  <a class="btn btn-link" href="">Abort</a>
+                  <button class="btn btn-primary">Image</button>
+                  <button class="btn btn-primary" disabled>PDF</button>
+                </div>
+              </div>
+              <div ng-show="measureActive">
+                <a class="btn close" ng-click="measureActive = false">&times;</a>
+                <div class="tools-content-heading">
+                  Measure
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="map-container">
+        <div class="search">
+          <gmf-search gmf-search-map="mainCtrl.map"
+            gmf-search-datasources="mainCtrl.searchDatasources"
+            gmf-search-currenttheme="mainCtrl.theme"
+            gmf-search-clearbutton="true">
+          </gmf-search>
+        </div>
+        <gmf-map class="gmf-map" gmf-map-map="mainCtrl.map"></gmf-map>
+      </div>
+    </main>
+    <script src="../../build/desktop.js"></script>
+    <script src="../../../../lib/watchwatchers.js"></script>
+    <script>
+      (function() {
+         var module = angular.module('app');
+         module.constant('defaultLang', 'en');
+         module.constant('langUrls', {
+           'en': '../../build/gmf-en.json',
+           'fr': '../../build/gmf-fr.json',
+           'de': '../../build/gmf-de.json'
+         });
+         module.constant('authenticationBaseUrl', 'https://geomapfish-demo.camptocamp.net/2.0/wsgi');
+         module.constant('fulltextsearchUrl', 'https://geomapfish-demo.camptocamp.net/2.0/wsgi/fulltextsearch?limit=30&partitionlimit=5');
+         module.constant('gmfWmsUrl', 'https://geomapfish-demo.camptocamp.net/2.0/wsgi/mapserv_proxy');
+         module.constant('gmfTreeUrl', 'https://geomapfish-demo.camptocamp.net/2.0/wsgi/themes?version=2&background=background');
+         module.constant('gmfSearchGroups', ['osm','district']);
+         // Requires that the gmfSearchGroups is specified
+         // TODO: add 'add_group' and 'add_layer' when supported
+         module.constant('gmfSearchActions', ['add_theme']);
+       })();
+    </script>
+  </body>
+</html>
