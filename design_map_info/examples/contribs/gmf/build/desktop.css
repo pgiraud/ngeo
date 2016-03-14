@@ -9503,6 +9503,8 @@ main {
 }
 .map-container .footer .text {
   line-height: 30px;
+  padding-right: 10px;
+  margin-top: 1px;
 }
 .map-container .footer button {
   margin-top: 1px;
@@ -9516,11 +9518,6 @@ main {
   border-bottom-right-radius: 0;
   right: 1rem;
   border-bottom: 0;
-}
-.map-container .footer .close {
-  margin-right: 5px;
-  margin-left: 15px;
-  margin-top: 3px;
 }
 .map-container #scaleline {
   display: inline-block;
