@@ -70,6 +70,17 @@ gmf.AbstractDesktopController = function(config, $scope, $injector) {
   goog.base(
       this, config, $scope, $injector);
 
+
+  var container = angular.element('<div class="notify"></div>');
+  angular.element(document.body).append(container);
+
+  var el = angular.element('<div class="alert alert-danger fade"></div>');
+  container.append(el);
+  el.html("Here's a notification message").addClass('in');
+
+  window.setTimeout(function() {
+    el.alert('close');
+  }, 7000);
 };
 goog.inherits(gmf.AbstractDesktopController, gmf.AbstractController);
 
