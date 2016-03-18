@@ -9624,3 +9624,10 @@ gmf-layertree ul .treenode {
   border-radius: 1rem;
   background: #b1c2b5;
 }
+.gmf-mobile-backgroundlayerselector {
+  padding: 0 10px;
+  margin: 0;
+}
+.gmf-mobile-backgroundlayerselector li {
+  padding: 0;
+}
