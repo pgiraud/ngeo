@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: BtnGroupController <small>controller:ngeoBtnGroupController</small></title>
+    <title>JSDoc: Class: TreeManager <small>service:gmfTreeManager</small></title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: BtnGroupController <small>controller:ngeoBtnGroupController</small></h1>
+    <h1 class="page-title">Class: TreeManager <small>service:gmfTreeManager</small></h1>
 
     
 
@@ -28,8 +28,8 @@
 
 <header>
     
-        <h2 id="BtnGroupController">
-            <span class="ancestors">ngeo.</span>BtnGroupController
+        <h2 id="TreeManager">
+            <span class="ancestors">gmf.</span>TreeManager
         </h2>
         
     
@@ -42,11 +42,20 @@
 
     
 
-    <h4 class="name" id="BtnGroupController"><span class="type-signature"></span>new BtnGroupController<span class="signature">($scope<span class="signature-attributes">non-null</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="TreeManager"><span class="type-signature"></span>new TreeManager<span class="signature">(gmfThemes)</span><span class="type-signature"></span></h4>
 
     
 
 
+
+<div class="description">
+    <p>Manage a tree with children. This service can be used in mode 'flush' or
+not (mode 'add'). In mode 'flush', each theme, group or group by layer that
+you add will replace the previous children's array. In mode 'add', children
+will be just pushed in this array.
+This service's theme is a GmfThemesNode with only children and a name.
+Thought to be the tree source of the gmf layertree directive.</p>
+</div>
 
 
 
@@ -81,13 +90,13 @@
 
         <tr>
             
-                <td class="name"><code>$scope</code></td>
+                <td class="name"><code>gmfThemes</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><a href="https://docs.angularjs.org/guide/scope">angular.Scope</a></span>
+<span class="param-type"><a href="gmf.Themes.html">gmf.Themes</a></span>
 
 
             
@@ -97,7 +106,7 @@
 
             
 
-            <td class="description last"><p>Scope.</p></td>
+            <td class="description last"><p>gmf Themes service.</p></td>
         </tr>
 
     
@@ -141,8 +150,8 @@
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
     
-        <a href="https://github.com/camptocamp/ngeo/blob/master/src/directives/btngroup.js">src/directives/btngroup.js</a>,
-        <a href="https://github.com/camptocamp/ngeo/blob/master/src/directives/btngroup.js#L78">line 78</a>
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/services/treemanager.js">contribs/gmf/src/services/treemanager.js</a>,
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/services/treemanager.js#L19">line 19</a>
     </li></ul></dd>
     
 
@@ -182,6 +191,80 @@
     
 
     
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="tree"><span class="type-signature"></span>tree<span class="type-signature"> :<a href="GmfThemesNode.html">GmfThemesNode</a></span></h4>
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="GmfThemesNode.html">GmfThemesNode</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+    
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/services/treemanager.js">contribs/gmf/src/services/treemanager.js</a>,
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/services/treemanager.js#L37">line 37</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
 
     
         <h3 class="subsection-title">Methods</h3>
@@ -191,12 +274,17 @@
 
     
 
-    <h4 class="name" id="activate"><span class="type-signature"></span>activate<span class="signature">(index)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="addGroupByLayerName"><span class="type-signature"></span>addGroupByLayerName<span class="signature">()</span><span class="type-signature"></span></h4>
 
     
 
 
 
+<div class="description">
+    <p>Retrieve a group by the name of a layer that is contained in this group
+(first found). This group will be added in the tree. Do nothing if any
+corresponding group is found.</p>
+</div>
 
 
 
@@ -204,54 +292,6 @@
 
 
 
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>index</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Index of the button in buttons array.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -290,8 +330,8 @@
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
     
-        <a href="https://github.com/camptocamp/ngeo/blob/master/src/directives/btngroup.js">src/directives/btngroup.js</a>,
-        <a href="https://github.com/camptocamp/ngeo/blob/master/src/directives/btngroup.js#L96">line 96</a>
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/services/treemanager.js">contribs/gmf/src/services/treemanager.js</a>,
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/services/treemanager.js#L162">line 162</a>
     </li></ul></dd>
     
 
@@ -322,12 +362,16 @@
 
     
 
-    <h4 class="name" id="addButton"><span class="type-signature"></span>addButton<span class="signature">(expressionFn)</span><span class="type-signature"> &rarr; {<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>}</span></h4>
+    <h4 class="name" id="addGroupByName"><span class="type-signature"></span>addGroupByName<span class="signature">()</span><span class="type-signature"></span></h4>
 
     
 
 
 
+<div class="description">
+    <p>Retrieve a group (first found) by its name and add in the tree. Do nothing
+if any corresponding group is found.</p>
+</div>
 
 
 
@@ -335,54 +379,6 @@
 
 
 
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>expressionFn</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">angular.$parse.Expression</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Expression function.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -421,8 +417,356 @@
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
     
-        <a href="https://github.com/camptocamp/ngeo/blob/master/src/directives/btngroup.js">src/directives/btngroup.js</a>,
-        <a href="https://github.com/camptocamp/ngeo/blob/master/src/directives/btngroup.js#L109">line 109</a>
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/services/treemanager.js">contribs/gmf/src/services/treemanager.js</a>,
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/services/treemanager.js#L144">line 144</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="addGroups"><span class="type-signature"></span>addGroups<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Add some groups as tree's children. If the service use mode 'flush', the
+previous tree's children will be removed. Add only groups that are not
+already in the tree.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+    
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/services/treemanager.js">contribs/gmf/src/services/treemanager.js</a>,
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/services/treemanager.js#L90">line 90</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="addTheme"><span class="type-signature"></span>addTheme<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Set the current theme name (mode 'flush' only) and add its children. Add
+only groups that are not already in the tree.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+    
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/services/treemanager.js">contribs/gmf/src/services/treemanager.js</a>,
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/services/treemanager.js#L74">line 74</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="addThemeByName"><span class="type-signature"></span>addThemeByName<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Retrieve a theme (first found) by its name and add in the tree. Do nothing
+if any corresponding theme is found.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+    
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/services/treemanager.js">contribs/gmf/src/services/treemanager.js</a>,
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/services/treemanager.js#L127">line 127</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="isModeFlush"><span class="type-signature"></span>isModeFlush<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Return the current 'mode' of this service.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+    
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/services/treemanager.js">contribs/gmf/src/services/treemanager.js</a>,
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/services/treemanager.js#L49">line 49</a>
     </li></ul></dd>
     
 
@@ -449,7 +793,7 @@
 
         
 <div class="param-desc">
-    <p>Index of the pushed setter.</p>
+    <p>True if the service is in 'flush' mode. False otherwise.</p>
 </div>
 
 
@@ -460,13 +804,188 @@
     </dt>
     <dd>
         
-<span class="param-type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span>
+<span class="param-type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span>
 
 
     </dd>
 </dl>
 
     
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="removeGroup"><span class="type-signature"></span>removeGroup<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Remove a group from this tree's children. The first group that is found (
+based on its name) will be removed. If any is found, nothing will append.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+    
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/services/treemanager.js">contribs/gmf/src/services/treemanager.js</a>,
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/services/treemanager.js#L179">line 179</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="setModeFlush"><span class="type-signature"></span>setModeFlush<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Set the 'mode' of this service. In mode 'flush', you'll replace previous
+tree's children with groups that you add. In mode 'add', you'll add them to
+the array.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+    
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/services/treemanager.js">contribs/gmf/src/services/treemanager.js</a>,
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/services/treemanager.js#L62">line 62</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

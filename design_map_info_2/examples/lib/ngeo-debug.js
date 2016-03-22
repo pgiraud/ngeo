@@ -108998,8 +108998,8 @@ goog.require('ol.control.Control');
 
 
 /**
- * Provides a directive can be used to add a control to a DOM
- * element of the HTML page.
+ * Provides a directive that can be used to add a control to the map
+ * using a DOM element.
  *
  * Example:
  *
@@ -109721,7 +109721,7 @@ ngeo.module.value('ngeoLayertreeTemplateUrl',
  *      <div ngeo-layertree="ctrl.tree"
  *        ngeo-layertree-map="ctrl.map"
  *        ngeo-layertree-nodelayer="ctrl.getLayer(node)"
- *        ngeo-layertree-listeners="ctrl.listeners(treeScope, treeCtrl)"
+ *        ngeo-layertree-listeners="ctrl.listeners(treeScope, treeCtrl)">
  *      </div>
  *
  * The "ngeo-layertree", "ngeo-layertree-map" and
@@ -114303,14 +114303,18 @@ ngeo.ScaleselectorController = function($scope, $element, $attrs) {
       ($scope.$eval(scalesExpr));
   goog.asserts.assert(this.scales !== undefined);
 
-  var zoomLevels = Object.keys(this.scales).map(Number);
-  zoomLevels.sort(ol.array.numberSafeCompareFunction);
-
   /**
    * @type {Array.<number>}
    * @export
    */
-  this.zoomLevels = zoomLevels;
+  this.zoomLevels;
+
+  $scope.$watch(function() {
+    return Object.keys(this.scales).length;
+  }.bind(this), function(newLength) {
+    this.zoomLevels = Object.keys(this.scales).map(Number);
+    this.zoomLevels.sort(ol.array.numberSafeCompareFunction);
+  }.bind(this));
 
   var mapExpr = $attrs['ngeoScaleselectorMap'];
 
@@ -114435,6 +114439,7 @@ ngeo.ScaleselectorController.prototype.handleResolutionChange_ = function(e) {
  */
 ngeo.ScaleselectorController.prototype.handleViewChange_ = function(e) {
   this.registerResolutionChangeListener_();
+  this.handleResolutionChange_(null);
 };
 
 
@@ -117779,9 +117784,8 @@ ngeo.SortableOptions;
 
 
 /**
- * Provides the "ngeoSortable" directive. This directive allows
- * drag-and-dropping DOM items between them. The directive also changes the
- * order of elements in the array it is given.
+ * Provides a directive that allows drag-and-dropping DOM items between them.
+ * It also changes the order of elements in the given array.
  *
  * It is typically used together with `ng-repeat`, for example for re-ordering
  * layers in a map.
@@ -121309,7 +121313,7 @@ goog.require('ngeo');
  *
  *      <input type="checkbox" ngModel="layer.visible" />
  *
- * @typedef {function(ol.layer.Layer)}
+ * @typedef {function(ol.layer.Base)}
  * @ngdoc service
  * @ngname ngeoDecorateLayer
  */
@@ -121317,10 +121321,10 @@ ngeo.DecorateLayer;
 
 
 /**
- * @param {ol.layer.Layer} layer Layer to decorate.
+ * @param {ol.layer.Base} layer Layer to decorate.
  */
 ngeo.decorateLayer = function(layer) {
-  goog.asserts.assertInstanceof(layer, ol.layer.Layer);
+  goog.asserts.assertInstanceof(layer, ol.layer.Base);
 
   Object.defineProperty(layer, 'visible', {
     configurable: true,
@@ -121603,6 +121607,32 @@ ngeo.LayerHelper.prototype.getFlatLayers_ = function(layer, array) {
   }
   return array;
 };
+
+
+/**
+ * Get a layer that has a `layerName` property equal to a given layer name from
+ * an array of layers. If one of the layers in the array is a group, then the
+ * layers contained in that group are searched as well.
+ * @param {string} layerName The name of the layer we're looking for.
+ * @param {Array.<ol.layer.Base>} layers Layers.
+ * @return {?ol.layer.Base} Layer.
+ * @export
+ */
+ngeo.LayerHelper.prototype.getLayerByName = function(layerName, layers) {
+  var found = null;
+  layers.some(function(layer) {
+    if (layer instanceof ol.layer.Group) {
+      var sublayers = layer.getLayers().getArray();
+      found = this.getLayerByName(layerName, sublayers);
+    } else if (layer.get('layerName') === layerName) {
+      found = layer;
+    }
+    return !!found;
+  }, this);
+
+  return found;
+};
+
 
 ngeo.module.service('ngeoLayerHelper', ngeo.LayerHelper);
 

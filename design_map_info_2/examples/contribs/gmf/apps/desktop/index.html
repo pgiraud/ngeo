@@ -14,10 +14,10 @@
     <main>
       <!-- using the mobile background layer selector (hidden) temporarily
            here to get a background-layer -->
-      <gmf-mobile-background-layer-selector
-        gmf-mobile-background-layer-selector-map="::mainCtrl.map"
+      <gmf-mobile-backgroundlayerselector
+        gmf-mobile-backgroundlayerselector-map="::mainCtrl.map"
         style="display: none;">
-      </gmf-mobile-background-layer-selector>
+      </gmf-mobile-backgroundlayerselector>
       <div class="data-panel">
         <div class="header">
           <div class="dropdown">
@@ -46,7 +46,7 @@
       <div class="tools" ngeo-resizemap="mainCtrl.map"
         ngeo-resizemap-state="mainCtrl.toolsActive">
         <div ngeo-btn-group class="bar btn-group-vertical" ngeo-btn-group-active="mainCtrl.toolsActive">
-          <button ngeo-btn class="btn btn-default" ng-model="loginActive"
+          <button ngeo-btn class="btn btn-default" ng-model="mainCtrl.loginActive"
             data-toggle="tooltip" data-placement="left" data-original-title="{{'Login'|translate}}">
             <span class="fa fa-user"></span>
           </button>
@@ -60,8 +60,8 @@
           </button>
         </div>
         <div class="tools-content" ng-class="{active: mainCtrl.toolsActive}">
-          <div ng-show="loginActive">
-            <a class="btn close" ng-click="loginActive = false">&times;</a>
+          <div ng-show="mainCtrl.loginActive">
+            <a class="btn close" ng-click="mainCtrl.loginActive = false">&times;</a>
             <div class="tools-content-heading">
               Login
             </div>
@@ -86,15 +86,13 @@
         <div class="search">
           <gmf-search gmf-search-map="mainCtrl.map"
             gmf-search-datasources="mainCtrl.searchDatasources"
-            gmf-search-currenttheme="mainCtrl.theme"
             gmf-search-coordinatesprojections="mainCtrl.searchCoordinatesProjections"
             gmf-search-clearbutton="true">
           </gmf-search>
         </div>
-        <button class="btn btn-sm fa fa-bars map-info ng-cloak" ng-if="!mainCtrl.info" ng-click="mainCtrl.info = true"></button>
+        <button class="btn btn-sm fa fa-info map-info ng-cloak" ng-if="!mainCtrl.info" ng-click="mainCtrl.info = true"></button>
         <gmf-map class="gmf-map" gmf-map-map="mainCtrl.map"></gmf-map>
-        <div class="footer ng-cloak" ng-if="mainCtrl.info">
-          <div id="scaleline"></div>
+        <div class="footer ng-cloak" ng-class="{'active': mainCtrl.info}">
           <div class="dropup">
             <button type="button" class="btn btn-default btn-sm" data-toggle="dropdown" aria-expanded="false"> 1&nbsp;:&nbsp;100,000&nbsp;<span class="caret"></span> </button>
             <ul class="dropdown-menu" role="menu">
@@ -108,9 +106,13 @@
               <li><a href="">1&nbsp;:&nbsp;100,000</a> </li>
             </ul>
           </div>
+          <div id="scaleline"></div>
           <div class="close pull-right" ng-click="mainCtrl.info = false">&times;</div>
-          <div class="btn-group pull-right dropup" style="margin-top: 2px;">
-            <div id="mouse-position" class="btn btn-sm" style="text-align: right; background-color: rgba(224, 224, 224, 0.8); min-width: 120px;"></div>
+          <div class="btn-group pull-right dropup">
+            <div class="btn btn-sm" style="background-color: rgba(224, 224, 224, 0.8);">
+              <span class="fa fa-location-arrow"></span>
+            </div>
+            <div id="mouse-position" class="btn btn-sm" style="text-align: right; background-color: rgba(224, 224, 224, 0.8); min-width: 110px;"></div>
             <div class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="background-color: rgba(224, 224, 224, 0.8);">
               <span class="fa fa-ellipsis-v"></span>
             </div>
@@ -120,6 +122,21 @@
               <li><a href=""><span class="fa fa-fw fa-check"></span>CH1903</a> </li>
             </ul>
           </div>
+          <!--<div class="pull-right btn-group dropup">-->
+            <!--<div class="btn btn-sm" style="background-color: rgba(224, 224, 224, 0.8);">-->
+              <!--<span class="fa fa-arrows-v"></span>-->
+            <!--</div>-->
+            <!--<div id="elevation" class="btn btn-sm" style="text-align: right; background-color: rgba(224, 224, 224, 0.8); min-width: 50px;">-->
+              <!--235m-->
+            <!--</div>-->
+            <!--<div class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="background-color: rgba(224, 224, 224, 0.8);">-->
+              <!--<span class="fa fa-ellipsis-v"></span>-->
+            <!--</div>-->
+            <!--<ul class="dropdown-menu" role="menu">-->
+              <!--<li><a href=""><span class="fa fa-fw"></span>SRTM</a> </li>-->
+              <!--<li><a href=""><span class="fa fa-fw fa-check"></span>Aster</a> </li>-->
+            <!--</ul>-->
+          <!--</div>-->
         </div>
       </div>
     </main>
@@ -140,8 +157,7 @@
          module.constant('gmfTreeUrl', 'https://geomapfish-demo.camptocamp.net/2.0/wsgi/themes?version=2&background=background');
          module.constant('gmfSearchGroups', ['osm','district']);
          // Requires that the gmfSearchGroups is specified
-         // TODO: add 'add_group' and 'add_layer' when supported
-         module.constant('gmfSearchActions', ['add_theme']);
+         module.constant('gmfSearchActions', ['add_theme', 'add_group', 'add_layer']);
        })();
     </script>
   </body>
