@@ -39,9 +39,7 @@ gmf-layertree ul .treenode {
   .state {
     font-family: gmf-icons;
     color: @color;
-  }
-  .on .state {
-    color: @special-link;
+    display: none;
   }
   .off, .off .legend img {
     opacity: 0.5;
@@ -51,11 +49,23 @@ gmf-layertree ul .treenode {
   }
 
   .group {
+    .state {
+      display: inline-block;
+    }
     .state::after {
-      content: "\e600";
+      content: "\e900";
+    }
+    &.on,
+    &.off {
+      .state::after {
+        content: "\e600";
+      }
     }
     .layerIcon {
       display: none;
+    }
+    &.off .state {
+      color: @color;
     }
   }
 
