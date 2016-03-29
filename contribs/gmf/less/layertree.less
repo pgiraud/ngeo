@@ -54,8 +54,20 @@ gmf-layertree ul .treenode {
     .state::after {
       content: "\e600";
     }
+    &.on .state::after {
+      content: "\e902";
+    }
     .layerIcon {
       display: none;
+    }
+    &,
+    &.on {
+      .state {
+        color: @special-link;
+      }
+    }
+    &.off .state {
+      color: @color;
     }
   }
 
