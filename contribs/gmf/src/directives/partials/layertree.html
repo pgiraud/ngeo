@@ -11,6 +11,7 @@
     </span>
     <span class="state"></span>
     <span class="name">{{layertreeCtrl.node.name | translate}}</span>
+    &nbsp<span class="layerIcon fa fa-search-plus zoom" data-toggle="tooltip" data-placement="right" data-original-title="{{'Not visible at current scale. Click to zoom to a visible level.'|translate}}" ng-click="::gmfLayertreeCtrl.zoomToResolution(layertreeCtrl.node); $event.stopPropagation(); $event.preventDefault();"></span>
   </a>
   <span class="rightButtons">
     <span class="metadata" ng-if="::layertreeCtrl.node.metadata.metadataUrl">
@@ -20,10 +21,6 @@
       <span ng-if="::gmfLayertreeCtrl.openLinksInNewWindow !== true">
         <a title="{{'More informations'|translate}}" href="" ng-click="gmfLayertreeCtrl.displayMetadata(layertreeCtrl)"></a>
       </span>
-    </span>
-    <span class="zoom" title="{{'Zoom to a visible level'|translate}}" ng-click="::gmfLayertreeCtrl.zoomToResolution(layertreeCtrl.node)"></span>
-    <span class="legendButton" ng-if="::(gmfLayertreeCtrl.getLegendURL(layertreeCtrl) && layertreeCtrl.node.metadata.legend == 'true')">
-      <a title="{{'Show/hide legend'|translate}}" data-toggle="collapse" href="#node-{{::layertreeCtrl.uid}}-legend"></a>
     </span>
   </span>
   <span class="legend">

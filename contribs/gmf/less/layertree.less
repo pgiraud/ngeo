@@ -100,9 +100,6 @@ gmf-layertree ul .treenode {
     &:hover {
       cursor: pointer;
     }
-    &::after {
-      content: "\f18e";
-    }
   }
   .noSource {
     opacity: 0.3;
@@ -111,12 +108,12 @@ gmf-layertree ul .treenode {
     }
   }
   .outOfResolution {
-    .rightButtons {
+    &.on {
       .zoom {
         display: inline;
       }
-      .legendButton {
-        display: none;
+      .name {
+        font-style: italic;
       }
     }
     &.leaf .state::after {
