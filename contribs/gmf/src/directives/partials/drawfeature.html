@@ -16,7 +16,9 @@
       ngeo-drawpoint
       class="btn btn-default ngeo-drawfeature-point"
       ng-class="{active: dfCtrl.drawPoint.active}"
-      ng-model="dfCtrl.drawPoint.active"></a>
+      ng-model="dfCtrl.drawPoint.active">
+      <span class="fa fa-circle"></span>
+    </a>
     <a
       href
       translate
@@ -24,7 +26,9 @@
       ngeo-measurelength
       class="btn btn-default ngeo-drawfeature-linestring"
       ng-class="{active: dfCtrl.measureLength.active}"
-      ng-model="dfCtrl.measureLength.active"></a>
+      ng-model="dfCtrl.measureLength.active">
+      <span class="fa fa-arrows-h"></span>
+    </a>
     <a
       href
       translate
@@ -32,7 +36,9 @@
       ngeo-measurearea
       class="btn btn-default ngeo-drawfeature-polygon"
       ng-class="{active: dfCtrl.measureArea.active}"
-      ng-model="dfCtrl.measureArea.active"></a>
+      ng-model="dfCtrl.measureArea.active">
+      <span class="fa fa-square"></span>
+    </a>
     <a
       href
       translate
@@ -40,7 +46,9 @@
       ngeo-measureazimut
       class="btn btn-default ngeo-drawfeature-circle"
       ng-class="{active: dfCtrl.measureAzimut.active}"
-      ng-model="dfCtrl.measureAzimut.active"></a>
+      ng-model="dfCtrl.measureAzimut.active">
+      <span class="fa fa-circle-o"></span>
+    </a>
     <a
       href
       translate
@@ -48,7 +56,9 @@
       ngeo-drawrectangle
       class="btn btn-default ngeo-drawfeature-rectangle"
       ng-class="{active: dfCtrl.drawRectangle.active}"
-      ng-model="dfCtrl.drawRectangle.active"></a>
+      ng-model="dfCtrl.drawRectangle.active">
+      <span class="fa fa-square-o"></span>
+    </a>
     <a
       href
       translate
@@ -56,7 +66,9 @@
       ngeo-drawtext
       class="btn btn-default ngeo-drawfeature-text"
       ng-class="{active: dfCtrl.drawText.active}"
-      ng-model="dfCtrl.drawText.active"></a>
+      ng-model="dfCtrl.drawText.active">
+      <span class="fa fa-trademark"></span>
+    </a>
   </ngeo-drawfeature>
 
   <hr />
@@ -66,20 +78,23 @@
     <div ng-switch-when="null">
       <div class="ngeo-drawfeature-actionbuttons">
         <button
-            class="btn btn-default">
+            class="btn btn-sm btn-default">
+          <span class="fa fa-mail-forward"></span>
           {{'Export' | translate}}
         </button>
         <button
             ng-click="efCtrl.features.clear();"
-            class="btn btn-default">
+            class="btn btn-sm btn-default">
+          <span class="fa fa-trash"></span>
           {{'Delete All' | translate}}
         </button>
       </div>
 
       <div class="gmf-eol"></div>
 
-      <ul class="gmf-drawfeature-featurelist">
+      <ul class="list-group gmf-drawfeature-featurelist">
         <li
+            class="list-group-item"
             ng-repeat="feature in efCtrl.features.getArray()"
             ng-click="efCtrl.selectedFeature = feature;">
           {{ feature.get(efCtrl.nameProperty) }}
@@ -90,22 +105,27 @@
 
     <div ng-switch-default>
 
+      <button
+          ng-click="efCtrl.selectedFeature = null;"
+          class="btn btn-sm btn-default">
+        <span class="fa fa-arrow-left"></span>
+        {{'List' | translate}}
+      </button>
       <div class="ngeo-drawfeature-actionbuttons">
         <button
-            ng-click="efCtrl.selectedFeature = null;"
-            class="btn btn-default">
-          {{'<- List' | translate}}
-        </button>
-        <button
-            class="btn btn-default">
+            class="btn btn-sm btn-default">
+          <span class="fa fa-mail-forward"></span>
           {{'Export' | translate}}
         </button>
         <button
             ng-click="efCtrl.features.remove(efCtrl.selectedFeature);"
-            class="btn btn-default">
+            class="btn btn-sm btn-default">
+          <span class="fa fa-trash"></span>
           {{'Delete' | translate}}
         </button>
       </div>
+
+      <div class="gmf-eol"></div>
 
       <gmf-featurestyle
         gmf-featurestyle-feature="efCtrl.selectedFeature">
