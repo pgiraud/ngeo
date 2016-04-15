@@ -95,8 +95,168 @@
           </gmf-search>
         </div>
         <gmf-map class="gmf-map" gmf-map-map="mainCtrl.map"></gmf-map>
+        <img src="https://cloud.githubusercontent.com/assets/319774/14563855/3b2c3c20-0324-11e6-94c3-e6beb4fa441c.png" alt="" style="position:absolute;" ng-show="!mainCtrl.oneIsSelected()">
+        <img src="https://cloud.githubusercontent.com/assets/319774/14563857/3c725bf0-0324-11e6-8484-d7f8213fff3f.png" alt="" style="position:absolute;" ng-show="mainCtrl.oneIsSelected()">
       </div>
     </main>
+    <footer>
+      <div class="gmf-results-grid">
+        <button class="close">&times;</button>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs small" role="tablist">
+          <li role="presentation" class="active"><a href="#parcelles" aria-controls="parcelles" role="tab" data-toggle="tab">Parcelles cadastrales (21)</a></li>
+          <li role="presentation"><a href="#adresses" aria-controls="adresses" role="tab" data-toggle="tab">Adresses (3)</a></li>
+          <li role="presentation"><a href="#arbres" aria-controls="arbres" role="tab" data-toggle="tab"><em>Arbres (342*)</em></a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="parcelles">
+            <div class="table-container">
+              <div class="table-container-header">
+                <table class="table table-hover table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Cadastre <i class="fa fa-sort-down"></i></th>
+                      <th>N° de bien-fonds <i class="text-muted fa fa-sort"></i></th>
+                      <th>Source <i class="text-muted fa fa-sort"></i></th>
+                      <th>Type <i class="text-muted fa fa-sort"></i></th>
+                      <th>Surface RF [m²] <i class="text-muted fa fa-sort"></i></th>
+                      <th>Propriétaire <i class="text-muted fa fa-sort"></i></th>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+              <div class="table-container-body">
+                <table class="table table-hover table-bordered">
+                  <tbody>
+                    <tr ng-repeat="row in mainCtrl.cadastre" ng-click="mainCtrl.select(row)" ng-class="{active: row.active}">
+                      <td>
+                        {{row.properties.cadastre}}
+                      </td>
+                      <td>
+                        {{row.properties.nummai}}
+                      </td>
+                      <td>
+                        {{row.properties.source}}
+                      </td>
+                      <td>
+                        {{row.properties.typimm}}
+                      </td>
+                      <td>
+                        {{row.properties.srfmai}}
+                      </td>
+                      <td>
+                        <a href>Cliquer ici</a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="navbar">
+              <ul class="nav navbar-nav">
+                <li class="dropdown navbar-link dropup">
+                  <button type="button" class="dropup btn btn-default btn-xs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Select
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dLabel">
+                    <li><a href ng-click="mainCtrl.selectAll()">All</a></li>
+                    <li><a href ng-click="mainCtrl.selectNone()">None</a></li>
+                    <li><a href ng-click="mainCtrl.reverseSelection()">Reverse selection</a></li>
+                  </ul>
+                </li>
+                <li class="small" ng-show="mainCtrl.oneIsSelected()">
+                  <p class="navbar-text" style="padding: 1px 5px; margin: 0; line-height: 1.5;">
+                  {{mainCtrl.selected()}} selected elements
+                  </p>
+                </li>
+                <li ng-show="mainCtrl.oneIsSelected()">
+                  <button class="btn btn-link btn-xs" ><i class="fa fa-search-plus"></i> Zoom to</button>
+                </li>
+                <li ng-show="mainCtrl.oneIsSelected()">
+                  <button class="btn btn-link btn-xs" ><i class="fa fa-download"></i> Export as CSV</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="adresses">
+            <div class="table-container">
+              <div class="table-container-header">
+                <table class="table table-hover table-bordered">
+                  <thead>
+                    <tr>
+                      <th>N° cantonal rue <i class="fa fa-sort-down"></i></th>
+                      <th>Adresse <i class="text-muted fa fa-sort"></i></th>
+                      <th>Source <i class="text-muted fa fa-sort"></i></th>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+              <div class="table-container-body">
+                <table class="table table-hover table-condensed table-bordered">
+                  <tbody>
+                    <tr ng-repeat="row in mainCtrl.adresses">
+                      <td>
+                        {{row.properties.covoie}}
+                      </td>
+                      <td>
+                        {{row.properties.nom_adresse}}
+                      </td>
+                      <td>
+                        {{row.properties.source}}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="navbar">
+              <ul class="nav navbar-nav">
+                <li class="dropdown navbar-link dropup">
+                  <button type="button" class="dropup btn btn-default btn-xs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Select
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dLabel">
+                    <li><a href ng-click="mainCtrl.selectAll()">All</a></li>
+                    <li><a href ng-click="mainCtrl.selectNone()">None</a></li>
+                    <li><a href ng-click="mainCtrl.reverseSelection()">Reverse selection</a></li>
+                  </ul>
+                </li>
+                <li class="small" ng-show="mainCtrl.oneIsSelected()">
+                  <p class="navbar-text" style="padding: 1px 5px; margin: 0; line-height: 1.5;">
+                  {{mainCtrl.selected()}} selected elements
+                  </p>
+                </li>
+                <li ng-show="mainCtrl.oneIsSelected()">
+                  <button class="btn btn-link btn-xs" ><i class="fa fa-search-plus"></i> Zoom to</button>
+                </li>
+                <li ng-show="mainCtrl.oneIsSelected()">
+                  <button class="btn btn-link btn-xs" ><i class="fa fa-download"></i> Export as CSV</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="arbres">
+            <div class="row message">
+              <div class="col-sm-4 col-sm-offset-4">
+                <div class="alert alert-warning">
+                  <em>
+                    We can't display the results because the maximum number has been reached (200).
+                    <br>
+                    Please refine your query.
+                  </em>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--<iframe src="http://dev.camptocamp.com/files/pgiraud/gmf2/grid/" width="100%" height="100%" frameborder="0"></iframe>-->
+      <!--<iframe src="http://localhost/~pierre/aad6db2afd43f02aed1b7e2fb50bfdc3/" width="100%" height="100%" frameborder="0"></iframe>-->
+    </footer>
     <script src="../../../../node_modules/jquery/dist/jquery.js"></script>
     <script src="../../../../node_modules/angular/angular.js"></script>
     <script src="../../../../node_modules/angular-animate/angular-animate.js"></script>

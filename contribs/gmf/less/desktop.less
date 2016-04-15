@@ -7,6 +7,7 @@
 @import 'desktoplayertree.less';
 @import 'icons.less';
 @import 'search.less';
+@import 'features-grid.less';
 
 @map-tools-size: 3rem;
 @button-size: 4rem;
@@ -36,9 +37,18 @@ header {
   .box-shadow(0px 2px 6px -1px rgba(0, 0, 0, 0.5));
 }
 
+@footer-height: 200px + 2 * 4px + 4px + 22px;
+footer {
+  position: fixed;
+  width: 100%;
+  height: @footer-height;
+  z-index: @zindex-navbar-fixed;
+  .box-shadow(0px 2px 6px 1px rgba(0, 0, 0, 0.5));
+}
+
 main {
   position: relative;
-  height: 100%;
+  height: calc(~'100%' - @footer-height);
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAAAAABzHgM7AAAAAnRSTlMAAHaTzTgAAAARSURBVHgBY3iKBFEAOp/+MgB+UQnYeBZPWAAAAABJRU5ErkJggg==');
 }
 

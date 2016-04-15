@@ -1,0 +1,47 @@
+{
+    "type": "FeatureCollection",
+    "crs": {
+        "type": "name",
+        "properties": {
+            "name": "urn:ogc:def:crs:EPSG::21781"
+        }
+    },
+
+    "features": [{
+        "type": "Feature",
+        "properties": {
+            "gml_id": null,
+            "covoie": 2933,
+            "nom_adresse": "La Vieille-Fontaine",
+            "source": "MO"
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [551998.70076499995776, 203079.5686]
+        }
+    }, {
+        "type": "Feature",
+        "properties": {
+            "gml_id": null,
+            "covoie": 2933,
+            "nom_adresse": "La Vieille-Fontaine 7",
+            "source": "MO"
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [551975.95863, 203105.66675]
+        }
+    }, {
+        "type": "Feature",
+        "properties": {
+            "gml_id": null,
+            "covoie": 3362,
+            "nom_adresse": "Route de Bourgogne 8",
+            "source": "MO"
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [552057.35774, 203075.786575]
+        }
+    }]
+}
