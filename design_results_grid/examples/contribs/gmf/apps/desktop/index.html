@@ -106,6 +106,7 @@
         <ul class="nav nav-tabs small" role="tablist">
           <li role="presentation" class="active"><a href="#parcelles" aria-controls="parcelles" role="tab" data-toggle="tab">Parcelles cadastrales (21)</a></li>
           <li role="presentation"><a href="#adresses" aria-controls="adresses" role="tab" data-toggle="tab">Adresses (3)</a></li>
+          <li role="presentation"><a href="#arbres" aria-controls="arbres" role="tab" data-toggle="tab"><em>Arbres (342*)</em></a></li>
         </ul>
 
         <!-- Tab panes -->
@@ -153,6 +154,32 @@
                 </table>
               </div>
             </div>
+            <div class="navbar">
+              <ul class="nav navbar-nav navbar-right">
+                <li class="small" ng-show="mainCtrl.oneIsSelected()">
+                  <p class="navbar-text" style="padding: 1px 5px; margin: 0; line-height: 1.5;">
+                  {{mainCtrl.selected()}} selected elements
+                  </p>
+                </li>
+                <li ng-show="mainCtrl.oneIsSelected()">
+                  <button class="btn btn-link btn-xs" ><i class="fa fa-search-plus"></i> Zoom to</button>
+                </li>
+                <li ng-show="mainCtrl.oneIsSelected()">
+                  <button class="btn btn-link btn-xs" ><i class="fa fa-download"></i> Export as CSV</button>
+                </li>
+                <li class="dropdown navbar-link dropup">
+                  <button type="button" class="dropup btn btn-default btn-xs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Select
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dLabel">
+                    <li><a href ng-click="mainCtrl.selectAll()">All</a></li>
+                    <li><a href ng-click="mainCtrl.selectNone()">None</a></li>
+                    <li><a href ng-click="mainCtrl.reverseSelection()">Reverse selection</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
           </div>
           <div role="tabpanel" class="tab-pane" id="adresses">
             <div class="table-container">
@@ -185,32 +212,45 @@
                 </table>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="navbar">
-          <ul class="nav navbar-nav navbar-right">
-            <li class="small" ng-show="mainCtrl.oneIsSelected()">
-              <p class="navbar-text" style="padding: 1px 5px; margin: 0; line-height: 1.5;">
-              {{mainCtrl.selected()}} selected elements
-              </p>
-            </li>
-            <li ng-show="mainCtrl.oneIsSelected()">
-              <button class="btn btn-link btn-xs" ><i class="fa fa-search-plus"></i> Zoom to</button>
-            </li>
-            <li ng-show="mainCtrl.oneIsSelected()">
-              <button class="btn btn-link btn-xs" ><i class="fa fa-download"></i> Export as CSV</button>
-            </li>
-            <li class="dropdown navbar-link dropup">
-              <button type="button" class="dropup btn btn-default btn-xs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Select
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dLabel">
-                <li><a href ng-click="mainCtrl.selectAll()">All</a></li>
-                <li><a href ng-click="mainCtrl.selectNone()">None</a></li>
-                <li><a href ng-click="mainCtrl.reverseSelection()">Reverse selection</a></li>
+            <div class="navbar">
+              <ul class="nav navbar-nav navbar-right">
+                <li class="small" ng-show="mainCtrl.oneIsSelected()">
+                  <p class="navbar-text" style="padding: 1px 5px; margin: 0; line-height: 1.5;">
+                  {{mainCtrl.selected()}} selected elements
+                  </p>
+                </li>
+                <li ng-show="mainCtrl.oneIsSelected()">
+                  <button class="btn btn-link btn-xs" ><i class="fa fa-search-plus"></i> Zoom to</button>
+                </li>
+                <li ng-show="mainCtrl.oneIsSelected()">
+                  <button class="btn btn-link btn-xs" ><i class="fa fa-download"></i> Export as CSV</button>
+                </li>
+                <li class="dropdown navbar-link dropup">
+                  <button type="button" class="dropup btn btn-default btn-xs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Select
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dLabel">
+                    <li><a href ng-click="mainCtrl.selectAll()">All</a></li>
+                    <li><a href ng-click="mainCtrl.selectNone()">None</a></li>
+                    <li><a href ng-click="mainCtrl.reverseSelection()">Reverse selection</a></li>
+                  </ul>
+                </li>
               </ul>
-            </li>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="arbres">
+            <div class="row message">
+              <div class="col-sm-4 col-sm-offset-4">
+                <div class="alert alert-warning">
+                  <em>
+                    We can't display the results because the maximum number has been reached (200).
+                    <br>
+                    Please refine your query.
+                  </em>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
