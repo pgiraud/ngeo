@@ -41,19 +41,28 @@
       </div>
       <div class="tools" ngeo-resizemap="mainCtrl.map"
         ngeo-resizemap-state="mainCtrl.toolsActive">
-        <div ngeo-btn-group class="bar btn-group-vertical" ngeo-btn-group-active="mainCtrl.toolsActive">
-          <button ngeo-btn class="btn btn-default" ng-model="mainCtrl.loginActive"
-            data-toggle="tooltip" data-placement="left" data-original-title="{{'Login'|translate}}">
-            <span class="fa fa-user"></span>
-          </button>
-          <button ngeo-btn class="btn btn-default" ng-model="printActive"
-            data-toggle="tooltip" data-placement="left" data-original-title="{{'Print'|translate}}">
-            <span class="fa fa-print"></span>
-          </button>
-          <button ngeo-btn class="btn btn-default" ng-model="measureActive"
-            data-toggle="tooltip" data-placement="left" data-original-title="{{'Draw & Measure'|translate}}">
-            <span class="fa fa-pencil"></span>
-          </button>
+        <div class="bar">
+          <div ngeo-btn-group class="btn-group-vertical" ngeo-btn-group-active="mainCtrl.toolsActive">
+            <button ngeo-btn class="btn btn-default" ng-model="mainCtrl.loginActive"
+              data-toggle="tooltip" data-placement="left" data-original-title="{{'Login'|translate}}">
+              <span class="fa fa-user"></span>
+            </button>
+            <button ngeo-btn class="btn btn-default" ng-model="printActive"
+              data-toggle="tooltip" data-placement="left" data-original-title="{{'Print'|translate}}">
+              <span class="fa fa-print"></span>
+            </button>
+            <button ngeo-btn class="btn btn-default" ng-model="measureActive"
+              data-toggle="tooltip" data-placement="left" data-original-title="{{'Measure tools'|translate}}">
+              <span class="fa fa-circle"></span>
+            </button>
+          </div>
+          <br/>
+          <br/>
+          <span data-toggle="tooltip" data-placement="left" data-original-title="{{'Share this map'|translate}}">
+            <button class="btn btn-default" data-toggle="modal" data-target="#myModal">
+              <span class="fa fa-share-alt"></span>
+            </button>
+          </span>
         </div>
         <div class="tools-content container-fluid" ng-class="{active: mainCtrl.toolsActive}">
           <div ng-show="mainCtrl.loginActive" class="row">
@@ -113,6 +122,42 @@
         <gmf-map class="gmf-map" gmf-map-map="mainCtrl.map"></gmf-map>
       </div>
     </main>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Share this map</h4>
+          </div>
+          <div class="modal-body">
+            <form role="form">
+              <div class="form-group">
+                <label for="exampleInputPermalink">Permalink</label>
+                <input type="text" class="form-control" id="exampleInputPermalink" readonly="True" value="http://sitn.ne.ch/production/wsgi/short/j01rE">
+                <p class="help-block">Copy this link to share it.</p>
+                <p class="text-danger"><span class="fa fa-exclamation-triangle"></span> You have a lot of drawn elements in this map. The above link may not be correctly supported by some browsers.</p>
+              </div>
+              <hr>
+              <div class="form-group">
+                <label for="exampleInputFile">Send this link to</label>
+                <input type="email" class="form-control" id="exampleInputFile" placeholder="Email">
+              </div>
+              <div class="form-group">
+                <textarea class="form-control" placeholder="Message (optional)"></textarea>
+              </div>
+              <!--<div class="text-success">-->
+                <!--<span class="fa fa-check"></span> Link successfully sent.-->
+              <!--</div>-->
+              <div class="text-right">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-default btn-primary">Send</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
     <script src="../../../../node_modules/jquery/dist/jquery.js"></script>
     <script src="../../third-party/jquery-ui/jquery-ui.min.js"></script>
     <script src="../../../../node_modules/angular/angular.js"></script>
