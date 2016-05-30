@@ -45,7 +45,6 @@ app.searchDirective = function() {
 app.module.directive('appSearch', app.searchDirective);
 
 
-
 /**
  * @constructor
  * @param {angular.Scope} $rootScope Angular root scope.
@@ -100,7 +99,7 @@ app.SearchController = function($rootScope, $compile,
       suggestion: function(suggestion) {
         var feature = /** @type {ol.Feature} */ (suggestion);
 
-        // A scope for the ng-click on the suggestion's « i » button.
+        // A scope for the ng-click on the suggestion's « i » button.
         var scope = $rootScope.$new(true);
         scope['feature'] = feature;
         scope['click'] = function(event) {
@@ -120,7 +119,7 @@ app.SearchController = function($rootScope, $compile,
    * @export
    */
   this.listeners = /** @type {ngeox.SearchDirectiveListeners} */ ({
-    select: angular.bind(this, app.SearchController.select_)
+    select: app.SearchController.select_.bind(this)
   });
 
 };
@@ -147,11 +146,10 @@ app.SearchController.prototype.createVectorLayer_ = function() {
  * @return {Bloodhound} The bloodhound engine.
  * @private
  */
-app.SearchController.prototype.createAndInitBloodhound_ =
-    function(ngeoCreateGeoJSONBloodhound) {
-  var url = 'http://devv3.geoportail.lu/main/wsgi/fulltextsearch?query=%QUERY';
-  var bloodhound = ngeoCreateGeoJSONBloodhound(url, undefined,
-                                               ol.proj.get('EPSG:3857'));
+app.SearchController.prototype.createAndInitBloodhound_ = function(ngeoCreateGeoJSONBloodhound) {
+  var url = 'https://geomapfish-demo.camptocamp.net/2.1/wsgi/fulltextsearch?query=%QUERY';
+  var bloodhound = ngeoCreateGeoJSONBloodhound(
+      url, undefined, ol.proj.get('EPSG:3857'), ol.proj.get('EPSG:21781'));
   bloodhound.initialize();
   return bloodhound;
 };
@@ -179,7 +177,6 @@ app.SearchController.select_ = function(event, suggestion, dataset) {
 
 
 app.module.controller('AppSearchController', app.SearchController);
-
 
 
 /**

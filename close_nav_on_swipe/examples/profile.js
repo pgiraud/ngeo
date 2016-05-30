@@ -10,7 +10,6 @@ var app = {};
 app.module = angular.module('app', ['ngeo']);
 
 
-
 /**
  * @constructor
  * @param {angular.$http} $http The $http angular service.
@@ -96,7 +95,7 @@ app.MainController = function($http, $scope) {
    */
   this.profileData = undefined;
 
-  $http.get('data/profile.json').then(angular.bind(this, function(resp) {
+  $http.get('data/profile.json').then(function(resp) {
     var data = resp.data['profile'];
     this.profileData = data;
 
@@ -112,21 +111,16 @@ app.MainController = function($http, $scope) {
 
     map.getView().fit(source.getExtent(),
         /** @type {ol.Size} */ (this.map.getSize()));
-  }));
+  }.bind(this));
 
-
-  // Using closures for hoverCallback and outCallback since
-  // wrapping in angular.bind leads to a closure error.
-  // See PR https://github.com/google/closure-compiler/pull/867
-  var that = this;
 
   map.on('pointermove', function(evt) {
     if (evt.dragging) {
       return;
     }
     var coordinate = map.getEventCoordinate(evt.originalEvent);
-    that.snapToGeometry(coordinate, source.getFeatures()[0].getGeometry());
-  });
+    this.snapToGeometry(coordinate, source.getFeatures()[0].getGeometry());
+  }.bind(this));
 
 
   /**
@@ -137,7 +131,7 @@ app.MainController = function($http, $scope) {
    * @param {string} key Key used for retrieving the value.
    * @param {string=} opt_childKey Key of a child object.
    * @template T
-   * @return {function(Object): T}
+   * @return {function(Object): T} Getter function.
    */
   var typedFunctionsFactory = function(type, key, opt_childKey) {
     return (
@@ -178,9 +172,9 @@ app.MainController = function($http, $scope) {
     dist: typedFunctionsFactory(types.number, 'dist'),
     title: typedFunctionsFactory(types.string, 'title'),
     /**
-      * @param {Object} item
-      * @param {number=} opt_z
-      * @return {number}
+      * @param {Object} item POI.
+      * @param {number=} opt_z Z value.
+      * @return {number} Z value.
       */
     z: function(item, opt_z) {
       if (opt_z !== undefined) {
@@ -191,18 +185,18 @@ app.MainController = function($http, $scope) {
   };
 
   /**
-   * @param {Object} point
+   * @param {Object} point Point.
    */
   var hoverCallback = function(point) {
     // An item in the list of points given to the profile.
-    that.point = point;
-    that.snappedPoint_.setGeometry(new ol.geom.Point([point.x, point.y]));
-  };
+    this.point = point;
+    this.snappedPoint_.setGeometry(new ol.geom.Point([point.x, point.y]));
+  }.bind(this);
 
   var outCallback = function() {
-    that.point = null;
-    that.snappedPoint_.setGeometry(null);
-  };
+    this.point = null;
+    this.snappedPoint_.setGeometry(null);
+  }.bind(this);
 
 
   /**

@@ -9,7 +9,6 @@ var app = {};
 app.module = angular.module('app', ['ngeo']);
 
 
-
 /**
  * @param {angular.Scope} $scope Scope.
  * @param {ngeo.DecorateLayer} ngeoDecorateLayer Decorate layer service.
@@ -129,7 +128,7 @@ app.MainController = function($scope, ngeoDecorateLayer, ngeoSyncArrays) {
  * @export
  */
 app.MainController.prototype.toggleRoadsLayer = function(val) {
-  if (!angular.isDefined(val)) {
+  if (val === undefined) {
     return this.map.getLayers().getArray().indexOf(this.roads_) >= 0;
   } else {
     if (val) {
