@@ -106837,17 +106837,14 @@ ngeo.FeatureOverlay.prototype.handleFeatureRemove_ = function(evt) {
 
 ngeo.module.service('ngeoFeatureOverlayMgr', ngeo.FeatureOverlayMgr);
 
-goog.provide('ngeo.Notification');
-
-goog.require('goog.asserts');
-goog.require('ngeo');
+goog.provide('ngeo.Message');
 
 
 /**
  * @enum {string}
  * @export
  */
-ngeo.NotificationType = {
+ngeo.MessageType = {
   /**
    * @type {string}
    * @export
@@ -106872,17 +106869,146 @@ ngeo.NotificationType = {
 
 
 /**
+ * Abstract class for services that display messages.
+ *
+ * @constructor
+ */
+ngeo.Message = function() {};
+
+
+/**
+ * Show the message.
+ * @param {ngeox.Message} message Message.
+ * @protected
+ */
+ngeo.Message.prototype.showMessage = goog.abstractMethod;
+
+
+/**
+ * Show disclaimer message string or object or list of disclame message
+ * strings or objects.
+ * @param {string|Array.<string>|ngeox.Message|Array.<ngeox.Message>}
+ *     object A message or list of messages as text or configuration objects.
+ * @export
+ */
+ngeo.Message.prototype.show = function(object) {
+  var msgObjects = this.getMessageObjects(object);
+  msgObjects.forEach(this.showMessage, this);
+};
+
+
+/**
+ * Display the given error message or list of error messages.
+ * @param {string|Array.<string>} message Message or list of messages.
+ * @export
+ */
+ngeo.Message.prototype.error = function(message) {
+  this.show(this.getMessageObjects(message, ngeo.MessageType.ERROR));
+};
+
+
+/**
+ * Display the given info message or list of info messages.
+ * @param {string|Array.<string>} message Message or list of messages.
+ * @export
+ */
+ngeo.Message.prototype.info = function(message) {
+  this.show(this.getMessageObjects(message, ngeo.MessageType.INFORMATION));
+};
+
+
+/**
+ * Display the given success message or list of success messages.
+ * @param {string|Array.<string>} message Message or list of messages.
+ * @export
+ */
+ngeo.Message.prototype.success = function(message) {
+  this.show(this.getMessageObjects(message, ngeo.MessageType.SUCCESS));
+};
+
+
+/**
+ * Display the given warning message or list of warning messages.
+ * @param {string|Array.<string>} message Message or list of messages.
+ * @export
+ */
+ngeo.Message.prototype.warn = function(message) {
+  this.show(this.getMessageObjects(message, ngeo.MessageType.WARNING));
+};
+
+
+/**
+ * Returns an array of message object from any given message string, list of
+ * message strings, message object or list message objects. The type can be
+ * overriden here as well OR defined (if the message(s) is/are string(s),
+ * defaults to 'information').
+ * @param {string|Array.<string>|ngeox.Message|Array.<ngeox.Message>}
+ *     object A message or list of messages as text or configuration objects.
+ * @param {string=} opt_type The type of message to override the messages with.
+ * @return {Array.<ngeox.Message>} List of message objects.
+ * @protected
+ */
+ngeo.Message.prototype.getMessageObjects = function(object, opt_type) {
+  var msgObjects = [];
+  var msgObject = null;
+  var defaultType = ngeo.MessageType.INFORMATION;
+
+  if (typeof object === 'string') {
+    msgObjects.push({
+      msg: object,
+      type: opt_type !== undefined ? opt_type : defaultType
+    });
+  } else if (goog.isArray(object)) {
+    object.forEach(function(msg) {
+      if (typeof object === 'string') {
+        msgObject = {
+          msg: msg,
+          type: opt_type !== undefined ? opt_type : defaultType
+        };
+      } else {
+        msgObject = msg;
+        if (opt_type !== undefined) {
+          msgObject.type = opt_type;
+        }
+      }
+      msgObjects.push(msgObject);
+    }, this);
+  } else {
+    msgObject = object;
+    if (opt_type !== undefined) {
+      msgObject.type = opt_type;
+    }
+    if (msgObject.type === undefined) {
+      msgObject.type = defaultType;
+    }
+    msgObjects.push(msgObject);
+  }
+
+  return msgObjects;
+};
+
+goog.provide('ngeo.Notification');
+
+goog.require('goog.asserts');
+goog.require('ngeo');
+goog.require('ngeo.Message');
+
+
+/**
  * Provides methods to display any sort of messages, notifications, errors,
  * etc. Requires Bootstrap library (both CSS and JS) to display the alerts
  * properly.
  *
  * @constructor
+ * @extends {ngeo.Message}
  * @param {angular.$timeout} $timeout Angular timeout service.
  * @ngdoc service
  * @ngname ngeoNotification
  * @ngInject
  */
 ngeo.Notification = function($timeout) {
+
+  goog.base(this);
 
   /**
    * @type {angular.$timeout}
@@ -106906,6 +107032,7 @@ ngeo.Notification = function($timeout) {
   this.cache_ = {};
 
 };
+goog.inherits(ngeo.Notification, ngeo.Message);
 
 
 /**
@@ -106927,8 +107054,7 @@ ngeo.Notification.DEFAULT_DELAY_ = 7000;
  * @export
  */
 ngeo.Notification.prototype.notify = function(object) {
-  var msgObjects = this.getMessageObjects_(object);
-  msgObjects.forEach(this.notifyMessage_, this);
+  this.show(object);
 };
 
 
@@ -106943,77 +107069,27 @@ ngeo.Notification.prototype.clear = function() {
 };
 
 
-// SHORTCUT METHODS
-
-
 /**
- * Display the given error message or list of error messages.
- * @param {string|Array.<string>} message Message or list of messages.
- * @export
- */
-ngeo.Notification.prototype.error = function(message) {
-  this.notify(this.getMessageObjects_(
-      message, ngeo.NotificationType.ERROR));
-};
-
-
-/**
- * Display the given info message or list of info messages.
- * @param {string|Array.<string>} message Message or list of messages.
- * @export
- */
-ngeo.Notification.prototype.info = function(message) {
-  this.notify(this.getMessageObjects_(
-      message, ngeo.NotificationType.INFORMATION));
-};
-
-
-/**
- * Display the given success message or list of success messages.
- * @param {string|Array.<string>} message Message or list of messages.
- * @export
- */
-ngeo.Notification.prototype.success = function(message) {
-  this.notify(this.getMessageObjects_(
-      message, ngeo.NotificationType.SUCCESS));
-};
-
-
-/**
- * Display the given warning message or list of warning messages.
- * @param {string|Array.<string>} message Message or list of messages.
- * @export
- */
-ngeo.Notification.prototype.warn = function(message) {
-  this.notify(this.getMessageObjects_(
-      message, ngeo.NotificationType.WARNING));
-};
-
-
-// UTILITY METHODS
-
-
-/**
- * Display the message.
+ * Show the message.
  * @param {ngeox.Message} message Message.
- * @private
+ * @protected
  */
-ngeo.Notification.prototype.notifyMessage_ = function(message) {
+ngeo.Notification.prototype.showMessage = function(message) {
   var type = message.type;
   goog.asserts.assertString(type, 'Type should be set.');
 
   var classNames = ['alert', 'fade'];
   switch (type) {
-    case ngeo.NotificationType.ERROR:
+    case ngeo.MessageType.ERROR:
       classNames.push('alert-danger');
       break;
-    case ngeo.NotificationType.INFORMATION:
+    case ngeo.MessageType.INFORMATION:
       classNames.push('alert-info');
       break;
-    case ngeo.NotificationType.SUCCESS:
+    case ngeo.MessageType.SUCCESS:
       classNames.push('alert-success');
       break;
-    case ngeo.NotificationType.WARNING:
+    case ngeo.MessageType.WARNING:
       classNames.push('alert-warning');
       break;
     default:
@@ -107070,54 +107146,6 @@ ngeo.Notification.prototype.clearMessageByCacheItem_ = function(item) {
 
   // Delete the cache item
   delete this.cache_[uid];
-};
-
-
-/**
- * Returns an array of message object from any given message string, list of
- * message strings, message object or list message objects. The type can be
- * overriden here as well OR defined (if the message(s) is/are string(s),
- * defaults to 'information').
- * @param {string|Array.<string>|ngeox.Message|Array.<ngeox.Message>}
- *     object A message or list of messages as text or configuration objects.
- * @param {string=} opt_type The type of message to override the messages with.
- * @return {Array.<ngeox.Message>} List of message objects.
- * @private
- */
-ngeo.Notification.prototype.getMessageObjects_ = function(object, opt_type) {
-  var msgObjects = [];
-  var msgObject = null;
-  var defaultType = ngeo.NotificationType.INFORMATION;
-
-  if (typeof object === 'string') {
-    msgObjects.push({
-      msg: object,
-      type: opt_type !== undefined ? opt_type : defaultType
-    });
-  } else if (goog.isArray(object)) {
-    object.forEach(function(msg) {
-      if (typeof object === 'string') {
-        msgObject = {
-          msg: msg,
-          type: opt_type !== undefined ? opt_type : defaultType
-        };
-      } else {
-        msgObject = msg;
-        if (opt_type !== undefined) {
-          msgObject.type = opt_type;
-        }
-      }
-      msgObjects.push(msgObject);
-    }, this);
-  } else {
-    msgObject = object;
-    if (opt_type !== undefined) {
-      msgObject.type = opt_type;
-    }
-    msgObjects.push(msgObject);
-  }
-
-  return msgObjects;
 };
 
 
@@ -124707,6 +124735,160 @@ ngeo.debounceServiceFactory = function($timeout) {
 
 
 ngeo.module.factory('ngeoDebounce', ngeo.debounceServiceFactory);
+
+goog.provide('ngeo.Disclaimer');
+
+goog.require('goog.asserts');
+goog.require('ngeo');
+goog.require('ngeo.Message');
+
+
+/**
+ * Provides methods to display any sort of messages, disclaimers, errors,
+ * etc. Requires Bootstrap library (both CSS and JS) to display the alerts
+ * properly.
+ *
+ * @constructor
+ * @extends {ngeo.Message}
+ * @ngdoc service
+ * @ngname ngeoDisclaimer
+ * @ngInject
+ */
+ngeo.Disclaimer = function() {
+
+  goog.base(this);
+
+  var container = angular.element('<div class="ngeo-disclaimer"></div>');
+  angular.element(document.body).append(container);
+
+  /**
+   * @type {angular.JQLite}
+   * @private
+   */
+  this.container_ = container;
+
+  /**
+   * Cache of messages.
+   * @type {Object.<string, angular.JQLite>}
+   * @private
+   */
+  this.messages_ = {};
+
+};
+goog.inherits(ngeo.Disclaimer, ngeo.Message);
+
+
+/**
+ * Show disclaimer message string or object or list of disclamer message
+ * strings or objects.
+ * @param {string|Array.<string>|ngeox.Message|Array.<ngeox.Message>}
+ *     object A message or list of messages as text or configuration objects.
+ * @export
+ */
+ngeo.Disclaimer.prototype.alert = function(object) {
+  this.show(object);
+};
+
+
+/**
+ * Close disclaimer message string or object or list of disclamer message
+ * strings or objects.
+ * @param {string|Array.<string>|ngeox.Message|Array.<ngeox.Message>}
+ *     object A message or list of messages as text or configuration objects.
+ * @export
+ */
+ngeo.Disclaimer.prototype.close = function(object) {
+  var msgObjects = this.getMessageObjects(object);
+  msgObjects.forEach(this.closeMessage_, this);
+};
+
+
+/**
+ * Show the message.
+ * @param {ngeox.Message} message Message.
+ * @protected
+ */
+ngeo.Disclaimer.prototype.showMessage = function(message) {
+  var type = message.type;
+  goog.asserts.assertString(type, 'Type should be set.');
+
+  var uid = this.getMessageUid_(message);
+  if (this.messages_[uid] !== undefined) {
+    return;
+  }
+
+  var classNames = ['alert', 'fade', 'alert-dismissible'];
+  switch (type) {
+    case ngeo.MessageType.ERROR:
+      classNames.push('alert-danger');
+      break;
+    case ngeo.MessageType.INFORMATION:
+      classNames.push('alert-info');
+      break;
+    case ngeo.MessageType.SUCCESS:
+      classNames.push('alert-success');
+      break;
+    case ngeo.MessageType.WARNING:
+      classNames.push('alert-warning');
+      break;
+    default:
+      break;
+  }
+
+  var el = angular.element(
+    '<div role="alert" class="' + classNames.join(' ') + '"></div>');
+  var button = angular.element(
+    '<button type="button" class="close" data-dismiss="alert" aria-label="' +
+    'Close' +  // FIXME i18n
+    '"><span aria-hidden="true">&times;</span></button>');
+  var msg = angular.element('<span />').html(message.msg);
+  el.append(button).append(msg);
+
+  var container;
+
+  if (message.target) {
+    container = angular.element(message.target);
+  } else {
+    container = this.container_;
+  }
+
+  container.append(el);
+  el.addClass('in');
+
+  // Listen when the message gets closed to cleanup the cache of messages
+  el.on('closed.bs.alert', function() {
+    this.closeMessage_(message);
+  }.bind(this));
+
+  this.messages_[uid] =  el;
+};
+
+
+/**
+ * @param {ngeox.Message} message Message.
+ * @return {string} The uid.
+ * @private
+ */
+ngeo.Disclaimer.prototype.getMessageUid_ = function(message) {
+  return message.msg + '-' + message.type;
+};
+
+
+/**
+ * Close the message.
+ * @param {ngeox.Message} message Message.
+ * @protected
+ */
+ngeo.Disclaimer.prototype.closeMessage_ = function(message) {
+  var uid = this.getMessageUid_(message);
+  if (this.messages_[uid] === undefined) {
+    return;
+  }
+  delete this.messages_[uid];
+};
+
+
+ngeo.module.service('ngeoDisclaimer', ngeo.Disclaimer);
 
 goog.provide('ngeo.Features');
 goog.require('ngeo');
