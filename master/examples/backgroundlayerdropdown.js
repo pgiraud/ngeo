@@ -34,7 +34,6 @@ app.backgroundlayerDirective = function() {
 app.module.directive('appBackgroundlayer', app.backgroundlayerDirective);
 
 
-
 /**
  * @constructor
  * @param {angular.$http} $http Angular http service.
@@ -45,11 +44,11 @@ app.module.directive('appBackgroundlayer', app.backgroundlayerDirective);
  */
 app.BackgroundlayerController = function($http, ngeoBackgroundLayerMgr) {
   $http.get('data/backgroundlayers.json').then(
-      angular.bind(this, function(resp) {
+      function(resp) {
         var bgLayers = resp.data;
         this['bgLayers'] = bgLayers;
         this.setLayer(bgLayers[0]);
-      }));
+      }.bind(this));
 
   /**
    * @type {ngeo.BackgroundLayerMgr}
@@ -92,7 +91,6 @@ app.BackgroundlayerController.prototype.createLayer_ = function(layerName) {
 
 app.module.controller('AppBackgroundlayerController',
     app.BackgroundlayerController);
-
 
 
 /**

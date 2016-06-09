@@ -1,12 +1,6 @@
 
 
 
-proj4.defs('EPSG:21781',
-    '+proj=somerc +lat_0=46.95240555555556 +lon_0=7.439583333333333 +k_0=1 ' +
-    '+x_0=600000 +y_0=200000 +ellps=bessel ' +
-    '+towgs84=674.374,15.056,405.346,0,0,0,0 +units=m +no_defs');
-
-
 /** @const **/
 var app = {};
 
@@ -43,6 +37,13 @@ app.PRINT_SCALES_ = [100, 250, 500, 2500, 5000, 10000, 25000, 50000,
  * @const
  * @private
  */
+app.PRINT_FORMAT_ = 'pdf';
+
+
+/**
+ * @const
+ * @private
+ */
 app.PRINT_LAYOUT_ = 'A4 portrait';
 
 
@@ -58,7 +59,6 @@ app.PRINT_DPI_ = 72;
  * @private
  */
 app.PRINT_PAPER_SIZE_ = [555, 675];
-
 
 
 /**
@@ -178,11 +178,12 @@ app.MainController.prototype.print = function() {
       app.PRINT_SCALES_[0];
 
   var dpi = app.PRINT_DPI_;
+  var format = app.PRINT_FORMAT_;
   var layout = app.PRINT_LAYOUT_;
 
   this.printState = 'Printing...';
 
-  var spec = this.print_.createSpec(map, scale, dpi, layout, {
+  var spec = this.print_.createSpec(map, scale, dpi, layout, format, {
     'datasource': [],
     'debug': 0,
     'comments': 'My comments',
@@ -190,8 +191,9 @@ app.MainController.prototype.print = function() {
   });
 
   this.print_.createReport(spec).then(
-      angular.bind(this, this.handleCreateReportSuccess_),
-      angular.bind(this, this.handleCreateReportError_));
+      this.handleCreateReportSuccess_.bind(this),
+      this.handleCreateReportError_.bind(this)
+  );
 };
 
 
@@ -211,8 +213,9 @@ app.MainController.prototype.handleCreateReportSuccess_ = function(resp) {
  */
 app.MainController.prototype.getStatus_ = function(ref) {
   this.print_.getStatus(ref).then(
-      angular.bind(this, this.handleGetStatusSuccess_, ref),
-      angular.bind(this, this.handleGetStatusError_));
+      this.handleGetStatusSuccess_.bind(this, ref),
+      this.handleGetStatusError_.bind(this)
+  );
 };
 
 

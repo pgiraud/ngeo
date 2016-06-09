@@ -9,14 +9,14 @@ var app = {};
 app.module = angular.module('app', ['ngeo']);
 
 
-
 /**
+ * @param {angular.Scope} $scope Scope.
  * @param {ngeo.FeatureOverlayMgr} ngeoFeatureOverlayMgr The ngeo feature
  *     overlay manager service.
  * @constructor
  * @ngInject
  */
-app.MainController = function(ngeoFeatureOverlayMgr) {
+app.MainController = function($scope, ngeoFeatureOverlayMgr) {
 
   var positionFeatureStyle = new ol.style.Style({
     image: new ol.style.Circle({
