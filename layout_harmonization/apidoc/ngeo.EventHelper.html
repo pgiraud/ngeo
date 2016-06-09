@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Altitude <small>service:gmfAltitude</small></title>
+    <title>JSDoc: Namespace: ngeo.EventHelper</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Altitude <small>service:gmfAltitude</small></h1>
+    <h1 class="page-title">Namespace: ngeo.EventHelper</h1>
 
     
 
@@ -28,8 +28,8 @@
 
 <header>
     
-        <h2 id="Altitude">
-            <span class="ancestors">gmf.</span>Altitude
+        <h2 id="ListenerKeys">
+            <span class="ancestors">ngeo.EventHelper.</span>ListenerKeys
         </h2>
         
     
@@ -40,32 +40,16 @@
     
         
 
+        
+
+
+    
+    <h5 class="subsection-title">Properties:</h5>
     
 
-    <h4 class="name" id="Altitude"><span class="type-signature"></span>new Altitude<span class="signature">($http, gmfRasterUrl)</span><span class="type-signature"></span></h4>
-
     
 
-
-
-<div class="description">
-    <p>The Altitude service, uses the
-c2cgeoportal's raster to obtain different kinds of altitude information
-at a specific coordinate.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
+<table class="props">
     <thead>
     <tr>
         
@@ -78,7 +62,7 @@ at a specific coordinate.</p>
 
         
 
-        <th class="last">Description</th>
+        
     </tr>
     </thead>
 
@@ -87,10 +71,15 @@ at a specific coordinate.</p>
 
         <tr>
             
-                <td class="name"><code>$http</code></td>
+                <td class="name"><code>goog</code></td>
             
 
             <td class="type">
+            
+                
+<span class="param-type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>.&lt;goog.events.Key></span>
+
+
             
             </td>
 
@@ -98,17 +87,22 @@ at a specific coordinate.</p>
 
             
 
-            <td class="description last"><p>Angular http service.</p></td>
+            </td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>gmfRasterUrl</code></td>
+                <td class="name"><code>ol</code></td>
             
 
             <td class="type">
+            
+                
+<span class="param-type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>.&lt;<a href="http://openlayers.org/en/master/apidoc/ol.events.html#.Key">ol.events.Key</a>></span>
+
+
             
             </td>
 
@@ -116,16 +110,12 @@ at a specific coordinate.</p>
 
             
 
-            <td class="description last"><p>URL to a raster service with altitude layers.</p></td>
+            </td>
         </tr>
 
     
     </tbody>
 </table>
-
-
-
-
 
 
 
@@ -160,8 +150,8 @@ at a specific coordinate.</p>
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
     
-        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/services/altitude.js">contribs/gmf/src/services/altitude.js</a>,
-        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/services/altitude.js#L26">line 26</a>
+        <a href="https://github.com/camptocamp/ngeo/blob/master/src/services/eventhelper.js">src/services/eventhelper.js</a>,
+        <a href="https://github.com/camptocamp/ngeo/blob/master/src/services/eventhelper.js#L99">line 99</a>
     </li></ul></dd>
     
 
@@ -173,20 +163,7 @@ at a specific coordinate.</p>
 </dl>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
     
     </div>
 
@@ -202,174 +179,6 @@ at a specific coordinate.</p>
 
     
 
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-
-    
-
-    <h4 class="name" id="getAltitude"><span class="type-signature"></span>getAltitude<span class="signature">(coordinate, [opt_params]<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>coordinate</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>Coordinate.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>[opt_params]</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>Optional parameters for the request.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-    
-        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/services/altitude.js">contribs/gmf/src/services/altitude.js</a>,
-        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/services/altitude.js#L48">line 48</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
     
 
     

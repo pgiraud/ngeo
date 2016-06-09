@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Altitude <small>service:gmfAltitude</small></title>
+    <title>JSDoc: Class: DisclaimerController <small>controller:GmfDisclaimerController</small></title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Altitude <small>service:gmfAltitude</small></h1>
+    <h1 class="page-title">Class: DisclaimerController <small>controller:GmfDisclaimerController</small></h1>
 
     
 
@@ -28,8 +28,8 @@
 
 <header>
     
-        <h2 id="Altitude">
-            <span class="ancestors">gmf.</span>Altitude
+        <h2 id="DisclaimerController">
+            <span class="ancestors">gmf.</span>DisclaimerController
         </h2>
         
     
@@ -42,17 +42,11 @@
 
     
 
-    <h4 class="name" id="Altitude"><span class="type-signature"></span>new Altitude<span class="signature">($http, gmfRasterUrl)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="DisclaimerController"><span class="type-signature"></span>new DisclaimerController<span class="signature">($element, $scope, ngeoDisclaimer, ngeoEventHelper, ngeoLayerHelper)</span><span class="type-signature"></span></h4>
 
     
 
 
-
-<div class="description">
-    <p>The Altitude service, uses the
-c2cgeoportal's raster to obtain different kinds of altitude information
-at a specific coordinate.</p>
-</div>
 
 
 
@@ -87,7 +81,7 @@ at a specific coordinate.</p>
 
         <tr>
             
-                <td class="name"><code>$http</code></td>
+                <td class="name"><code>$element</code></td>
             
 
             <td class="type">
@@ -98,14 +92,14 @@ at a specific coordinate.</p>
 
             
 
-            <td class="description last"><p>Angular http service.</p></td>
+            <td class="description last"><p>Element.</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>gmfRasterUrl</code></td>
+                <td class="name"><code>$scope</code></td>
             
 
             <td class="type">
@@ -116,7 +110,61 @@ at a specific coordinate.</p>
 
             
 
-            <td class="description last"><p>URL to a raster service with altitude layers.</p></td>
+            <td class="description last"><p>Angular scope.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ngeoDisclaimer</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Ngeo Disclaimer service.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ngeoEventHelper</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Ngeo Event Helper.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ngeoLayerHelper</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Ngeo Layer Helper.</p></td>
         </tr>
 
     
@@ -160,8 +208,8 @@ at a specific coordinate.</p>
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
     
-        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/services/altitude.js">contribs/gmf/src/services/altitude.js</a>,
-        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/services/altitude.js#L26">line 26</a>
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/directives/disclaimer.js">contribs/gmf/src/directives/disclaimer.js</a>,
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/directives/disclaimer.js#L55">line 55</a>
     </li></ul></dd>
     
 
@@ -201,112 +249,26 @@ at a specific coordinate.</p>
     
 
     
-
-    
-        <h3 class="subsection-title">Methods</h3>
+        <h3 class="subsection-title">Members</h3>
 
         
             
-
-    
-
-    <h4 class="name" id="getAltitude"><span class="type-signature"></span>getAltitude<span class="signature">(coordinate, [opt_params]<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
-
-    
+<h4 class="name" id="map"><span class="type-signature"></span>map<span class="type-signature"> :<a href="http://openlayers.org/en/master/apidoc/ol.Map.html">ol.Map</a></span></h4>
 
 
 
 
 
 
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
+    <h5>Type:</h5>
+    <ul>
+        <li>
             
-                <td class="name"><code>coordinate</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>Coordinate.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>[opt_params]</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>Optional parameters for the request.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
+<span class="param-type"><a href="http://openlayers.org/en/master/apidoc/ol.Map.html">ol.Map</a></span>
 
 
-
+        </li>
+    </ul>
 
 
 
@@ -342,8 +304,8 @@ at a specific coordinate.</p>
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
     
-        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/services/altitude.js">contribs/gmf/src/services/altitude.js</a>,
-        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/services/altitude.js#L48">line 48</a>
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/directives/disclaimer.js">contribs/gmf/src/directives/disclaimer.js</a>,
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/directives/disclaimer.js#L62">line 62</a>
     </li></ul></dd>
     
 
@@ -359,17 +321,9 @@ at a specific coordinate.</p>
 
 
 
-
-
-
-
-
-
-
-
-
-
         
+    
+
     
 
     
