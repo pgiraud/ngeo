@@ -17,37 +17,25 @@
         list-style: none;
         margin: 0;
         padding: 0;
+        width: 120px;
       }
       .gmf-backgroundlayerselector li {
         cursor: pointer;
         margin: 10px;
+        display: flex;
+        align-items: center;
       }
-      .gmf-backgroundlayerselector .gmf-check,
-      .gmf-backgroundlayerselector .gmf-text,
-      .gmf-backgroundlayerselector .gmf-thumb {
-        float: left;
-      }
-      .gmf-backgroundlayerselector .gmf-check {
-        height: 20px;
-        margin: 15px 5px 0 0;
+      .fa-fw {
         width: 20px;
       }
-      .gmf-backgroundlayerselector .gmf-check .gmf-icon.gmf-icon-check:after {
+      .fa-check:after {
         content: 'o';
       }
       .gmf-backgroundlayerselector .gmf-text {
-        margin: 15px 10px 0 0;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        width: 120px;
-        white-space: nowrap;
+        flex: 1;
       }
       .gmf-backgroundlayerselector .gmf-thumb {
         height: 60px;
-        width: 60px;
-      }
-      .gmf-backgroundlayerselector .gmf-eol {
-        clear: left;
       }
     </style>
   </head>
