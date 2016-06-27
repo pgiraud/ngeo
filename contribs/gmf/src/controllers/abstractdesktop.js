@@ -11,6 +11,10 @@ goog.require('gmf.mousepositionDirective');
 /** @suppress {extraRequire} */
 goog.require('gmf.printDirective');
 /** @suppress {extraRequire} */
+goog.require('gmf.profileDirective');
+/** @suppress {extraRequire} */
+goog.require('gmf.drawprofilelineDirective');
+/** @suppress {extraRequire} */
 goog.require('gmf.DatePickerDirective');
 /** @suppress {extraRequire} */
 goog.require('gmf.TimeSliderDirective');
@@ -129,6 +133,18 @@ gmf.AbstractDesktopController = function(config, $scope, $injector) {
   this.scaleSelectorOptions = {
     'dropup': true
   };
+
+  /**
+   * @type {boolean}
+   * @export
+   */
+  this.profileActive = false;
+
+  /**
+   * @type {ol.geom.LineString}
+   * @export
+   */
+  this.profileLine = null;
 
   goog.base(
       this, config, $scope, $injector);
