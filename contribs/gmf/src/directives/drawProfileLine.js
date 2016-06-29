@@ -55,6 +55,7 @@ gmf.module.directive('gmfDrawprofileline', gmf.drawprofilelineDirective);
 /**
  * @param {!angular.Scope} $scope Scope.
  * @param {angular.JQLite} $element Element.
+ * @param {angular.$timeout} $timeout Angular timeout service.
  * @param {ngeo.FeatureOverlayMgr} ngeoFeatureOverlayMgr Feature overlay
  *     manager.
  * @constructor
@@ -63,7 +64,7 @@ gmf.module.directive('gmfDrawprofileline', gmf.drawprofilelineDirective);
  * @ngdoc controller
  * @ngname gmfDrawprofilelineController
  */
-gmf.DrawprofilelineController = function($scope, $element,
+gmf.DrawprofilelineController = function($scope, $element, $timeout,
     ngeoFeatureOverlayMgr) {
 
   /**
@@ -122,14 +123,18 @@ gmf.DrawprofilelineController = function($scope, $element,
   this.drawLine_.setActive(initialState);
 
   // Clear the line to draw a new one.
-  this.drawLine_.on('drawstart', function() {
+  this.drawLine_.on(ol.interaction.DrawEventType.DRAWSTART, function() {
     this.clear_();
   }, this);
 
   // Update the profile with the new geometry.
-  this.drawLine_.on('drawend', function(e) {
+  this.drawLine_.on(ol.interaction.DrawEventType.DRAWEND, function(e) {
     this.line = e.feature.getGeometry();
     $scope.$digest();
+    // using timeout to prevent dblclick to zoom the map
+    $timeout(function() {
+      this.drawLine_.setActive(false);
+    }.bind(this), 0);
   }, this);
 
   // Activate or deactive the draw.
