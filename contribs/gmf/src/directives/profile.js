@@ -75,7 +75,7 @@ gmf.profileDirective = function(gmfProfileTemplateUrl) {
     replace: true,
     restrict: 'E',
     scope: {
-      'active': '<?gmfProfileActive',
+      'active': '=gmfProfileActive',
       'line': '<gmfProfileLine',
       'getMapFn': '&?gmfProfileMap',
       'getLinesConfigurationFn': '&gmfProfileLinesconfiguration',
@@ -350,6 +350,7 @@ gmf.ProfileController.prototype.update_ = function() {
   } else {
     this.profileData = [];
   }
+  this.active = !!this.line;
 };
 
 

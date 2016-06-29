@@ -1,7 +1,11 @@
+@profile-height: 20rem;
+.map-container.profile-chart-active {
+  height: calc(~"100% -" @profile-height);
+}
 .profile-container {
+  position: relative;
+  background-color: red;
   @profileLegendWidth: 15rem;
-  position: absolute;
-  bottom: 0;
   padding: @app-margin;
   background-color: white;
   border-top: solid 1px black;
@@ -10,7 +14,7 @@
 
   .profile {
     display: inline-block;
-    height: 20rem;
+    height: @profile-height;
     width: ~"calc(100% - @{profileLegendWidth})";
   }
 
