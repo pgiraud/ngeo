@@ -139,22 +139,9 @@ gmf.DrawprofilelineController = function($scope, $element, $timeout,
 
   // Activate or deactive the draw.
   $element.on('click' , function() {
-    this.toggleActive_();
-  }.bind(this));
-};
-
-
-/**
- * Toggle activation of the draw line interaction.
- * @private
- */
-gmf.DrawprofilelineController.prototype.toggleActive_ = function() {
-  if (this.drawLine_.getActive()) {
-    this.drawLine_.setActive(false);
     this.clear_();
-  } else {
-    this.drawLine_.setActive(true);
-  }
+    this.drawLine_.setActive(!this.drawLine_.getActive());
+  }.bind(this));
 };
 
 
