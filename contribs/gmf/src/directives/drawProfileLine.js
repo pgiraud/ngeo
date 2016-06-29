@@ -36,13 +36,14 @@ goog.require('ol.style.Stroke');
  */
 gmf.drawprofilelineDirective = function() {
   return {
-    bindToController: true,
+    scope: {},
     controller: 'GmfDrawprofilelineController',
     controllerAs: 'ctrl',
     restrict: 'A',
-    scope: {
+    bindToController: {
       'getMapFn': '&gmfDrawprofilelineMap',
       'line': '=gmfDrawprofilelineLine',
+      'active': '=gmfDrawprofilelineActive',
       'getInitialStateFn': '&?gmfDrawprofileLineInitialstate',
       'getStyleFn': '&?gmfDrawprofilelineStyle'
     }
@@ -111,35 +112,35 @@ gmf.DrawprofilelineController = function($scope, $element, $timeout,
 
   /**
    * @type {ol.interaction.Draw}
-   * @private
+   * @export
    */
-  this.drawLine_ = new ol.interaction.Draw(
+  this.interaction = new ol.interaction.Draw(
       /** @type {olx.interaction.DrawOptions} */ ({
         type: 'LineString',
         features: this.features_
       }));
 
-  this.map_.addInteraction(this.drawLine_);
-  this.drawLine_.setActive(initialState);
+  this.map_.addInteraction(this.interaction);
+  this.interaction.setActive(initialState);
 
   // Clear the line to draw a new one.
-  this.drawLine_.on(ol.interaction.DrawEventType.DRAWSTART, function() {
+  this.interaction.on(ol.interaction.DrawEventType.DRAWSTART, function() {
     this.clear_();
   }, this);
 
   // Update the profile with the new geometry.
-  this.drawLine_.on(ol.interaction.DrawEventType.DRAWEND, function(e) {
+  this.interaction.on(ol.interaction.DrawEventType.DRAWEND, function(e) {
     this.line = e.feature.getGeometry();
     // using timeout to prevent dblclick to zoom the map
     $timeout(function() {
-      this.drawLine_.setActive(false);
+      this.interaction.setActive(false);
     }.bind(this), 0);
   }, this);
 
   // Activate or deactive the draw.
   $element.on('click' , function() {
     this.clear_();
-    this.drawLine_.setActive(!this.drawLine_.getActive());
+    this.interaction.setActive(!this.interaction.getActive());
     $scope.$apply();
   }.bind(this));
 
