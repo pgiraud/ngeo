@@ -130,7 +130,6 @@ gmf.DrawprofilelineController = function($scope, $element, $timeout,
   // Update the profile with the new geometry.
   this.drawLine_.on(ol.interaction.DrawEventType.DRAWEND, function(e) {
     this.line = e.feature.getGeometry();
-    $scope.$digest();
     // using timeout to prevent dblclick to zoom the map
     $timeout(function() {
       this.drawLine_.setActive(false);
@@ -141,7 +140,20 @@ gmf.DrawprofilelineController = function($scope, $element, $timeout,
   $element.on('click' , function() {
     this.clear_();
     this.drawLine_.setActive(!this.drawLine_.getActive());
+    $scope.$apply();
   }.bind(this));
+
+  // Line may be removed from an an other component
+  // for example closing the chart panel
+  $scope.$watch(
+    function() {
+      return this.line;
+    }.bind(this),
+    function(newLine, oldLine) {
+      if (newLine === null) {
+        this.clear_();
+      }
+    }.bind(this));
 };
 
 

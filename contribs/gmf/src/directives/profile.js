@@ -76,7 +76,7 @@ gmf.profileDirective = function(gmfProfileTemplateUrl) {
     restrict: 'E',
     scope: {
       'active': '=gmfProfileActive',
-      'line': '<gmfProfileLine',
+      'line': '=gmfProfileLine',
       'getMapFn': '&?gmfProfileMap',
       'getLinesConfigurationFn': '&gmfProfileLinesconfiguration',
       'getHoverPointStyleFn': '&?gmfProfileHoverpointstyle',

@@ -1,4 +1,4 @@
-<div class="profile-container" ng-show="ctrl.active">
+<div class="profile-container panel" ng-show="ctrl.active">
   <div class="profile" ngeo-profile="ctrl.profileData"
       ngeo-profile-highlight="ctrl.profileHighlight"
       ngeo-profile-options="::ctrl.profileOptions">
@@ -15,4 +15,5 @@
       <li><a href="" ng-click="::ctrl.downloadCsv()"><i class="fa fa-table"></i>&nbsp;{{'Download CSV' | translate}}</a></li>
     </ul>
   </div>
+  <div class="close" ng-click="ctrl.line = null">&times;</div>
 </div>
