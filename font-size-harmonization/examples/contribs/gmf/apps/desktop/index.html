@@ -98,30 +98,33 @@
           class="search"
           gmf-search-datasources="mainCtrl.searchDatasources"
           gmf-search-coordinatesprojections="mainCtrl.searchCoordinatesProjections"
+          gmf-search-colorchooser="false"
           gmf-search-clearbutton="true">
         </gmf-search>
-        <div class="gmf-backgroundlayerbutton btn-group dropup">
-          <button
-              class="btn btn-default dropdown-toggle"
-              data-toggle="dropdown">
-            <img src="image/background-layer-button.png" alt="" />
-          </button>
-          <gmf-backgroundlayerselector
-            gmf-backgroundlayerselector-map="::mainCtrl.map"
-            class="dropdown-menu">
-          </gmf-backgroundlayerselector>
+        <div class="map-bottom-controls">
+          <div class="gmf-backgroundlayerbutton btn-group dropup">
+            <button
+                class="btn btn-default dropdown-toggle"
+                data-toggle="dropdown">
+              <img src="image/background-layer-button.png" alt="" />
+            </button>
+            <gmf-backgroundlayerselector
+              gmf-backgroundlayerselector-map="::mainCtrl.map"
+              class="dropdown-menu">
+            </gmf-backgroundlayerselector>
+          </div>
+          <gmf-disclaimer
+            gmf-disclaimer-map="::mainCtrl.map">
+          </gmf-disclaimer>
+          <gmf-displayqueries
+            gmf-displayqueries-featuresstyle="::mainCtrl.queryFeatureStyle"
+            gmf-displayqueries-desktop="true">
+          </gmf-displayqueries>
         </div>
         <gmf-map class="gmf-map" gmf-map-map="mainCtrl.map"
           ngeo-map-query=""
           ngeo-map-query-map="::mainCtrl.map"
           ngeo-map-query-active="mainCtrl.queryActive"></gmf-map>
-        <gmf-displayqueries
-          gmf-displayqueries-featuresstyle="::mainCtrl.queryFeatureStyle"
-          gmf-displayqueries-desktop="true">
-        </gmf-displayqueries>
-        <gmf-disclaimer
-          gmf-disclaimer-map="::mainCtrl.map">
-        </gmf-disclaimer>
 
         <!--infobar-->
         <div class="footer" ng-class="{'active': mainCtrl.showInfobar}">
@@ -133,29 +136,12 @@
                ngeo-scaleselector-options="mainCtrl.scaleSelectorOptions"></div>
           <div id="scaleline"></div>
           <div class="pull-right">
-            <div class="elevation text-center btn-group dropup" gmf-elevation
-                    gmf-elevation-active="mainCtrl.showInfobar"
-                    gmf-elevation-elevation="elevationValue"
-                    gmf-elevation-loading="elevationLoading"
-                    gmf-elevation-layer="mainCtrl.selectedElevationLayer"
-                    gmf-elevation-map="mainCtrl.map">
-              <a type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                <span class="elevation-value">
-                  {{elevationValue | number}}<span ng-show="elevationValue"> m</span>
-                  <span ng-show="elevationLoading" class="fa fa-spinner"></span>
-                  <span ng-show="!elevationValue && !elevationLoading" translate>Elevation…</span>
-                </span><span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                <li class="dropdown-header" translate>Elevation data sources</li>
-                <li ng-repeat="elevationItem in ::mainCtrl.elevationLayers">
-                  <a href ng-click="mainCtrl.selectedElevationLayer = elevationItem">
-                    <span class="fa fa-fw" ng-class="{'fa-check': mainCtrl.selectedElevationLayer === elevationItem}"></span>
-                    {{::elevationItem}}
-                  </a>
-                </li>
-              </ul>
-            </div>
+            <gmf-elevationwidget
+                gmf-elevationwidget-map="::mainCtrl.map"
+                gmf-elevationwidget-layers="::mainCtrl.elevationLayers"
+                gmf-elevationwidget-active="mainCtrl.showInfobar"
+                class="elevation">
+            </gmf-elevationwidget>
             <gmf-mouseposition
                  gmf-mouseposition-map="mainCtrl.map"
                  gmf-mouseposition-projections="::mainCtrl.mousePositionProjections"
@@ -169,10 +155,11 @@
     <script src="../../../../lib/watchwatchers.js"></script>
     <script>
       (function() {
+        var cacheVersion = '8fb10d396d51efdcb5739705ce836336dc24123e';
         var urlElements = window.location.pathname.split('/');
 
         var angularLocaleScriptUrlElements = urlElements.slice(0, urlElements.length - 3);
-        angularLocaleScriptUrlElements.push('build', 'angular-locale_{{locale}}.js');
+        angularLocaleScriptUrlElements.push('build', 'angular-locale_{{locale}}.js?cache_version=' + cacheVersion);
 
         var gmfModule = angular.module('gmf');
         gmfModule.constant('angularLocaleScript', angularLocaleScriptUrlElements.join('/'));
@@ -180,13 +167,14 @@
         var langUrls = {};
         ['en', 'fr', 'de'].forEach(function(lang) {
             var langUrlElements = urlElements.slice(0, urlElements.length - 3);
-            langUrlElements.push('build', 'gmf-' + lang + '.json')
+            langUrlElements.push('build', 'gmf-' + lang + '.json?cache_version=' + cacheVersion)
             langUrls[lang] = langUrlElements.join('/')
         });
 
         var module = angular.module('app');
         module.constant('defaultLang', 'en');
         module.constant('langUrls', langUrls);
+        module.constant('cacheVersion', cacheVersion);
         module.constant('authenticationBaseUrl', 'https://geomapfish-demo.camptocamp.net/2.1/wsgi');
         module.constant('fulltextsearchUrl', 'https://geomapfish-demo.camptocamp.net/2.1/wsgi/fulltextsearch?limit=30&partitionlimit=5');
         module.constant('gmfRasterUrl', 'https://geomapfish-demo.camptocamp.net/2.1/wsgi/raster');
