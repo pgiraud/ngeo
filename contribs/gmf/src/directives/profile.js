@@ -320,7 +320,7 @@ gmf.ProfileController = function($scope, $http, $element, $filter,
     function() {
       return this.active;
     }.bind(this),
-    function(oldValue, newValue) {
+    function(newValue, oldValue) {
       if (oldValue !== newValue) {
         this.updateEventsListening_();
       }
@@ -331,7 +331,7 @@ gmf.ProfileController = function($scope, $http, $element, $filter,
     function() {
       return this.line;
     }.bind(this),
-    function(oldLine, newLine) {
+    function(newLine, oldLine) {
       if (oldLine !== newLine) {
         this.update_();
       }
