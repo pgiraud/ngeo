@@ -169,9 +169,10 @@ gmf.DrawprofilelineController = function($scope, $element, $timeout,
     }.bind(this),
     function(newValue) {
       if (newValue === false) {
-        this.interaction.setActive(false);
         this.clear_();
       }
+      // Will activate the interaction automatically the first time
+      this.interaction.setActive(newValue);
     }.bind(this)
   );
 };
