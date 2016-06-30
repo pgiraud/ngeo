@@ -101,17 +101,23 @@
                 {{'Profile'|translate}}
                 <a class="btn close" ng-click="profileActive = false">&times;</a>
               </div>
-              <div>
-                <button class="btn btn-default"
-                  ngeo-btn ng-model="ctrl.interaction.active"
-                  gmf-drawprofileline
-                  gmf-drawprofileline-active="profileActive"
-                  gmf-drawprofileline-map="::mainCtrl.map"
-                  gmf-drawprofileline-line="mainCtrl.profileLine"
-                  translate
-                  >
-                  Draw profile line
-                </button>
+              <div gmf-drawprofileline
+                   gmf-drawprofileline-active="profileActive"
+                   gmf-drawprofileline-map="::mainCtrl.map"
+                   gmf-drawprofileline-line="mainCtrl.profileLine">
+                 <p>
+                  <button class="btn btn-default"
+                    ngeo-btn ng-model="ctrl.interaction.active"
+                    translate>
+                    Draw profile line
+                  </button>
+                </p>
+                <p>
+                  <em translate ng-if="ctrl.interaction.active" class="text-muted small">
+                    Draw a line on the map to display the corresponding elevation profile.
+                    Use double-click to finish the drawing.
+                  </em>
+                </p>
               </div>
             </div>
           </div>
