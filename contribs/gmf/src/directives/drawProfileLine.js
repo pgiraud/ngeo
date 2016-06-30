@@ -89,6 +89,7 @@ gmf.DrawprofilelineController = function($scope, $element, $timeout,
 
   /**
    * @type {boolean}
+   * @export
    */
   this.active;
 
