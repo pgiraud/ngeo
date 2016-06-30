@@ -36,14 +36,14 @@ goog.require('ol.style.Stroke');
  */
 gmf.drawprofilelineDirective = function() {
   return {
-    scope: {},
+    scope: true,
     controller: 'GmfDrawprofilelineController',
     controllerAs: 'ctrl',
     restrict: 'A',
     bindToController: {
       'getMapFn': '&gmfDrawprofilelineMap',
       'line': '=gmfDrawprofilelineLine',
-      'active': '=gmfDrawprofilelineActive',
+      'active': '<gmfDrawprofilelineActive',
       'getInitialStateFn': '&?gmfDrawprofileLineInitialstate',
       'getStyleFn': '&?gmfDrawprofilelineStyle'
     }
@@ -82,6 +82,12 @@ gmf.DrawprofilelineController = function($scope, $element, $timeout,
    * @private
    */
   this.map_ = map;
+
+
+  /**
+   * @type {boolean}
+   */
+  this.active;
 
   /**
    * @type {ol.Collection}
@@ -155,6 +161,18 @@ gmf.DrawprofilelineController = function($scope, $element, $timeout,
         this.clear_();
       }
     }.bind(this));
+
+  $scope.$watch(
+    function() {
+      return this.active;
+    }.bind(this),
+    function(newValue) {
+      if (newValue === false) {
+        this.interaction.setActive(false);
+        this.clear_();
+      }
+    }.bind(this)
+  );
 };
 
 
