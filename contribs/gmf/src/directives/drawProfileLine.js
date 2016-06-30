@@ -7,6 +7,7 @@ goog.require('ol.geom.LineString');
 goog.require('ol.interaction.Draw');
 goog.require('ol.style.Style');
 goog.require('ol.style.Stroke');
+goog.require('ngeo.DecorateInteraction');
 
 
 /**
@@ -59,6 +60,8 @@ gmf.module.directive('gmfDrawprofileline', gmf.drawprofilelineDirective);
  * @param {angular.$timeout} $timeout Angular timeout service.
  * @param {ngeo.FeatureOverlayMgr} ngeoFeatureOverlayMgr Feature overlay
  *     manager.
+ * @param {ngeo.DecorateInteraction} ngeoDecorateInteraction Decorate
+ *     interaction service
  * @constructor
  * @export
  * @ngInject
@@ -66,7 +69,7 @@ gmf.module.directive('gmfDrawprofileline', gmf.drawprofilelineDirective);
  * @ngname gmfDrawprofilelineController
  */
 gmf.DrawprofilelineController = function($scope, $element, $timeout,
-    ngeoFeatureOverlayMgr) {
+    ngeoFeatureOverlayMgr, ngeoDecorateInteraction) {
 
   /**
    * @type {ol.geom.LineString}
@@ -128,11 +131,16 @@ gmf.DrawprofilelineController = function($scope, $element, $timeout,
 
   this.map_.addInteraction(this.interaction);
   this.interaction.setActive(initialState);
+  ngeoDecorateInteraction(this.interaction);
 
-  // Clear the line to draw a new one.
-  this.interaction.on(ol.interaction.DrawEventType.DRAWSTART, function() {
-    this.clear_();
-  }, this);
+  // Clear the line as soon as the interaction is activated.
+  this.interaction.on(
+    ol.Object.getChangeEventType(ol.interaction.InteractionProperty.ACTIVE),
+    function() {
+      if (this.interaction.getActive()) {
+        this.clear_();
+      }
+    }, this);
 
   // Update the profile with the new geometry.
   this.interaction.on(ol.interaction.DrawEventType.DRAWEND, function(e) {
@@ -142,13 +150,6 @@ gmf.DrawprofilelineController = function($scope, $element, $timeout,
       this.interaction.setActive(false);
     }.bind(this), 0);
   }, this);
-
-  // Activate or deactive the draw.
-  $element.on('click' , function() {
-    this.clear_();
-    this.interaction.setActive(!this.interaction.getActive());
-    $scope.$apply();
-  }.bind(this));
 
   // Line may be removed from an an other component
   // for example closing the chart panel

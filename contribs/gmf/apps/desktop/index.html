@@ -103,11 +103,11 @@
               </div>
               <div>
                 <button class="btn btn-default"
+                  ngeo-btn ng-model="ctrl.interaction.active"
                   gmf-drawprofileline
                   gmf-drawprofileline-active="profileActive"
                   gmf-drawprofileline-map="::mainCtrl.map"
                   gmf-drawprofileline-line="mainCtrl.profileLine"
-                  ng-class="{active: ctrl.interaction.getActive()}"
                   translate
                   >
                   Draw profile line
