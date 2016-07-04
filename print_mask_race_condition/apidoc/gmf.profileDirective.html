@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: BtnGroupController <small>controller:ngeoBtnGroupController</small></title>
+    <title>JSDoc: Class: profileDirective <small>directive:gmfProfile</small></title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: BtnGroupController <small>controller:ngeoBtnGroupController</small></h1>
+    <h1 class="page-title">Class: profileDirective <small>directive:gmfProfile</small></h1>
 
     
 
@@ -28,8 +28,8 @@
 
 <header>
     
-        <h2 id="BtnGroupController">
-            <span class="ancestors">ngeo.</span>BtnGroupController
+        <h2 id="profileDirective">
+            <span class="ancestors">gmf.</span>profileDirective
         </h2>
         
     
@@ -42,12 +42,28 @@
 
     
 
-    <h4 class="name" id="BtnGroupController"><span class="type-signature"></span>new BtnGroupController<span class="signature">($scope)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="profileDirective"><span class="type-signature"></span>new profileDirective<span class="signature">(gmfProfileTemplateUrl)</span><span class="type-signature"></span></h4>
 
     
 
 
 
+<div class="description">
+    <p>Provide a directive that display a profile panel. This profile use the given
+LineString geometry to request the c2cgeoportal profile.json service. The
+raster used in the request are the keys of the 'linesconfiguration' object.
+The 'profileActive' and 'map' attributes are optionals and are only used to
+display on the map the informations that concerne the hovered
+point (in the profile and on the map) of the line.
+This profile relies on the ngeo.profile (d3) and ngeo.ProfileDirective.</p>
+<p>Example:</p>
+<pre class="prettyprint source"><code> &lt;gmf-profile
+   gmf-profile-active=&quot;ctrl.profileActive&quot;
+   gmf-profile-line=&quot;ctrl.profileLine&quot;
+   gmf-profile-map=&quot;::ctrl.map&quot;
+   gmf-profile-linesconfiguration=&quot;::ctrl.profileLinesconfiguration&quot;>
+ &lt;/gmf-profile></code></pre>
+</div>
 
 
 
@@ -56,7 +72,10 @@
 
 
 
-    <h5>Parameters:</h5>
+
+
+
+    <h5>HTML attributes:</h5>
     
 
 <table class="params">
@@ -68,6 +87,8 @@
 
         <th>Type</th>
 
+        
+        <th>Attributes</th>
         
 
         
@@ -81,25 +102,238 @@
 
         <tr>
             
-                <td class="name"><code>$scope</code></td>
+                <td class="name"><code>gmf-profile-active</code></td>
             
 
             <td class="type">
             
+                
+<span class="param-type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span>
+
+
+            
             </td>
 
             
+                <td class="attributes">
+                
+
+                
+                    &lt;nullable><br>
+                
+
+                
+                </td>
+            
 
             
 
-            <td class="description last"><p>Scope.</p></td>
+            <td class="description last">Optional to active the hover
+    functions.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>gmf-profile-line</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="http://openlayers.org/en/master/apidoc/ol.geom.LineString.html">ol.geom.LineString</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The linestring geometry
+    to use to draw the profile.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>gmf-profile-map</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="http://openlayers.org/en/master/apidoc/ol.Map.html">ol.Map</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                    &lt;nullable><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">An optional map.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>gmf-profile-linesconfiguration</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>.&lt;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, <a href="gmfx.html#ProfileLineConfiguration">gmfx.ProfileLineConfiguration</a>></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The configuration of the lines. Each keys
+    will be used to request elevation layers.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>gmf-profile-hoverpointstyle</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="http://openlayers.org/en/master/apidoc/ol.style.Style.html">ol.style.Style</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                    &lt;nullable><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Optional style
+    for the 'on Hover' point on the line.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>gmf-profile-numberofpoints</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                    &lt;nullable><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Optional maximum limit of
+    points to request. Default to 100.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>gmf-profile-css</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                    &lt;nullable><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Inline Optional CSS style definition
+    to inject in the SVG.</td>
         </tr>
 
     
     </tbody>
 </table>
-
-
 
 
 
@@ -136,8 +370,8 @@
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
     
-        <a href="https://github.com/camptocamp/ngeo/blob/master/src/directives/btngroup.js">src/directives/btngroup.js</a>,
-        <a href="https://github.com/camptocamp/ngeo/blob/master/src/directives/btngroup.js#L80">line 80</a>
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/directives/profile.js">contribs/gmf/src/directives/profile.js</a>,
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/directives/profile.js#L69">line 69</a>
     </li></ul></dd>
     
 
@@ -178,262 +412,6 @@
 
     
 
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-
-    
-
-    <h4 class="name" id="activate"><span class="type-signature"></span>activate<span class="signature">(index)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>index</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Index of the button in buttons array.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-    
-        <a href="https://github.com/camptocamp/ngeo/blob/master/src/directives/btngroup.js">src/directives/btngroup.js</a>,
-        <a href="https://github.com/camptocamp/ngeo/blob/master/src/directives/btngroup.js#L98">line 98</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="addButton"><span class="type-signature"></span>addButton<span class="signature">(expressionFn)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>expressionFn</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Expression function.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-    
-        <a href="https://github.com/camptocamp/ngeo/blob/master/src/directives/btngroup.js">src/directives/btngroup.js</a>,
-        <a href="https://github.com/camptocamp/ngeo/blob/master/src/directives/btngroup.js#L111">line 111</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
     
 
     

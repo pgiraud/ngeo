@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: BtnGroupController <small>controller:ngeoBtnGroupController</small></title>
+    <title>JSDoc: Class: ProfileController <small>Controller:GmfProfileController</small></title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: BtnGroupController <small>controller:ngeoBtnGroupController</small></h1>
+    <h1 class="page-title">Class: ProfileController <small>Controller:GmfProfileController</small></h1>
 
     
 
@@ -28,8 +28,8 @@
 
 <header>
     
-        <h2 id="BtnGroupController">
-            <span class="ancestors">ngeo.</span>BtnGroupController
+        <h2 id="ProfileController">
+            <span class="ancestors">gmf.</span>ProfileController
         </h2>
         
     
@@ -42,7 +42,7 @@
 
     
 
-    <h4 class="name" id="BtnGroupController"><span class="type-signature"></span>new BtnGroupController<span class="signature">($scope)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="ProfileController"><span class="type-signature"></span>new ProfileController<span class="signature">($scope, $http, $element, $filter, gettextCatalog, ngeoFeatureOverlayMgr, gmfProfileJsonUrl, gmfProfileCsvUrl)</span><span class="type-signature"></span></h4>
 
     
 
@@ -92,7 +92,134 @@
 
             
 
-            <td class="description last"><p>Scope.</p></td>
+            <td class="description last"><p>Angular scope.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>$http</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Angular http service.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>$element</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Element.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>$filter</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Angular filter</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>gettextCatalog</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Gettext catalog.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ngeoFeatureOverlayMgr</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Feature overlay
+    manager.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>gmfProfileJsonUrl</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>URL of GMF service JSON profile.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>gmfProfileCsvUrl</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>URL of GMF service CSV profile.</p></td>
         </tr>
 
     
@@ -136,8 +263,8 @@
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
     
-        <a href="https://github.com/camptocamp/ngeo/blob/master/src/directives/btngroup.js">src/directives/btngroup.js</a>,
-        <a href="https://github.com/camptocamp/ngeo/blob/master/src/directives/btngroup.js#L80">line 80</a>
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/directives/profile.js">contribs/gmf/src/directives/profile.js</a>,
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/directives/profile.js#L109">line 109</a>
     </li></ul></dd>
     
 
@@ -177,6 +304,504 @@
     
 
     
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="$filter_"><span class="type-signature"></span>$filter_<span class="type-signature"> :<a href="https://docs.angularjs.org/api/ng/service/$filter">angular.$filter</a></span></h4>
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="https://docs.angularjs.org/api/ng/service/$filter">angular.$filter</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+    
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/directives/profile.js">contribs/gmf/src/directives/profile.js</a>,
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/directives/profile.js#L135">line 135</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="active"><span class="type-signature"></span>active<span class="type-signature"> :<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></h4>
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+    
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/directives/profile.js">contribs/gmf/src/directives/profile.js</a>,
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/directives/profile.js#L310">line 310</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="currentPoint"><span class="type-signature"></span>currentPoint<span class="type-signature"> :<a href="gmfx.html#ProfileHoverPointInformations">gmfx.ProfileHoverPointInformations</a></span></h4>
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="gmfx.html#ProfileHoverPointInformations">gmfx.ProfileHoverPointInformations</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+    
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/directives/profile.js">contribs/gmf/src/directives/profile.js</a>,
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/directives/profile.js#L242">line 242</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="line"><span class="type-signature"></span>line<span class="type-signature"> :<a href="http://openlayers.org/en/master/apidoc/ol.geom.LineString.html">ol.geom.LineString</a></span></h4>
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="http://openlayers.org/en/master/apidoc/ol.geom.LineString.html">ol.geom.LineString</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+    
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/directives/profile.js">contribs/gmf/src/directives/profile.js</a>,
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/directives/profile.js#L230">line 230</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="profileData"><span class="type-signature"></span>profileData<span class="type-signature"> :<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>.&lt;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></span></h4>
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>.&lt;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+    
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/directives/profile.js">contribs/gmf/src/directives/profile.js</a>,
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/directives/profile.js#L236">line 236</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="profileHighlight"><span class="type-signature"></span>profileHighlight<span class="type-signature"> :<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span></h4>
+
+
+
+
+<div class="description">
+    <p>Distance to highlight on the profile. (Property used in ngeo.Profile.)</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+    
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/directives/profile.js">contribs/gmf/src/directives/profile.js</a>,
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/directives/profile.js#L255">line 255</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="profileOptions"><span class="type-signature"></span>profileOptions<span class="type-signature"> :<a href="ngeox.profile.html#ProfileOptions">ngeox.profile.ProfileOptions</a></span></h4>
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="ngeox.profile.html#ProfileOptions">ngeox.profile.ProfileOptions</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+    
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/directives/profile.js">contribs/gmf/src/directives/profile.js</a>,
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/directives/profile.js#L298">line 298</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
 
     
         <h3 class="subsection-title">Methods</h3>
@@ -186,12 +811,15 @@
 
     
 
-    <h4 class="name" id="activate"><span class="type-signature"></span>activate<span class="signature">(index)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="downloadCsv"><span class="type-signature"></span>downloadCsv<span class="signature">()</span><span class="type-signature"></span></h4>
 
     
 
 
 
+<div class="description">
+    <p>Request the csv profile with the current profile data.</p>
+</div>
 
 
 
@@ -199,49 +827,6 @@
 
 
 
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>index</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Index of the button in buttons array.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -280,8 +865,8 @@
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
     
-        <a href="https://github.com/camptocamp/ngeo/blob/master/src/directives/btngroup.js">src/directives/btngroup.js</a>,
-        <a href="https://github.com/camptocamp/ngeo/blob/master/src/directives/btngroup.js#L98">line 98</a>
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/directives/profile.js">contribs/gmf/src/directives/profile.js</a>,
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/directives/profile.js#L652">line 652</a>
     </li></ul></dd>
     
 
@@ -312,11 +897,15 @@
 
     
 
-    <h4 class="name" id="addButton"><span class="type-signature"></span>addButton<span class="signature">(expressionFn)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="getColor"><span class="type-signature"></span>getColor<span class="signature">(layerName)</span><span class="type-signature"></span></h4>
 
     
 
 
+
+<div class="description">
+    <p>Return the color value of a gmfx.ProfileLineConfiguration.</p>
+</div>
 
 
 
@@ -351,7 +940,7 @@
 
         <tr>
             
-                <td class="name"><code>expressionFn</code></td>
+                <td class="name"><code>layerName</code></td>
             
 
             <td class="type">
@@ -362,7 +951,7 @@
 
             
 
-            <td class="description last"><p>Expression function.</p></td>
+            <td class="description last"><p>name of the elevation layer.</p></td>
         </tr>
 
     
@@ -406,8 +995,94 @@
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
     
-        <a href="https://github.com/camptocamp/ngeo/blob/master/src/directives/btngroup.js">src/directives/btngroup.js</a>,
-        <a href="https://github.com/camptocamp/ngeo/blob/master/src/directives/btngroup.js#L111">line 111</a>
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/directives/profile.js">contribs/gmf/src/directives/profile.js</a>,
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/directives/profile.js#L541">line 541</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getLayersNames"><span class="type-signature"></span>getLayersNames<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Return a copy of the existing layer names.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+    
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/directives/profile.js">contribs/gmf/src/directives/profile.js</a>,
+        <a href="https://github.com/camptocamp/ngeo/blob/master/contribs/gmf/src/directives/profile.js#L555">line 555</a>
     </li></ul></dd>
     
 

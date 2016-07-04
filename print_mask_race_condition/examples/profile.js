@@ -154,12 +154,14 @@ app.MainController = function($http, $scope) {
   };
 
 
-  /**
-   * @type {ngeox.profile.ElevationExtractor}
-   */
-  var elevationExtractor = {
-    z: typedFunctionsFactory(types.number, 'mnt', 'values'),
-    dist: typedFunctionsFactory(types.number, 'dist')
+  var distanceExtractor = typedFunctionsFactory(types.number, 'dist');
+
+
+  var linesConfiguration = {
+    'line1': {
+      style: {},
+      zExtractor: typedFunctionsFactory(types.number, 'mnt', 'values')
+    }
   };
 
 
@@ -204,7 +206,8 @@ app.MainController = function($http, $scope) {
    * @export
    */
   this.profileOptions = {
-    elevationExtractor: elevationExtractor,
+    distanceExtractor: distanceExtractor,
+    linesConfiguration: linesConfiguration,
     poiExtractor: poiExtractor,
     hoverCallback: hoverCallback,
     outCallback: outCallback
