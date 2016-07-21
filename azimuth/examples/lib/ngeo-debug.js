@@ -107189,10 +107189,15 @@ ngeo.interaction.MeasureAzimut.getFormattedAzimutRadius = function(
  */
 ngeo.interaction.MeasureAzimut.getFormattedAzimut = function(line) {
   var azimut = ngeo.interaction.MeasureAzimut.getAzimut(line);
-  return azimut + '°';
+  return azimut + 'aaaaaaaaaaa°';
 };
 
 
+/**
+ * Compute azimut from a 2 points line.
+ * @param {ol.geom.LineString} line LineString.
+ * @return {number} Azimut value.
+ */
 ngeo.interaction.MeasureAzimut.getAzimut = function(line) {
   var coords = line.getCoordinates();
   var dx = coords[1][0] - coords[0][0];
@@ -107690,7 +107695,7 @@ ngeo.FeatureHelper.prototype.getLineStringStyle_ = function(feature) {
 
   if (showMeasure) {
     options.text = this.createTextStyle_({
-      text: this.getMeasure(feature)
+      text: "blah"
     });
   }
 
@@ -108666,7 +108671,7 @@ ngeo.measureazimutDirective = function($compile, gettext, $filter) {
             var polygon = ol.geom.Polygon.fromCircle(circle, 64);
             event.feature = new ol.Feature(polygon);
             var azimut = ngeo.interaction.MeasureAzimut.getAzimut(
-              geometry.getGeometries()[0]
+              /** @type {ol.geom.LineString} */ (geometry.getGeometries()[0])
             );
             event.feature.set('azimut', azimut);
 
