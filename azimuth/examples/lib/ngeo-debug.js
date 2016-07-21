@@ -107157,23 +107157,23 @@ ngeo.interaction.MeasureAzimut.prototype.handleMeasure = function(callback) {
   var geom = /** @type {ol.geom.GeometryCollection} */
       (this.sketchFeature.getGeometry());
   var line = /** @type {ol.geom.LineString} */ (geom.getGeometries()[0]);
-  var output = ngeo.interaction.MeasureAzimut.getFormattedAzimuthRadius(line, this.getMap().getView().getProjection(), this.decimals, this.format);
+  var output = ngeo.interaction.MeasureAzimut.getFormattedAzimutRadius(line, this.getMap().getView().getProjection(), this.decimals, this.format);
   callback(output, line.getLastCoordinate());
 };
 
 
 /**
- * Format measure output of azimuth and radius.
+ * Format measure output of azimut and radius.
  * @param {ol.geom.LineString} line LineString.
  * @param {ol.proj.Projection} projection Projection of the polygon coords.
  * @param {?number} decimals Decimals.
  * @param {ngeox.unitPrefix} format The format function.
  * @return {string} Formated measure.
  */
-ngeo.interaction.MeasureAzimut.getFormattedAzimuthRadius = function(
+ngeo.interaction.MeasureAzimut.getFormattedAzimutRadius = function(
     line, projection, decimals, format) {
 
-  var output = ngeo.interaction.MeasureAzimut.getFormattedAzimuth(line);
+  var output = ngeo.interaction.MeasureAzimut.getFormattedAzimut(line);
 
   output += ', ' + ngeo.interaction.Measure.getFormattedLength(
       line, projection, decimals, format);
@@ -107183,11 +107183,11 @@ ngeo.interaction.MeasureAzimut.getFormattedAzimuthRadius = function(
 
 
 /**
- * Format measure output of azimuth.
+ * Format measure output of azimut.
  * @param {ol.geom.LineString} line LineString.
  * @return {string} Formated measure.
  */
-ngeo.interaction.MeasureAzimut.getFormattedAzimuth = function(line) {
+ngeo.interaction.MeasureAzimut.getFormattedAzimut = function(line) {
   var azimut = ngeo.interaction.MeasureAzimut.getAzimut(line);
   return azimut + '°';
 };
@@ -108218,7 +108218,7 @@ ngeo.FeatureHelper.prototype.getMeasure = function(feature) {
         feature.get(ngeo.FeatureProperties.AZIMUT));
       var line = this.getRadiusLine(feature, azimut);
 
-      measure = ngeo.interaction.MeasureAzimut.getFormattedAzimuthRadius(
+      measure = ngeo.interaction.MeasureAzimut.getFormattedAzimutRadius(
         line, this.projection_, this.decimals_, this.format_);
     } else {
       measure = ngeo.interaction.Measure.getFormattedArea(
