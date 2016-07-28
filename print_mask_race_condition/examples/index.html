@@ -117,6 +117,19 @@
       </div>
       <hr>
       <div>
+        <a href="datepicker.html">Datepicker example</a>
+        <p>This example shows how to use the <code>ngeo-date-picker</code> directive.</p>
+      </div>
+      <hr>
+      <div>
+        <a href="bboxquery.html">BBox Query example</a>
+        <p>
+      This example shows how to use the <code><a href="../apidoc/ngeo.bboxQueryDirective.html" title="Read our documentation">ngeo-mobile-query</a></code>
+      directive. Press <code>Ctrl</code> (or <code>Cmd</code> on Mac) and draw a query bbox on the map.
+    </p>
+      </div>
+      <hr>
+      <div>
         <a href="mapquery.html">Map Query example</a>
         <p>
       This example shows how to use the <code><a href="../apidoc/ngeo.mapQueryDirective.html" title="Read our documentation">ngeo-map-query</a></code>
@@ -169,7 +182,9 @@
             or click
             <input ng-click="ctrl.updateName()" type="button" value="Change name">
 </input>
-            to change the name.
+            to change the name. You can also
+            <label for="disable">Disable the form</label>
+<input id="disable" ng-model="ctrl.disabled" type="checkbox"/>.
           </p>
       </div>
       <hr>

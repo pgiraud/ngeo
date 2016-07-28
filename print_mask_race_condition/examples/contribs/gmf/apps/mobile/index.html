@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{mobileCtrl.lang}}" ng-app="app" ng-controller="MobileController as mainCtrl">
   <head>
-    <title translate>Mobile Application</title>
+    <title>{{'Mobile Application'|translate}}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
     <meta name="mobile-web-app-capable" content="yes">
@@ -16,9 +16,10 @@
         ngeo-map-query=""
         ngeo-map-query-map="::mainCtrl.map"
         ngeo-map-query-active="mainCtrl.queryActive"></gmf-map>
-      <gmf-displayqueries
-        gmf-displayqueries-featuresstyle="::mainCtrl.queryFeatureStyle">
-      </gmf-displayqueries>
+      <gmf-displayquerywindow
+        gmf-displayquerywindow-featuresstyle="::mainCtrl.queryFeatureStyle"
+        gmf-displayquerywindow-defaultcollapsed="false">
+      </gmf-displayquerywindow>
       <div
         class="measure-tools-control"
         gmf-mobile-measurelength
@@ -76,6 +77,7 @@
         </ul>
         <gmf-layertree
           gmf-layertree-source="mainCtrl.theme"
+          gmf-layertree-dimensions="mainCtrl.dimensions"
           gmf-layertree-map="::mainCtrl.map"
           gmf-layertree-openlinksinnewwindow="true">
         </gmf-layertree>
@@ -132,14 +134,15 @@
           </li>
         </ul>
       </div>
-      <gmf-authentication id="login" class="slide" data-header-title="{{'Login' | translate}}">
+      <gmf-authentication id="login" class="slide" data-header-title="{{'Login' | translate}}"
+        gmf-mobile-nav-back="authCtrl.gmfUser.username !== null">
       </gmf-authentication>
     </nav>
     <script src="../../build/mobile.js"></script>
     <script src="../../../../lib/watchwatchers.js"></script>
     <script>
       (function() {
-        var cacheVersion = '0b84027ed466d26eff86915e85776727c3169d5a';
+        var cacheVersion = '45ee0e7a047fba09347ae2f06ad476378e93f67a';
         var urlElements = window.location.pathname.split('/');
 
         var angularLocaleScriptUrlElements = urlElements.slice(0, urlElements.length - 3);
@@ -163,6 +166,7 @@
         module.constant('fulltextsearchUrl', 'https://geomapfish-demo.camptocamp.net/2.1/wsgi/fulltextsearch?limit=20');
         module.constant('gmfWmsUrl', 'https://geomapfish-demo.camptocamp.net/2.1/wsgi/mapserv_proxy');
         module.constant('gmfTreeUrl', 'https://geomapfish-demo.camptocamp.net/2.1/wsgi/themes?version=2&background=background');
+        module.constant('gmfShortenerCreateUrl', '');
         module.constant('gmfSearchGroups', []);
         // Requires that the gmfSearchGroups is specified
         module.constant('gmfSearchActions', []);

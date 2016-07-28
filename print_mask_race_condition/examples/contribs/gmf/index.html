@@ -26,6 +26,18 @@
       </div>
       <hr>
       <div>
+        <a href="editfeatureselector.html">GeoMapFish EditFeature selector example</a>
+        <p>
+      This example shows how to use the <code>gmf-editfeatureselector</code>
+      directive to edit vector features from editable layers that are defined
+      in the GeoMapFish themes. First, you need to login. Then, select the
+      layer you wish to edit. Finally, you can either click on an existing
+      feature on map to modify or delete it, or you can create a new one using
+      the "Draw" button.
+    </p>
+      </div>
+      <hr>
+      <div>
         <a href="backgroundlayerselector.html">GeoMapFish's background layer selector example</a>
         <p>This example shows how to use the
     <code>gmf-backgroundlayerselector</code>
@@ -109,27 +121,12 @@
       <hr>
       <div>
         <a href="datepicker.html">GeoMapFish Datepicker example</a>
-        <p>This example shows how to use the <code>gmf-date-picker</code> directive.</p>
+        <p>This example shows how to use the <code>ngeo-date-picker</code> directive with the gmf WMS time service in order to format the date for WMS.</p>
       </div>
       <hr>
       <div>
         <a href="timeslider.html">GeoMapFish Timeslider example</a>
         <p>This example shows how to use the <code>gmf-time-slider</code> directive.</p>
-      </div>
-      <hr>
-      <div>
-        <a href="mapquery.html">GeoMapFish Map Query example</a>
-        <p>
-      This example shows how to use the <code>ngeo-map-query</code>
-      directive in combination with the <code>gmf.QueryManager</code>.
-      The QueryManager fetches the themes returned by the theme service and
-      adds one source to the query service per layer definition found. In this
-      example, the layer tree is responsible of creating the layer. You can
-      switch theme and turn on/off layers to see the impact it has on results
-      returned by the query service.
-      To display results, this example use the <code>gmf-displayqueries
-      </code> componant. Here, this last directive uses a custom style to
-      display all selected features.</p>
       </div>
       <hr>
       <div>
@@ -198,7 +195,8 @@
         <p>This example shows how to use the <code>gmf-profile</code>.
     The draw tool and hover feedback on the map are completely independant of
     the gmf-profile components. This profile relies on the ngeo.profile (d3) and
-    ngeo.ProfileDirective.</p>
+    ngeo.ProfileDirective. It passes a custom css through the optional
+    gmf-profile-options attribute</p>
       </div>
       <hr>
       <div>
@@ -210,6 +208,26 @@
             and transformed into a form using the <code>ngeo-attributes</code>
             directive.
           </p>
+      </div>
+      <hr>
+      <div>
+        <a href="share.html">GMF Share permalink example</a>
+        <p>This example shows how to use the <code>gmf-share</code> directive to get a shorten permalink</p>
+      </div>
+      <hr>
+      <div>
+        <a href="displayquerywindow.html">GeoMapFish Map Query example</a>
+        <p>
+      This example shows how to use the <code>ngeo-map-query</code>
+      directive in combination with the <code>gmf.QueryManager</code>.
+      The QueryManager fetches the themes returned by the theme service and
+      adds one source to the query service per layer definition found. In this
+      example, the layer tree is responsible of creating the layer. You can
+      switch theme and turn on/off layers to see the impact it has on results
+      returned by the query service.
+      To display results, this example use the <code>gmf-displayquerywindow
+      </code> componant. Here, this last directive uses a custom style to
+      display all selected features.</p>
       </div>
       <hr>
       <div>

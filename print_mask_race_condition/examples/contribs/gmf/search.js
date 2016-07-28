@@ -47,6 +47,14 @@ app.MainController = function(gmfThemes) {
     })
   };
 
+  /**
+   * @type {TypeaheadOptions}
+   * @export
+   */
+  this.searchOptions = {
+    minLength: 2
+  };
+
 
   /**
    * @type {ol.Map}

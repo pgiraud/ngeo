@@ -23,32 +23,32 @@ app.MainController = function($scope, gmfWMSTime) {
   this.gmfWMSTime_ = gmfWMSTime;
 
   /**
-   * @type {gmfx.TimeProperty}
+   * @type {ngeox.TimeProperty}
    * @export
    */
   this.wmsTimeRangeMode = {
-    widget: /** @type {gmfx.TimePropertyWidgetEnum} */ ('datepicker'),
+    widget: /** @type {ngeox.TimePropertyWidgetEnum} */ ('datepicker'),
     maxValue: '2013-12-31T00:00:00Z',
     minValue: '2006-01-01T00:00:00Z',
     maxDefValue: null,
     minDefValue: null,
-    resolution: /** @type {gmfx.TimePropertyResolutionEnum}*/ ('day'),
-    mode: /** @type {gmfx.TimePropertyModeEnum} */ ('range'),
+    resolution: /** @type {ngeox.TimePropertyResolutionEnum}*/ ('day'),
+    mode: /** @type {ngeox.TimePropertyModeEnum} */ ('range'),
     interval : [0,1,0,0]
   };
 
   /**
-   * @type {gmfx.TimeProperty}
+   * @type {ngeox.TimeProperty}
    * @export
    */
   this.wmsTimeValueMode = {
-    widget: /** @type {gmfx.TimePropertyWidgetEnum} */ ('datepicker'),
+    widget: /** @type {ngeox.TimePropertyWidgetEnum} */ ('datepicker'),
     maxValue: '2015-12-31T00:00:00Z',
     minValue: '2014-01-01T00:00:00Z',
     maxDefValue: null,
     minDefValue: null,
-    resolution: /** @type {gmfx.TimePropertyResolutionEnum}*/ ('month'),
-    mode: /** @type {gmfx.TimePropertyModeEnum} */ ('value'),
+    resolution: /** @type {ngeox.TimePropertyResolutionEnum}*/ ('month'),
+    mode: /** @type {ngeox.TimePropertyModeEnum} */ ('value'),
     interval : [0,1,0,0]
   };
 
