@@ -173,12 +173,10 @@ ngeo.ToolActivateMgr.prototype.unregisterTool = function(groupName, tool) {
  */
 ngeo.ToolActivateMgr.prototype.unregisterGroup = function(groupName) {
   var entries = this.groups_[groupName];
-  if (entries) {
-    for (var i = 0; i < entries.length; i++) {
-      entries[i].unlisten();
-    }
-    delete this.groups_[groupName];
-  }
+  entries.forEach(function(entry) {
+    entry.unlisten();
+  });
+  delete this.groups_[groupName];
 };
 
 
@@ -211,11 +209,11 @@ ngeo.ToolActivateMgr.prototype.deactivateTool = function(tool) {
  */
 ngeo.ToolActivateMgr.prototype.deactivateTools_ = function(groupName, tool) {
   var entries = this.groups_[groupName];
-  for (var i = 0; i < entries.length; i++) {
-    if (tool != entries[i].tool) {
-      entries[i].tool.setActive(false);
+  entries.forEach(function(entry) {
+    if (tool != entry.tool) {
+      entry.tool.setActive(false);
     }
-  }
+  });
 };
 
 
@@ -230,13 +228,13 @@ ngeo.ToolActivateMgr.prototype.activateDefault_ = function(groupName) {
   var defaultTool = null;
   var hasActiveTool = false;
 
-  for (var i = 0; i < entries.length; i++) {
-    hasActiveTool = hasActiveTool || entries[i].tool.getActive();
+  entries.forEach(function(entry) {
+    hasActiveTool = hasActiveTool || entry.tool.getActive();
 
-    if (entries[i].defaultTool) {
-      defaultTool = entries[i].tool;
+    if (entry.defaultTool) {
+      defaultTool = entry.tool;
     }
-  }
+  });
 
   if (!hasActiveTool && defaultTool !== null) {
     defaultTool.setActive(true);

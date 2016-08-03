@@ -387,11 +387,10 @@ ngeo.Query.prototype.getQueryableSources_ = function(map, wfsOnly) {
     var infoFormat;
     var url;
     var item;
-    for (var i = 0, len = ids.length; i < len; i++) {
-      var id = ids[i];
+    ids.forEach(function(id) {
       item = this.cache_[id];
       if (!item) {
-        continue;
+        return;
       }
 
       // If `validateLayerParams` is set, then the source config layer in the
@@ -416,7 +415,7 @@ ngeo.Query.prototype.getQueryableSources_ = function(map, wfsOnly) {
         goog.asserts.assert(cfgLayer.indexOf(',') === -1,
             'The LAYERS param contains more than one item');
         if (layerLayers.indexOf(cfgLayer) === -1) {
-          continue;
+          return;
         }
       }
 
@@ -450,7 +449,7 @@ ngeo.Query.prototype.getQueryableSources_ = function(map, wfsOnly) {
           item['resultSource'].queried = false;
         }
       }
-    }
+    }.bind(this));
   }, this);
 
   return {

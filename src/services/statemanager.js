@@ -42,7 +42,6 @@ ngeo.StateManager = function(ngeoLocation) {
   // is no state in the location URL.
 
   var paramKeys = ngeoLocation.getParamKeys();
-  var i, key, theme;
   var themeRegex = new RegExp(/\/theme\/([^\?\/]*)/);
   var urlPath = ngeoLocation.getPath();
   var locationInitState = {};
@@ -51,8 +50,8 @@ ngeo.StateManager = function(ngeoLocation) {
       (paramKeys.length === 1 && paramKeys[0] == 'debug')) {
     if (this.localStorage.isAvailable()) {
       var count = this.localStorage.getCount();
-      for (i = 0; i < count; ++i) {
-        key = this.localStorage.key(i);
+      for (var i = 0; i < count; ++i) {
+        var key = this.localStorage.key(i);
         goog.asserts.assert(key !== null);
         this.initialState[key] = this.getItemFromLocalStorage_(key);
 
@@ -64,13 +63,12 @@ ngeo.StateManager = function(ngeoLocation) {
       this.ngeoLocation.updateParams(locationInitState);
     }
   } else {
-    var keys = ngeoLocation.getParamKeys();
-    for (i = 0; i < keys.length; ++i) {
-      key = keys[i];
-      this.initialState[key] = this.getItemFromLocation_(key);
-    }
+    ngeoLocation.getParamKeys().forEach(function(key) {
+      this.initialState[key] = /** @type {string} */ (
+        this.getItemFromLocation_(key));
+    }.bind(this));
     //Retrieve selected theme in url path
-    theme = urlPath.match(themeRegex);
+    var theme = urlPath.match(themeRegex);
     if (theme) {
       this.initialState['theme'] = theme[1];
     }
