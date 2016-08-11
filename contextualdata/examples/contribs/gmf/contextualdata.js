@@ -13,6 +13,21 @@ app.module.constant(
     'gmfRasterUrl',
     'https://geomapfish-demo.camptocamp.net/2.1/wsgi/raster');
 
+app.module.constant(
+    'contextualdataTemplateUrl',
+    'partials/contextualdata.html');
+
+app.module.decorator('gmfContextualdatacontentDirective',
+  /**
+   * @param {angular.Directive} $delegate The directive to be decorated.
+   * @param {string} contextualdataTemplateUrl The path to template.
+   * @return {angular.Directive} The Directive Definition Object.
+   */
+  function($delegate, contextualdataTemplateUrl) {
+    $delegate[0].templateUrl = contextualdataTemplateUrl;
+    return $delegate;
+  });
+
 
 /**
  * @constructor
@@ -38,6 +53,13 @@ app.MainController = function() {
       zoom: 3
     })
   });
+};
+
+
+app.MainController.prototype.onRasterData = function(coordinate, data) {
+  return {
+    'elelvation_diff': data.srtm - data.aster
+  };
 };
 
 
