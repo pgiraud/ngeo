@@ -56,6 +56,13 @@ app.MainController = function() {
 };
 
 
+/**
+ * @param {ol.Coordinate} coordinate The coordinate for the right-clicked
+ *     point.
+ * @param {Object} data The data received from the raster service.
+ * @return {Object} The additional data to add to the scope for the
+ *     contextualdata popover.
+ */
 app.MainController.prototype.onRasterData = function(coordinate, data) {
   return {
     'elelvation_diff': data.srtm - data.aster
