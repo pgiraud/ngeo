@@ -14,19 +14,8 @@ app.module.constant(
     'https://geomapfish-demo.camptocamp.net/2.1/wsgi/raster');
 
 app.module.constant(
-    'contextualdataTemplateUrl',
+    'gmfContextualdatacontentTemplateUrl',
     'partials/contextualdata.html');
-
-app.module.decorator('gmfContextualdatacontentDirective',
-  /**
-   * @param {angular.Directive} $delegate The directive to be decorated.
-   * @param {string} contextualdataTemplateUrl The path to template.
-   * @return {angular.Directive} The Directive Definition Object.
-   */
-  function($delegate, contextualdataTemplateUrl) {
-    $delegate[0].templateUrl = contextualdataTemplateUrl;
-    return $delegate;
-  });
 
 
 /**
