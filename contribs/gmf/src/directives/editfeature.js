@@ -716,8 +716,18 @@ gmf.EditfeatureController.prototype.handleMapSelectActiveChange_ = function(
 
 
 /**
- * Called when the map is clicked. Manage the clicked location
- * (i.e. coordinate and pixel).
+ * Called when the map is clicked.
+ *
+ * (1) If a vector feature was clicked, don't do anything (i.e. allow the
+ *     interactions to do their bidings without selecting a new feature).
+ *
+ * (2) Otherwise, if there is a feature being edited and has unsaved
+ *     modifications, show the confirmation modal asking the user what to do
+ *     about it.
+ *
+ * (3) If there's no feature selected or we have one without unsaved
+ *     modifications or with modifications that were canceled, launch a query
+ *     to fetch the features at the clicked location.
  *
  * @param {ol.MapBrowserEvent} evt Event.
  * @private
