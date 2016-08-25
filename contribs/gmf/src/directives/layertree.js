@@ -354,14 +354,17 @@ gmf.LayertreeController.prototype.getLayer = function(node, parentCtrl, depth) {
       default:
         throw new Error('Node wrong type: ' + type);
     }
-    this.dataLayerGroup_.getLayers().insertAt(0, layer);
+    this.dataLayerGroup_.getLayers().push(layer);
+    console.log ("depth 1", node.name);
     return layer;
   }
 
   //depth > 1 && parent is not a MIXED_GROUP;
   if (!parentCtrl || gmf.Themes.getNodeType(parentCtrl['node']) !== gmf.Themes.NodeType.MIXED_GROUP) {
+    console.log ("null", node.name);
     return null;
   }
+  console.log ("parent is mixed group", node.name);
   //depth > 1 && parent is a MIXED group
   switch (type) {
     case gmf.Themes.NodeType.MIXED_GROUP:
@@ -391,7 +394,7 @@ gmf.LayertreeController.prototype.getLayer = function(node, parentCtrl, depth) {
   }
   this.prepareLayer_(node, layer);
   this.updateLayerDimensions_(/** @type {ol.layer.Layer} */ (layer), node);
-  parentCtrl['layer'].getLayers().insertAt(0, layer);
+  parentCtrl['layer'].getLayers().push(layer);
   return layer;
 };
 

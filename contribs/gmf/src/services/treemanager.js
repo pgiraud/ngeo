@@ -125,6 +125,9 @@ gmf.TreeManager.prototype.setModeFlush = function(value) {
  */
 gmf.TreeManager.prototype.addTheme = function(theme, opt_init) {
   var firstLevelNodes = theme.children;
+  console.log (firstLevelNodes[0].name);
+  firstLevelNodes.reverse();
+  console.log (firstLevelNodes[0].name);
   var groupsNames, firstLevelNodesNames, isSubset;
   var treeGroups = /** @type {string} */ (this.ngeoStateManager_.getInitialValue(
     gmf.PermalinkParam.TREE_GROUPS));
@@ -140,6 +143,7 @@ gmf.TreeManager.prototype.addTheme = function(theme, opt_init) {
       //User removed all groups from the tree
       return;
     }
+    groupsNames.reverse();
     if (!this.isModeFlush()) {
       //Initialization phase and state exists -> first-level groups must be read
       //from the stateManager
@@ -189,6 +193,7 @@ gmf.TreeManager.prototype.addGroups = function(groups, opt_add, opt_silent) {
     this.ngeoStateManager_.deleteParam(gmf.PermalinkParam.TREE_GROUPS);
   }
   groups.forEach(function(group) {
+    console.log (group);
     if (!this.addGroup_(group)) {
       groupNotAdded.push(group);
     }
