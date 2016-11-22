@@ -62,6 +62,10 @@
               data-toggle="tooltip" data-placement="left" data-original-title="{{'Profile'|translate}}">
               <span class="fa fa-area-chart"></span>
             </button>
+            <button ngeo-btn class="btn btn-default" ng-model="mainCtrl.streetviewPanelActive"
+              data-toggle="tooltip" data-placement="left" data-original-title="{{'Streetview'|translate}}">
+              <span class="fa fa-street-view"></span>
+            </button>
           </div>
           <br/>
           <br/>
@@ -71,7 +75,7 @@
             </button>
           </span>
         </div>
-        <div class="gmf-app-tools-content container-fluid" ng-class="{'gmf-app-active': mainCtrl.toolsActive}">
+        <div class="gmf-app-tools-content container-fluid" ng-class="{'gmf-app-active': mainCtrl.toolsActive, 'gmf-app-tools-content-lg': mainCtrl.streetviewPanelActive}">
           <div ng-show="mainCtrl.loginActive" class="row">
             <div class="col-sm-12">
               <div class="gmf-app-tools-content-heading">
@@ -149,6 +153,17 @@
                     Use double-click to finish the drawing.
                   </em>
                 </p>
+              </div>
+            </div>
+          </div>
+          <div ng-show="mainCtrl.streetviewPanelActive" class="row">
+            <div class="col-sm-12">
+              <div class="gmf-app-tools-content-heading">
+                {{'StreetView'|translate}}
+                <a class="btn close" ng-click="mainCtrl.streetviewPanelActive = false">&times;</a>
+              </div>
+              <div>
+                <img src="http://imgur.com/XcEPEQT.png" alt="">
               </div>
             </div>
           </div>
